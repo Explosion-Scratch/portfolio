@@ -13,11 +13,6 @@
   $accent1: blue;
   $accent2: red;
 
-  body {
-    background-color: $secondaryColor;
-    padding: 100px;
-  }
-
   .glitch {
     position: relative;
     margin: 0 auto;

@@ -6,7 +6,7 @@
   import Icon from "@iconify/svelte";
 </script>
 
-<!-- <CustomCursor /> -->
+<Matrix />
 <div class="center">
   <Glitch text="--Explosion--" />
   <Glassmorphism class="button"
@@ -14,7 +14,7 @@
     <Icon icon="bytesize:arrow-right" />
   </Glassmorphism>
 </div>
-<Matrix />
+<CustomCursor />
 
 <style lang="scss">
   @import "main.scss";

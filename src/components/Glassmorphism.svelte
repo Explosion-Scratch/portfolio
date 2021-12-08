@@ -1,4 +1,4 @@
-<div {...$$props}><slot /></div>
+<div {...$$props} data-glassmorphism><slot /></div>
 
 <style lang="scss">
   div {

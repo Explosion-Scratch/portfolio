@@ -11,7 +11,7 @@
 
     outerCursor.style.left = `${x}px`;
     outerCursor.style.top = `${y}px`;
-    if (e.target.closest("a, button")) {
+    if (e.target.closest("a, button, .button, .pointer")) {
       innerCursor.classList.add("grow");
       outerCursor.classList.add("grow");
     } else {
