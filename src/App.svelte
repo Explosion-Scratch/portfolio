@@ -5,6 +5,12 @@
   import CustomCursor from "./components/CustomCursor.svelte";
   import Icon from "@iconify/svelte";
   import Section from "./components/Section.svelte";
+  import Cards from "./components/Cards.svelte";
+
+  let cards = Array(5).fill({
+    title: "This is a cool card",
+    body: "Do you like it?",
+  });
 </script>
 
 <Section>
@@ -17,7 +23,9 @@
     </Glassmorphism>
   </div>
 </Section>
-<Section id="gradient-bg" style="height: 60vh" />
+<Section id="gradient-bg">
+  <Cards {cards} />
+</Section>
 <CustomCursor />
 
 <style lang="scss">
@@ -29,16 +37,10 @@
     background: black;
   }
   :global(#gradient-bg) {
-    background: linear-gradient(
-      90deg,
-      #184e77,
-      #005b83,
-      #007c97,
-      #00a59f,
-      #73cb97,
-      #bbe492,
-      #d9ed92
-    );
+    height: 100vh;
+    width: 100vw;
+    @include flex;
+    background: linear-gradient(to bottom, black, #1f005c);
   }
   :global(.button) {
     @include flex;

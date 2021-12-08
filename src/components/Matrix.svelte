@@ -23,6 +23,16 @@
     resize();
     console.log(CANVAS_EL);
   });
+  function handleScroll() {
+    let visible = inView(CANVAS_EL);
+    if (window.MATRIX_INTERVAL && !visible) {
+      clearInterval(window.MATRIX_INTERVAL);
+      window.MATRIX_INTERVAL = null;
+    }
+    if (!window.MATRIX_INTERVAL && visible) {
+      resize();
+    }
+  }
   function matrix({
     selector = "canvas",
     el = null,
@@ -78,9 +88,24 @@
 
     window.MATRIX_INTERVAL = setInterval(_matrix, 1000 / fps);
   }
+  function inView(elem) {
+    let x = elem.getBoundingClientRect().left;
+    let y = elem.getBoundingClientRect().top;
+    let ww = Math.max(
+      document.documentElement.clientWidth,
+      window.innerWidth || 0
+    );
+    let hw = Math.max(
+      document.documentElement.clientHeight,
+      window.innerHeight || 0
+    );
+    let w = elem.clientWidth;
+    let h = elem.clientHeight;
+    return y < hw && y + h > 0 && x < ww && x + w > 0;
+  }
 </script>
 
-<svelte:window on:resize={resize} />
+<svelte:window on:resize={resize} on:scroll={handleScroll} />
 
 <canvas bind:this={CANVAS_EL} />
 
