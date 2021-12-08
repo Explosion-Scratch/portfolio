@@ -19,21 +19,8 @@
     });
   };
   onMount(() => {
-    matrix({
-      el: CANVAS_EL,
-      color: ({ x, y, width, height }) => {
-        // Nice diagonal gradient:
-        // y / height = percentage down, toString(16) = hex char
-        return `#${Math.floor((y / height) * 16).toString(16)}f${Math.floor(
-          (x / width) * 16
-        ).toString(16)}`;
-      },
-      font: "8px monospace",
-      fps: 20,
-      size: 8,
-      width: window.innerWidth,
-      height: window.innerHeight,
-    });
+    // We can just run the resize function =P
+    resize();
     console.log(CANVAS_EL);
   });
   function matrix({
@@ -99,6 +86,17 @@
 
 <style>
   canvas {
-    mask-image: linear-gradient(to bottom, #fff 90%, #000);
+    -webkit-mask-image: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 1),
+      rgba(0, 0, 0, 1)
+    );
+    mask-image: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 1),
+      rgba(0, 0, 0, 1)
+    );
   }
 </style>

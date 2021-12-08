@@ -4,16 +4,20 @@
   import Matrix from "./components/Matrix.svelte";
   import CustomCursor from "./components/CustomCursor.svelte";
   import Icon from "@iconify/svelte";
+  import Section from "./components/Section.svelte";
 </script>
 
-<Matrix />
-<div class="center">
-  <Glitch text="--Explosion--" />
-  <Glassmorphism class="button"
-    >Hello
-    <Icon icon="bytesize:arrow-right" />
-  </Glassmorphism>
-</div>
+<Section>
+  <Matrix />
+  <div class="center">
+    <Glitch text="--Explosion--" />
+    <Glassmorphism class="button"
+      >Hello
+      <Icon icon="bytesize:arrow-right" />
+    </Glassmorphism>
+  </div>
+</Section>
+<Section id="gradient-bg" style="height: 60vh" />
 <CustomCursor />
 
 <style lang="scss">
@@ -23,6 +27,18 @@
     padding: 0;
     box-sizing: border-box;
     background: black;
+  }
+  :global(#gradient-bg) {
+    background: linear-gradient(
+      90deg,
+      #184e77,
+      #005b83,
+      #007c97,
+      #00a59f,
+      #73cb97,
+      #bbe492,
+      #d9ed92
+    );
   }
   :global(.button) {
     @include flex;

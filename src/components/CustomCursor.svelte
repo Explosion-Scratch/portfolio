@@ -32,7 +32,7 @@
     z-index: 10000;
   }
   :global(*) {
-    cursor: none;
+    cursor: none !important;
   }
   .inner-cursor {
     position: fixed;
