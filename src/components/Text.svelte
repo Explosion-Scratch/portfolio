@@ -1,15 +1,14 @@
 <script>
-  export const text;
-  console.log(text);
+  export let text = "";
 </script>
 
-<h1 class="glitch" data-text={text}>{text}</h1>
+<h1 class="glitch" data-text={text} style={$$props.style || ""}>{text}</h1>
 
 <style scoped lang="scss">
   // Important that this background color remains consistent with the background of the page
 
-  $primaryColor: #111;
-  $secondaryColor: #fff;
+  $primaryColor: #fff;
+  $secondaryColor: #000;
   $steps: 20;
   $accent1: blue;
   $accent2: red;
