@@ -2,9 +2,11 @@
   import Glitch from "./components/Text.svelte";
   import Glassmorphism from "./components/Glassmorphism.svelte";
   import Matrix from "./components/Matrix.svelte";
+  import CustomCursor from "./components/CustomCursor.svelte";
   import Icon from "@iconify/svelte";
 </script>
 
+<!-- <CustomCursor /> -->
 <div class="center">
   <Glitch text="--Explosion--" />
   <Glassmorphism class="button"

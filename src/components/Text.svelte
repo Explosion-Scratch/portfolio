@@ -22,8 +22,8 @@
     position: relative;
     margin: 0 auto;
     color: $primaryColor;
-    font-size: 80px;
-    font-family: "Exo", sans-serif;
+    font-size: clamp(3rem, 10.7vw - 1.7rem, 5rem);
+    white-space: nowrap;
     font-weight: 600;
     text-align: center;
     text-transform: uppercase;

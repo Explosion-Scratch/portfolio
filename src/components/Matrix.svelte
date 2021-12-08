@@ -96,3 +96,9 @@
 <svelte:window on:resize={resize} />
 
 <canvas bind:this={CANVAS_EL} />
+
+<style>
+  canvas {
+    mask-image: linear-gradient(to bottom, #fff 90%, #000);
+  }
+</style>
