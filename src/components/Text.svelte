@@ -1,8 +1,19 @@
 <script>
+  import { onMount } from "svelte";
+  let el = null;
   export let text = "";
+  onMount(() => {
+    text = el.innerText;
+  });
 </script>
 
-<h1 class="glitch" data-text={text} style={$$props.style || ""}>{text}</h1>
+<h1 class="glitch" data-text={text} bind:this={el} style={$$props.style || ""}>
+  {#if text}
+    {text}
+  {:else}
+    <slot />
+  {/if}
+</h1>
 
 <style scoped lang="scss">
   // Important that this background color remains consistent with the background of the page

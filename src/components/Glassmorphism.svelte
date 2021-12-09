@@ -1,11 +1,15 @@
-<div {...$$props} data-glassmorphism><slot /></div>
+<div class="glassmorphism_container">
+  <div {...$$props} data-glassmorphism light={$$props.light || undefined}>
+    <slot />
+  </div>
+</div>
 
 <style lang="scss">
-  div {
-    backdrop-filter: blur(var(--blur, 2px)) saturate(200%);
-    -webkit-backdrop-filter: blur(14px) saturate(200%);
-    background-color: rgba(17, 25, 40, 0.63);
-    border: 1px solid rgba(255, 255, 255, 0.125);
-    color: white;
+  @import "../main.scss";
+  .glassmorphism_container > div {
+    @include dark-glassmorphism;
+  }
+  .glassmorphism_container > :global(div[light]) {
+    @include glassmorphism;
   }
 </style>

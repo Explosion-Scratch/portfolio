@@ -109,19 +109,9 @@
 
 <canvas bind:this={CANVAS_EL} />
 
-<style>
+<style lang="scss">
+  @import "../main.scss";
   canvas {
-    -webkit-mask-image: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0),
-      rgba(0, 0, 0, 1),
-      rgba(0, 0, 0, 1)
-    );
-    mask-image: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0),
-      rgba(0, 0, 0, 1),
-      rgba(0, 0, 0, 1)
-    );
+    @include fade-out;
   }
 </style>

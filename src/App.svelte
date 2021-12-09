@@ -4,19 +4,22 @@
   import Matrix from "./components/Matrix.svelte";
   import CustomCursor from "./components/CustomCursor.svelte";
   import Icon from "@iconify/svelte";
+  import Timeline from "./components/Timeline.svelte";
   import Section from "./components/Section.svelte";
-  import Cards from "./components/Cards.svelte";
 
-  let cards = Array(5).fill({
-    title: "This is a cool card",
-    body: "Do you like it?",
-  });
+  let timeline = [
+    "Created this timeline",
+    "Published my second chrome extension to the chrome webstore",
+    "Published my first extension to the chrome webstore",
+    "Created a fast and end to end encrypted file sharing service called OnDrop",
+    "Created a library of useful JavaScript functions called Bijou.js and designed a website for it",
+  ];
 </script>
 
 <Section>
   <Matrix />
   <div class="center">
-    <Glitch text="--Explosion--" />
+    <Glitch>--Explosion--</Glitch>
     <Glassmorphism class="button"
       >Hello
       <Icon icon="bytesize:arrow-right" />
@@ -24,7 +27,13 @@
   </div>
 </Section>
 <Section id="gradient-bg">
-  <Cards {cards} />
+  <div class="container">
+    <Timeline items={timeline} />
+    <Glassmorphism light={true} tilt={{ scale: 1.02, reverse: true }}>
+      <h1>Hello! I am --Explosion--</h1>
+      <span>Epic</span>
+    </Glassmorphism>
+  </div>
 </Section>
 <CustomCursor />
 
@@ -37,10 +46,29 @@
     background: black;
   }
   :global(#gradient-bg) {
-    height: 100vh;
-    width: 100vw;
-    @include flex;
     background: linear-gradient(to bottom, black, #1f005c);
+    @include flex;
+    & > .container {
+      height: 100vh;
+      width: clamp(60vw, 60vw, 700px);
+      display: flex;
+      & > :global(*) {
+        flex: 1;
+      }
+
+      & > :global(.timeline) {
+        padding: 20px;
+        margin: 20px;
+      }
+      & > :global(.glassmorphism_container) {
+        flex: 2;
+      }
+      & > :global(.glassmorphism_container > *) {
+        padding: 20px;
+        margin: 20px;
+        border-radius: 10px;
+      }
+    }
   }
   :global(.button) {
     @include flex;
