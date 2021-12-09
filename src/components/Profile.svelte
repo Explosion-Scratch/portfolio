@@ -274,13 +274,13 @@
 
     &__name {
       font-weight: 700;
-      font-size: 24px;
+      font-size: 1.2em /* 24px */;
       color: #6944ff;
       margin-bottom: 15px;
     }
 
     &__txt {
-      font-size: 18px;
+      font-size: 1.1em /* 18px */;
       font-weight: 500;
       color: #324e63;
       margin-bottom: 15px;
@@ -295,12 +295,12 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 18px;
+      font-size: 1.1em /* 18px */;
       font-weight: 600;
 
       &__icon {
         display: inline-flex;
-        font-size: 27px;
+        font-size: 1.2em /* 27px */;
         margin-right: 10px;
         //color: #6944ff;
       }
@@ -311,10 +311,10 @@
       justify-content: center;
       flex-wrap: wrap;
       align-items: flex-start;
-      margin-top: 35px;
+      margin-top: 25px;
 
       &__item {
-        padding: 10px 35px;
+        padding: 10px 25px;
         min-width: 150px;
 
         @media screen and (max-width: 768px) {
@@ -325,7 +325,7 @@
 
       &__title {
         font-weight: 700;
-        font-size: 27px;
+        font-size: 1.2em /* 27px */;
         //color: #6944ff;
         color: #324e63;
       }
@@ -337,7 +337,7 @@
     }
 
     &-social {
-      margin-top: 25px;
+      margin-top: 15px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -347,7 +347,7 @@
         display: inline-flex;
         width: 55px;
         height: 55px;
-        margin: 15px;
+        margin: 8px;
         border-radius: 50%;
         align-items: center;
         justify-content: center;
@@ -355,7 +355,7 @@
         background: #405de6;
         box-shadow: 0px 7px 30px rgba(43, 98, 169, 0.5);
         position: relative;
-        font-size: 21px;
+        font-size: 1.15em /* 21px */;
         flex-shrink: 0;
         transition: all 0.3s;
 
@@ -411,7 +411,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-top: 40px;
+      margin-top: 25px;
 
       @media screen and (max-width: 576px) {
         flex-wrap: wrap;
@@ -421,10 +421,9 @@
     &__button {
       background: none;
       border: none;
-      font-family: "Quicksand", sans-serif;
       font-weight: 700;
-      font-size: 19px;
-      margin: 15px 35px;
+      font-size: 1em /* 19px */;
+      margin: 15px 10px;
       padding: 15px 40px;
       min-width: 201px;
       border-radius: 50px;
@@ -550,7 +549,6 @@
       padding: 15px 20px;
       color: #324e63;
       font-weight: 500;
-      font-family: "Quicksand", sans-serif;
       outline: none;
       transition: all 0.3s;
 
