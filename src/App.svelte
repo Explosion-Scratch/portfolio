@@ -6,7 +6,7 @@
   import Icon from "@iconify/svelte";
   import Timeline from "./components/Timeline.svelte";
   import Section from "./components/Section.svelte";
-
+  import Profile from "./components/Profile.svelte";
   let timeline = [
     "Created this timeline",
     "Published my second chrome extension to the chrome webstore",
@@ -29,10 +29,7 @@
 <Section id="gradient-bg">
   <div class="container">
     <Timeline items={timeline} />
-    <Glassmorphism light={true} tilt={{ scale: 1.02, reverse: true }}>
-      <h1>Hello! I am --Explosion--</h1>
-      <span>Epic</span>
-    </Glassmorphism>
+    <Profile />
   </div>
 </Section>
 <CustomCursor />
@@ -49,8 +46,8 @@
     background: linear-gradient(to bottom, black, #1f005c);
     @include flex;
     & > .container {
-      height: 100vh;
-      width: clamp(60vw, 60vw, 700px);
+      height: calc(100vh + 100px);
+      width: 100vw;
       display: flex;
       & > :global(*) {
         flex: 1;
@@ -60,13 +57,8 @@
         padding: 20px;
         margin: 20px;
       }
-      & > :global(.glassmorphism_container) {
-        flex: 2;
-      }
-      & > :global(.glassmorphism_container > *) {
-        padding: 20px;
-        margin: 20px;
-        border-radius: 10px;
+      & > :global(.profile .wrapper) {
+        max-width: 500px;
       }
     }
   }
