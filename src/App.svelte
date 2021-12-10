@@ -7,6 +7,8 @@
   import Timeline from "./components/Timeline.svelte";
   import Section from "./components/Section.svelte";
   import Profile from "./components/Profile.svelte";
+  import GridSection from "./components/GridSection.svelte";
+  import Meta from "./components/Meta.svelte";
   let timeline = [
     "Created this timeline",
     "Published my second chrome extension to the chrome webstore",
@@ -16,6 +18,8 @@
   ];
 </script>
 
+<svelte:head><Meta /></svelte:head>
+<!-- <GridSection /> -->
 <Section>
   <Matrix />
   <div class="center">
@@ -26,11 +30,8 @@
     </Glassmorphism>
   </div>
 </Section>
-<Section id="gradient-bg">
-  <div class="container">
-    <Timeline items={timeline} />
-    <Profile />
-  </div>
+<Section>
+  <h1>About me</h1>
 </Section>
 <CustomCursor />
 

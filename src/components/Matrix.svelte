@@ -1,22 +1,23 @@
 <script>
   import { onMount } from "svelte";
   let CANVAS_EL = null; //Bind in dom
+  export let settings = {
+    el: CANVAS_EL,
+    color: ({ x, y, width, height }) => {
+      // Nice diagonal gradient:
+      // y / height = percentage down, toString(16) = hex char
+      return `#${Math.floor((y / height) * 16).toString(16)}f${Math.floor(
+        (x / width) * 16
+      ).toString(16)}`;
+    },
+    font: "8px monospace",
+    fps: 20,
+    size: 8,
+    width: window.innerWidth,
+    height: window.innerHeight,
+  };
   const resize = () => {
-    matrix({
-      el: CANVAS_EL,
-      color: ({ x, y, width, height }) => {
-        // Nice diagonal gradient:
-        // y / height = percentage down, toString(16) = hex char
-        return `#${Math.floor((y / height) * 16).toString(16)}f${Math.floor(
-          (x / width) * 16
-        ).toString(16)}`;
-      },
-      font: "8px monospace",
-      fps: 20,
-      size: 8,
-      width: window.innerWidth,
-      height: window.innerHeight + 200,
-    });
+    matrix(settings);
   };
   onMount(() => {
     // We can just run the resize function =P
