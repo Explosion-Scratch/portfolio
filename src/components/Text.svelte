@@ -3,16 +3,12 @@
   let el = null;
   export let text = "";
   onMount(() => {
-    text = el.innerText;
+    setInterval(() => (text = el.innerText), 100);
   });
 </script>
 
-<h1 class="glitch" data-text={text} bind:this={el} style={$$props.style || ""}>
-  {#if text}
-    {text}
-  {:else}
-    <slot />
-  {/if}
+<h1 {...$$props} class="glitch" data-text={text} bind:this={el}>
+  <slot />
 </h1>
 
 <style scoped lang="scss">

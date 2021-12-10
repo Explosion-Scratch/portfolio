@@ -13,11 +13,11 @@
     font: "8px monospace",
     fps: 20,
     size: 8,
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width: () => window.innerWidth,
+    height: () => window.innerHeight,
   };
   const resize = () => {
-    matrix(settings);
+    matrix({ ...settings, height: settings.height(), width: settings.width() });
   };
   onMount(() => {
     // We can just run the resize function =P

@@ -1,5 +1,6 @@
 <script>
   import Glitch from "./components/Text.svelte";
+  import { typing } from "./components/typing.js";
   import Glassmorphism from "./components/Glassmorphism.svelte";
   import Matrix from "./components/Matrix.svelte";
   import CustomCursor from "./components/CustomCursor.svelte";
@@ -23,7 +24,14 @@
 <Section>
   <Matrix />
   <div class="center">
-    <Glitch>--Explosion--</Glitch>
+    <Glitch>
+      I am <span
+        use:typing={{
+          items: ["--Explosion--", "a developer", "a designer", "a creator"],
+          loop: false,
+        }}
+      />
+    </Glitch>
     <Glassmorphism class="button"
       >Hello
       <Icon icon="bytesize:arrow-right" />

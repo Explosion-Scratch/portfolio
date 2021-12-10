@@ -21,6 +21,16 @@ export async function typing(node, config){
 		await sleep(config.wordWait || 500)
 		index++;
 		if (index >= texts.length){
+            if (config.loop === false){
+                if (!config.dontRepeatFirst){
+                    for (let letter of texts[0]){
+                        current += letter;
+                        node.innerText = current;
+                        await sleep(config.typeTime || 200);
+                    }
+                }
+                return;
+            }
 			index = 0;
 		}
 	}
