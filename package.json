@@ -1,28 +1,18 @@
 {
-  "name": "svelte-app",
-  "version": "1.0.0",
+  "name": "vite",
   "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
-    "start": "sirv public --no-clear"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "devDependencies": {
-    "@iconify/svelte": "^2.1.0",
-    "@rollup/plugin-commonjs": "^17.0.0",
-    "@rollup/plugin-node-resolve": "^11.0.0",
-    "node-sass": "^7.0.0",
-    "rollup": "^2.3.4",
-    "rollup-plugin-css-only": "^3.1.0",
-    "rollup-plugin-livereload": "^2.0.0",
-    "rollup-plugin-svelte": "^7.0.0",
-    "rollup-plugin-terser": "^7.0.0",
-    "svelte": "^3.0.0",
-    "svelte-preprocess": "^4.9.8"
-  },
-  "dependencies": {
-    "sass": "^1.44.0",
-    "sass-loader": "^12.4.0",
-    "sirv-cli": "1.0.14"
+    "@sveltejs/vite-plugin-svelte": "^2.0.4",
+    "svelte": "^3.59.1",
+    "vite": "^4.3.9",
+    "@iconify/svelte": "^3.1.4",
+    "node-sass": "^9.0.0"
   }
 }

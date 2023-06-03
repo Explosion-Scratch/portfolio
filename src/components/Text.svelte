@@ -60,7 +60,7 @@
 
   @keyframes glitch-effect {
     @for $i from 0 through $steps {
-      #{percentage($i*(1/$steps))} {
+      #{percentage($i*calc(1/$steps))} {
         clip: rect(random(100) + px, 9999px, random(100) + px, 0);
       }
     }
