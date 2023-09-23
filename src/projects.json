@@ -1,0 +1,682 @@
+[
+  {
+    "title": "Spanish Tutoring",
+    "link": "https://github.com/Explosion-Scratch/coding_backup/tree/main/langchat_again",
+    "code_link": "https://github.com/Explosion-Scratch/coding_backup/tree/main/langchat_again",
+    "image": "https://github.com/Explosion-Scratch/projects/assets/61319150/0d696d49-b94b-4ba7-b30b-53e9f72e6e80",
+    "description": "Talk to AI characters and have them respond (Uses whisper, ChatGPT and ElevenLabs)",
+    "tags": "ai,javascript,nodejs,svelte"
+  },
+  {
+    "title": "AI Todo List",
+    "link": "https://github.com/Explosion-Scratch/coding_backup/tree/main/todo_app",
+    "code_link": "https://github.com/Explosion-Scratch/coding_backup/tree/main/todo_app",
+    "image": "https://github.com/Explosion-Scratch/projects/assets/61319150/a93340ea-3c6b-4c2e-80d5-f7505bc936c3",
+    "description": "An AI todoist like todo list app which breaks down tasks, and automatically schedules your day",
+    "tags": "ai,javascript,svelte"
+  },
+  {
+    "title": "MathBooks",
+    "link": "https://explosion-scratch.github.io/sveltebooks/",
+    "code_link": "https://github.com/Explosion-Scratch/sveltebooks",
+    "image": "https://user-images.githubusercontent.com/61319150/236589961-e0b14b9a-8ff5-42c5-8bc9-24392022a169.png",
+    "description": "A text based math notebook where you can define variables, do high precision math and solve any problem!",
+    "tags": "javascript,svelte"
+  },
+  {
+    "title": "Guitar Chord Chart Generator",
+    "link": "https://explosion-scratch.github.io/chartz",
+    "code_link": "https://github.com/explosion-scratch/chartz",
+    "image": "https://github.com/Explosion-Scratch/chartz/assets/61319150/0ea005d9-4195-4e76-97f1-4671f0df2851",
+    "description": "Generate printable guitar chord charts using a simple text format. Supports different fingerings, fonts, etc",
+    "tags": "javascript,svelte"
+  },
+  {
+    "title": "Vibes - AI Playlist Generator",
+    "link": "https://vibes.explosionscratc.repl.co/",
+    "code_link": "https://github.com/Explosion-Scratch/coding_backup/tree/main/playlist_gen",
+    "image": "https://github.com/Explosion-Scratch/projects/assets/61319150/5521a43b-5555-49cd-8bc9-46dde5416ce4",
+    "description": "Generate Spotify Playlists using AI and natural language descriptions, e.g. \"Pop songs about breakups\" or \"Sad acoustic fingerstyle guitar songs from the 80s\"",
+    "tags": "music,ai,javascript,vue,nodejs"
+  },
+  {
+    "title": "ChatGPT for Google",
+    "link": "https://gist.github.com/Explosion-Scratch/fc205244d3737f21e51ff7dfb9476835",
+    "code_link": "https://gist.github.com/Explosion-Scratch/fc205244d3737f21e51ff7dfb9476835",
+    "image": "https://github.com/Explosion-Scratch/projects/assets/61319150/02fbe35b-9376-4312-8d70-c82d92f19ad6",
+    "description": "See ChatGPT responses integrated with google results - Syntax highlights code, references search results",
+    "tags": "javascript,userscript"
+  },
+  {
+    "title": "FireFox custom userCSS",
+    "link": "https://github.com/explosion-scratch/coding_backup",
+    "code_link": "https://github.com/explosion-scratch/coding_backup",
+    "image": "https://github.com/Explosion-Scratch/projects/assets/61319150/4cb680a2-16eb-4882-8611-3dc648bf4323",
+    "description": "Custom userChrome CSS for firefox to make it look like Chrome– Translucent window backgrounds to integrate with MacOS",
+    "tags": "css,javascript"
+  },
+  {
+    "title": "ChatGPT as a Search Engine Userscript",
+    "link": "https://gist.github.com/Explosion-Scratch/162aeb7ddf02403a3bfc2b1e6a1d99ec",
+    "code_link": "https://gist.github.com/Explosion-Scratch/162aeb7ddf02403a3bfc2b1e6a1d99ec",
+    "image": "https://github.com/Explosion-Scratch/projects/assets/61319150/662d74c3-4726-4581-a791-7e9d2e1a7941",
+    "description": "Use ChatGPT as a custom chrome search engine. Also supports summarizing YouTube videos."
+  },
+  {
+    "title": "Custom MacOS app icons",
+    "link": "https://gist.github.com/Explosion-Scratch/d915138e3c6268fa2b76013c0557d9b9",
+    "code_link": "https://gist.github.com/Explosion-Scratch/d915138e3c6268fa2b76013c0557d9b9",
+    "image": "https://github.com/Explosion-Scratch/projects/assets/61319150/792289e8-ccfc-4073-a346-98d0b944457f",
+    "description": "Set custom MacOS Icons from a folder with .icns files",
+    "tags": "nodejs,javascript"
+  },
+  {
+    "title": "YouTube Summarizer Userscript",
+    "link": "https://gist.github.com/Explosion-Scratch/e8857930850ff5b8b963a05c40fea2fb",
+    "code_link": "https://gist.github.com/Explosion-Scratch/e8857930850ff5b8b963a05c40fea2fb",
+    "image": "https://github.com/Explosion-Scratch/projects/assets/61319150/5f41a08a-bde7-4c34-a82b-5b4d4acb031a",
+    "description": "Summarize YouTube videos using Google's Bard language model",
+    "tags": "ai,javascript,userscript"
+  },
+  {
+    "title": "Claude Unofficial API",
+    "link": "https://github.com/explosion-scratch/claude-unofficial-api",
+    "code_link": "https://github.com/explosion-scratch/claude-unofficial-api",
+    "image": "https://user-images.githubusercontent.com/61319150/253622962-6c3f706d-bddf-42e6-9745-aa1f7561ca40.mp4",
+    "description": "An unofficial JavaScript API and CLI for interacting with the Claude-2.0 Large Language Model",
+    "tags": "ai,javascript"
+  },
+  {
+    "title": "Swift Browser App",
+    "link": "https://github.com/Explosion-Scratch/coding_backup/tree/main/Xcode/browser",
+    "code_link": "https://github.com/Explosion-Scratch/coding_backup/tree/main/Xcode/browser",
+    "image": "https://github.com/Explosion-Scratch/projects/assets/61319150/6c33bc39-f397-48fa-bda6-dbc89abb73ae",
+    "description": "A super simple browser app made with Swift",
+    "tags": "swift"
+  },
+  {
+    "title": "Swift Authenticator App",
+    "link": "https://github.com/Explosion-Scratch/authenticator-swift",
+    "code_link": "https://github.com/Explosion-Scratch/authenticator-swift",
+    "image": "https://github.com/Explosion-Scratch/projects/assets/61319150/6b3d68b5-9e57-4b3c-93e7-e61d46fd254b",
+    "description": "A 2fa code generator mac app made with Swift. Interacts with JavaScript to generate codes",
+    "tags": "swift,javascript,nodejs"
+  },
+  {
+    "title": "Screen Recorder",
+    "link": "https://explosion-scratch.github.io/screen-recorder",
+    "code_link": "https://github.com/explosion-scratch/screen-recorder",
+    "image": "https://user-images.githubusercontent.com/61319150/197055827-1da33970-7397-4d62-af30-ecbc8d8676f2.gif",
+    "description": "A fully featured in browser screen recorder",
+    "tags": "javascript,svelte"
+  },
+  {
+    "title": "Svelteflowy - A workflowy clone",
+    "link": "https://explosion-scratch.github.io/svelteflowy",
+    "code_link": "https://github.com/explosion-scratch/svelteflowy",
+    "image": "https://user-images.githubusercontent.com/61319150/197055602-b0eaacf5-6513-446d-9650-2299eeaab4f8.gif",
+    "description": "A workflowy clone in svelte, supports nesting, indenting, outdenting, zooming, toggling and descriptions.",
+    "tags": "javascript,svelte"
+  },
+  {
+    "title": "Factor Polynomials",
+    "link": "https://svelte.dev/repl/c1e3bfd9d88a4f0c961f1f18b0591405?version=4.2.1",
+    "code_link": "https://svelte.dev/repl/c1e3bfd9d88a4f0c961f1f18b0591405?version=4.2.1",
+    "image": "https://github.com/Explosion-Scratch/projects/assets/61319150/b171d243-b27e-46da-b464-8b227445ed27",
+    "description": "Factor any polynomial super quickly!",
+    "tags": "javascript,svelte"
+  },
+  {
+    "title": "Math Solver",
+    "link": "https://explosion-scratch.github.io/tools/math",
+    "code_link": "https://github.com/Explosion-Scratch/tools/blob/main/src/routes/math.svelte",
+    "image": "https://user-images.githubusercontent.com/61319150/183678184-53167355-4946-43da-a8fc-b37ccd7a8134.png",
+    "description": "A step by step algebra, calculus and mathematics solver.",
+    "tags": "javascript,svelte"
+  },
+  {
+    "title": "Gitty",
+    "link": "https://github.com/Explosion-Scratch/gitty",
+    "code_link": "https://github.com/Explosion-Scratch/gitty",
+    "image": "",
+    "description": "Backup all GitHub repos on your machine interactively at once",
+    "tags": "cli,javascript,inquirer"
+  },
+  {
+    "title": "Radio player",
+    "link": "https://explosion-scratch.github.io/tools/radio",
+    "code_link": "https://github.com/Explosion-Scratch/tools/blob/main/src/routes/radio.svelte",
+    "image": "https://user-images.githubusercontent.com/61319150/183678746-963d4101-4d04-4a46-bca7-4fcce82aa5a4.png",
+    "description": "Play (almost) any radio station online!",
+    "tags": "javascript,svelte"
+  },
+  {
+    "title": "Bookmarklets",
+    "link": "https://explosion-scratch.github.io/tools/bookmarklets",
+    "code_link": "https://github.com/Explosion-Scratch/tools/blob/main/src/routes/bookmarklets.svelte",
+    "image": "https://user-images.githubusercontent.com/61319150/183679090-b5ec3a78-3dd3-4102-b233-852481d3d5d9.png",
+    "description": "A collection of over 100 bookmarklets that I've coded for everything from getting the answer to anything to playing games.",
+    "tags": "javascript,svelte"
+  },
+  {
+    "title": "Translate webpages",
+    "link": "",
+    "code_link": "",
+    "image": "https://github.com/Explosion-Scratch/projects/assets/61319150/b8571c44-ca35-4a04-9735-256001fa7d71",
+    "description": "Learn any language by translating some of the words on the current webpage to your target language",
+    "tags": "javascript,chrome"
+  },
+  {
+    "title": "Code Editor",
+    "link": "https://explosion-scratch.github.io/tools/beautify",
+    "code_link": "https://github.com/Explosion-Scratch/tools/blob/main/src/routes/beautify.svelte",
+    "image": "https://user-images.githubusercontent.com/61319150/183680018-9439a866-9360-4d7d-a3df-9a0a932a68a9.png",
+    "description": "A minimal but fully featured code editor with beautification, minification, saving and more.",
+    "tags": "javascript,svelte"
+  },
+  {
+    "title": "Split Pages Chrome Extension",
+    "link": "https://github.com/Explosion-Scratch/extensions/tree/master/Split%20window",
+    "code_link": "https://github.com/Explosion-Scratch/extensions/tree/master/Split%20window",
+    "image": "https://github.com/Explosion-Scratch/projects/assets/61319150/aadfbaaf-e48f-47f4-b481-a42e895c2d0c",
+    "description": "Split webpages vertically or horizontally and multitask!",
+    "tags": "chrome,javascript,html"
+  },
+  {
+    "title": "HTMLifyCLI",
+    "link": "https://github.com/Explosion-Scratch/htmlifycli",
+    "code_link": "https://github.com/Explosion-Scratch/htmlifycli",
+    "image": "https://user-images.githubusercontent.com/61319150/178159862-b6285581-2c43-451a-975d-c154a4311e0b.png",
+    "description": "A beautiful command line interface for downloading scratch projects",
+    "tags": "cli,node.js,javascript"
+  },
+  {
+    "title": "Userscripts",
+    "link": "https://github.com/Explosion-Scratch/userscripts",
+    "code_link": "https://github.com/Explosion-Scratch/userscripts",
+    "image": "https://user-images.githubusercontent.com/61319150/183681577-bf7b2688-0bec-4b60-b9af-999f82844920.png",
+    "description": "A collection of userscripts for various websites",
+    "tags": "javascript"
+  },
+  {
+    "title": "Svelte VIM",
+    "link": "https://svelte.dev/repl/292c8bf6ca714a6e9ee5c8c81214bf71?version=4.2.1",
+    "code_link": "https://github.com/Explosion-Scratch/svelte-vim",
+    "image": "https://github.com/Explosion-Scratch/projects/assets/61319150/9648661c-96ee-42d0-8fa9-c11d6a979459",
+    "description": "A web based VIM clone written in Svelte",
+    "tags": "svelte,javascript"
+  },
+  {
+    "title": "PipeStream - JavaScript Code Generator",
+    "link": "https://github.com/Explosion-Scratch/PipeStream",
+    "code_link": "https://github.com/Explosion-Scratch/PipeStream",
+    "image": "https://github.com/Explosion-Scratch/projects/assets/61319150/b9ce7654-d7bc-496d-8d14-c77d6ae6260e",
+    "description": "Generate and run readable javascript code through a step by step based interface",
+    "tags": "javascript,svelte"
+  },
+  {
+    "title": "Recipes",
+    "link": "https://explosion-scratch.github.io/recipes",
+    "code_link": "https://github.com/Explosion-Scratch/recipes",
+    "image": "https://user-images.githubusercontent.com/61319150/163600824-64f87b1c-101c-46a0-a5a5-8e959ec4e29b.png",
+    "description": "Get a printable version of any recipe with ease!",
+    "tags": "svelte,javascript"
+  },
+  {
+    "title": "Stackoverflow Import",
+    "link": "https://so.explosionscratc.repl.co/",
+    "code_link": "https://github.com/Explosion-Scratch/stackoverflow_import",
+    "image": "https://user-images.githubusercontent.com/61319150/178159997-c091899f-b20a-4f69-9874-55f7e4da5e4b.png",
+    "description": "Import code directly from Stack overflow and use it in your production application!",
+    "tags": "javascript,node.js,api"
+  },
+  {
+    "title": "Podcasts Player",
+    "link": "https://explosion-scratch.github.io/podcasts_player/",
+    "code_link": "https://github.com/Explosion-Scratch/podcasts_player",
+    "image": "https://user-images.githubusercontent.com/61319150/161435554-72dd119e-572c-47d2-a274-d69ebac08fbd.png",
+    "description": "🎶 A feature rich podcasts player PWA that allows you to search, download, play and zip podcasts.",
+    "tags": "vue,JavaScript,less"
+  },
+  {
+    "title": "Full page screenshot extension",
+    "link": "https://chrome.google.com/webstore/detail/full-page-screen-capture/apnckokpemodoljkfcdkmmnlpaicfjkl",
+    "code_link": "https://GitHub.com/explosion-scratch/screenshot_extension",
+    "image": "https://user-images.githubusercontent.com/61319150/152699900-76aa8bb7-6b29-42cf-a9ae-a633932ec859.png",
+    "description": "A full page screen capture extension that captures super high resolution, and doesn't scroll",
+    "tags": "javascript,extension"
+  },
+  {
+    "title": "Function log",
+    "link": "https://GitHub.com/explosion-scratch/function-log",
+    "code_link": "https://GitHub.com/explosion-scratch/function-log",
+    "image": "https://user-images.githubusercontent.com/61319150/178160186-0b7689fd-e741-4798-b2c5-d23c76441ffa.png",
+    "description": "Logs the output, time, arguments, and stacktrace of any function when it's called in a gorgeous way.",
+    "tags": "javascript"
+  },
+  {
+    "title": "Stylash",
+    "link": "https://explosion-scratch.github.io/stylash",
+    "code_link": "https://github.com/Explosion-Scratch/stylash",
+    "image": "https://user-images.githubusercontent.com/61319150/152684932-ad22d31c-2723-4386-b61b-1a463f2d68d2.png",
+    "description": "A style editor bookmarklet with Less.js support, live preview, beautification, and autosave",
+    "tags": "javascript,bookmarklet"
+  },
+  {
+    "title": "YouTube downloader extension",
+    "link": "https://github.com/Explosion-Scratch/youtube-downloader-extension",
+    "code_link": "https://github.com/Explosion-Scratch/youtube-downloader-extension",
+    "image": "https://user-images.githubusercontent.com/61319150/178160403-951183a0-9017-44b0-b160-f6541573c91b.png",
+    "description": "A beautiful, simple, and easy to use YouTube downloader extension",
+    "tags": "javascript,extension"
+  },
+  {
+    "title": "Tab searcher",
+    "link": "https://chrome.google.com/webstore/detail/findex-the-quickest-way-t/bkkpiihclpmelfmgncnleakfedbffhaa",
+    "code_link": "https://github.com/Explosion-Scratch/tab_searcher",
+    "image": "https://user-images.githubusercontent.com/61319150/143915246-1d2f0024-f651-41d8-bdd3-e87e68fa120e.png",
+    "description": "A beautiful tab, bookmarks, history, and downloads searcher (beta)",
+    "tags": "JavaScript,extension"
+  },
+  {
+    "title": "Tab grouping",
+    "link": "https://chrome.google.com/webstore/detail/tab-grouper/ebaakekgcpaojdlfcfmlaelgaacmdeje",
+    "code_link": "https://github.com/Explosion-Scratch/tab_grouping",
+    "image": "https://user-images.githubusercontent.com/61319150/178160752-58cba80f-d756-4688-8310-b16ac4eedb57.png",
+    "description": "A beautiful tab grouping extension with tons of options!",
+    "tags": "javascript,extension"
+  },
+  {
+    "title": "Svelte Forms",
+    "link": "https://github.com/Explosion-Scratch/svelte-forms",
+    "code_link": "https://github.com/Explosion-Scratch/svelte-forms",
+    "image": "https://user-images.githubusercontent.com/61319150/168218071-d7511c04-160c-455c-9563-e52608fee26c.png",
+    "description": "An intuitive and beautiful svelte forms library",
+    "tags": "svelte,library,javascript"
+  },
+  {
+    "title": "Svelte Components Collection",
+    "link": "https://github.com/Explosion-Scratch/components",
+    "code_link": "https://github.com/Explosion-Scratch/components",
+    "image": "https://user-images.githubusercontent.com/61319150/168413122-60e24b82-8a9b-4dd6-bc60-b4e44f0d5427.png",
+    "description": "A collection of svelte components",
+    "tags": "svelte,library,javascript"
+  },
+  {
+    "title": "Cool APIs",
+    "link": "https://GitHub.com/explosion-scratch/cool_apis",
+    "code_link": "https://GitHub.com/cool_apis",
+    "image": "https://user-images.githubusercontent.com/61319150/178159582-31059b4e-3a49-43ab-876d-b43b21fb8185.png",
+    "description": "A collection of documented JavaScript functions to scrape popular websites.",
+    "tags": "javascript,api"
+  },
+  {
+    "title": "Star to rename",
+    "link": "https://GitHub.com/explosion-scratch/star-to-rename",
+    "code_link": "https://GitHub.com/explosion-scratch/star-to-rename",
+    "image": "https://user-images.githubusercontent.com/61319150/178160891-81d9f8ed-cb75-48b8-bd1d-844435b02d0c.png",
+    "description": "Star to rename the GitHub repo with your username! (As of writing has about 420 stars)",
+    "tags": "javascript,actions"
+  },
+  {
+    "title": "Tools",
+    "link": "https://explosion-scratch.github.io/tools",
+    "code_link": "https://GitHub.com/explosion-scratch/tools",
+    "image": "https://user-images.githubusercontent.com/61319150/164757252-89369ae2-744f-444a-91f6-072ae7644adc.png",
+    "description": "Random tools that I coded, including a code beautifier, radio, calculators, emoji picker, dictionary and much more",
+    "tags": "javascript,svelte"
+  },
+  {
+    "title": "OnDrop - The quickest way to share files",
+    "link": "https://ondrop.explosionscratc.repl.co",
+    "code_link": "https://github.com/explosion-scratch/ondrop",
+    "image": "https://user-images.githubusercontent.com/61319150/128514730-9361cf6c-f77c-4d13-ac20-92e6a586b43b.png",
+    "description": "OnDrop is the quickest way to send files to anyone, near or far! Works in realtime using socket.io and node.js! Installable as a PWA as well!",
+    "tags": "share,javascript,node.js,socket.io,pwa",
+    "___deleteme": "https://github.com/Explosion-Scratch/projects/assets/61319150/22783feb-a671-4438-aa7c-71d51c8c808f"
+  },
+  {
+    "title": "Useful coding resources for developers",
+    "link": "https://gist.github.com/Explosion-Scratch/18a27590b4aa6a0b12bfe515ad5f5c84",
+    "code_link": "https://gist.github.com/Explosion-Scratch/18a27590b4aa6a0b12bfe515ad5f5c84",
+    "image": "https://user-images.githubusercontent.com/61319150/128512321-d7761ca9-649d-418b-8f83-b31e7509de6d.png",
+    "description": "A bunch of useful coding wesites and resources for coders and developers! Please check it out! It took a long time to type.",
+    "tags": "javascript,blog"
+  },
+  {
+    "title": "Mandelbrot fractal set",
+    "link": "https://wkz6g.csb.app",
+    "code_link": "https://codesandbox.io/s/wkz6g",
+    "image": "https://user-images.githubusercontent.com/61319150/128511806-2bdc438f-edf4-40aa-85c6-8ca386025fad.png",
+    "description": "The Mandelbrot fractal set rendered using JavaScript and p5.js!",
+    "tags": "javascript,canvas,art"
+  },
+  {
+    "title": "Color picker for developers!",
+    "link": "https://github.com/Explosion-Scratch/colorizer",
+    "code_link": "https://github.com/Explosion-Scratch/colorizer",
+    "image": "https://user-images.githubusercontent.com/61319150/125462709-26d741a5-c9d8-4e0d-b704-375945ca9f92.gif",
+    "description": "Color picker that uses google images! Search something and it will come up with all the colors in the images that google images turns up! Then you can copy colors and use them in your projects!",
+    "tags": "javascript,vue,node.js"
+  },
+  {
+    "title": "Eliminate most of browsing!",
+    "link": "https://github.com/Explosion-Scratch/search_ext",
+    "code_link": "https://github.com/Explosion-Scratch/search_ext",
+    "image": "https://user-images.githubusercontent.com/61319150/125463524-c52a6db7-c07d-4252-83e5-ca027ab45ce1.gif",
+    "description": "Press tilde then press tab, then enter something and go to the first search result for it!",
+    "tags": "javascript,extension,api"
+  },
+  {
+    "title": "Quick answers to any coding question!",
+    "link": "https://quick-code-search-testing-thing.explosionscratc.repl.co/",
+    "code_link": "https://quick-code-search-testing-thing.explosionscratc.repl.co/__repl",
+    "image": "https://user-images.githubusercontent.com/61319150/123884079-f5697c80-d90f-11eb-8fad-9f901a66bef8.gif",
+    "description": "Quickly get the code you need to any programming question you might have! Searches stackoverflow for the best result to your query then returns relevant code and questions! Supports all programming languages!",
+    "tags": "javascript,node.js,vue"
+  },
+  {
+    "title": "Spotify song matching",
+    "link": "https://test-or-1.explosionscratc.repl.co/",
+    "code_link": "https://test-or-1.explosionscratc.repl.co/__repl",
+    "image": "https://user-images.githubusercontent.com/61319150/123884108-0914e300-d910-11eb-8309-f7d67d271e84.gif",
+    "description": "Find related and good sounding songs to the songs you like! Simply enter a few songs that you like, and let the program do the rest! Generates spotify links and cover art for each song as well!",
+    "tags": "javascript,vue,api"
+  },
+  {
+    "title": "Natural language processing calendar",
+    "link": "https://nlp.explosionscratc.repl.co",
+    "code_link": "https://nlp.explosionscratc.repl.co/__repl",
+    "image": "https://user-images.githubusercontent.com/61319150/123193643-c4e69600-d46a-11eb-9ba4-ce873d9f7842.gif",
+    "description": "Convert natural language to a Google calendar event! Made with compromise.js!",
+    "tags": "javascript,node.js"
+  },
+  {
+    "title": "Perlin noise with p5.js",
+    "link": "https://oggek.csb.app",
+    "code_link": "https://codesandbox.io/s/holy-fire-oggek",
+    "image": "https://user-images.githubusercontent.com/61319150/123193882-23137900-d46b-11eb-84db-6a6ab68c5ff0.png",
+    "description": "A beautiful perlin noise effect using p5.js!",
+    "tags": "p5,JavaScript,canvas,art"
+  },
+  {
+    "title": "Simple icons library",
+    "link": "https://icon-library-im-working-on.explosionscratc.repl.co/",
+    "code_link": "https://replit.com/@ExplosionScratc/icon-library-Im-working-on",
+    "image": "https://user-images.githubusercontent.com/61319150/121227591-57731c80-c851-11eb-8fe7-894e9af16231.gif",
+    "description": "Simple icons library! Supports the use of <icon>[search term]</icon> tags and animated icons!",
+    "tags": "javascript,html"
+  },
+  {
+    "title": "Conway's Game of Life",
+    "link": "https://gol.explosionscratc.repl.co",
+    "code_link": "https://replit.com/@ExplosionScratc/gol",
+    "image": "https://user-images.githubusercontent.com/61319150/121230096-6d361100-c854-11eb-979d-373206aeaabf.gif",
+    "description": "The famous game of life! Recreated in JavaScript canvas",
+    "tags": "javascript,canvas,html"
+  },
+  {
+    "title": "Gooey text",
+    "link": "https://gmb05.csb.app",
+    "code_link": "https://codesandbox.io/s/gmb05",
+    "image": "https://user-images.githubusercontent.com/61319150/120940002-85851f00-c6e0-11eb-8d93-d3fad8569a74.gif",
+    "description": "A gooey text effect using SVG filters on canvas.",
+    "tags": "canvas,javascript"
+  },
+  {
+    "title": "Water Foutain",
+    "link": "https://3pch1.csb.app/",
+    "code_link": "https://codesandbox.io/s/3pch1",
+    "image": "https://user-images.githubusercontent.com/61319150/120940023-a5b4de00-c6e0-11eb-8873-763680c94a91.gif",
+    "description": "A fun water fountain to splash your mouse in!",
+    "tags": "canvas,javascript"
+  },
+  {
+    "title": "Drip, drip, drip",
+    "link": "https://x2d6s.csb.app/",
+    "code_link": "https://codesandbox.io/s/x2d6s",
+    "image": "https://user-images.githubusercontent.com/61319150/120940115-3390c900-c6e1-11eb-9a00-1b299c209aee.gif",
+    "description": "When you draw, your drawings will drip away!",
+    "tags": "canvas,javascript"
+  },
+  {
+    "title": "Dizzying but fun!",
+    "link": "https://gomot.csb.app/",
+    "code_link": "https://codesandbox.io/s/gomot/",
+    "image": "https://user-images.githubusercontent.com/61319150/120940620-cc284880-c6e3-11eb-8660-b1c59ca980ce.gif",
+    "description": "An experiment using mouse velocities to set the particle velocities, creating for a very interesting effect!",
+    "tags": "canvas,javascript"
+  },
+  {
+    "title": "A cool text effect!",
+    "link": "https://canvas-particles.explosionscratc.repl.co",
+    "code_link": "https://replit.com/@ExplosionScratc/canvas-particles",
+    "image": "https://user-images.githubusercontent.com/61319150/120924584-0bca4280-c69a-11eb-81ff-928778f48455.gif",
+    "description": "A super cool project that scans text, then creates particles to form that text which interact with the mouse and each other.",
+    "tags": "canvas,javascript"
+  },
+  {
+    "title": "Random particle effect",
+    "link": "https://yrr5v.csb.app",
+    "code_link": "https://codesandbox.io/s/epicness-yrr5v",
+    "image": "https://user-images.githubusercontent.com/61319150/120908759-549ae080-c633-11eb-9a0f-8199826269e5.gif",
+    "description": "Random particles effect I did as an experiment, interesting 'physics'",
+    "tags": "canvas,javascript"
+  },
+  {
+    "title": "Particles with the Pythagorean theorem!",
+    "link": "https://sci-fi-canvas-particles-effect.explosionscratc.repl.co/",
+    "code_link": "https://replit.com/@ExplosionScratc/Sci-fi-canvas-particles-effect",
+    "image": "https://user-images.githubusercontent.com/61319150/120908592-5e234900-c631-11eb-80c5-02a72314a0cc.gif",
+    "description": "A satisfying particle effect that uses the pythagorean theorum to connect particles",
+    "tags": "canvas,javascript"
+  },
+  {
+    "title": "Image reveal rain",
+    "link": "https://canvas-particles.explosionscratc.repl.co",
+    "code_link": "https://replit.com/@ExplosionScratc/canvas-particles",
+    "image": "https://user-images.githubusercontent.com/61319150/120908689-5f08aa80-c632-11eb-915f-d1865f2fe633.gif",
+    "description": "An amazing canvas effect which reveals an image through stunning particle rain",
+    "tags": "canvas,javascript"
+  },
+  {
+    "title": "URL Shortener:",
+    "link": "https://slight.gq",
+    "code_link": "https://slight.gq/__repl",
+    "image": "https://user-images.githubusercontent.com/61319150/121193980-ebce8680-c833-11eb-9728-0af139545184.png",
+    "description": " A URL shortener I made that doesn't track, supports custom ID's, and is super fast and user friendly! Made in Node.js, Vue.js and tailwind.css",
+    "tags": "node.js,tailwind,vue,javascript"
+  },
+  {
+    "title": "Bookmarklet maker:",
+    "link": "https://qzlxp.csb.app",
+    "code_link": "https://codesandbox.io/s/competent-snowflake-qzlxp?file=/script.js",
+    "image": "https://user-images.githubusercontent.com/61319150/120908701-7fd10000-c632-11eb-9784-759991921ef3.gif",
+    "description": " Creating a bookmarklet no longer requires coding knowledge! A simple to use interface resulting in a neato bookmarklet!",
+    "tags": "tailwind,vue,javascript"
+  },
+  {
+    "title": "YouTube bot",
+    "link": "https://replit.com/@ExplosionScratc/ytbot",
+    "code_link": "https://replit.com/@ExplosionScratc/ytbot",
+    "image": "https://user-images.githubusercontent.com/61319150/120015667-3553e180-bfa9-11eb-9eb0-986b7a8d5275.gif",
+    "description": "An easy to use youtube discord bot! Supports progress, pausing and resuming, volume, downloading videos and more!",
+    "tags": "discord,bot,javascript"
+  },
+  {
+    "title": "Google bot",
+    "link": "https://replit.com/@ExplosionScratc/google-bot",
+    "code_link": "https://replit.com/@ExplosionScratc/google-bot",
+    "image": "https://user-images.githubusercontent.com/61319150/120017117-16eee580-bfab-11eb-900e-e899a0000c7a.gif",
+    "description": "A super simple bot that lets you google anything without leaving discord! Also supports defining words, autocompleting terms, and more!",
+    "tags": "discord,bot,javascript"
+  },
+  {
+    "title": "Animals bot",
+    "link": "https://replit.com/@ExplosionScratc/animals",
+    "code_link": "https://replit.com/@ExplosionScratc/animals",
+    "image": "https://user-images.githubusercontent.com/61319150/121197684-1f5ee000-c837-11eb-80c3-a19eca12c8b1.png",
+    "description": "A discord bot that lets you farm, adopt, and give away animals!",
+    "tags": "discord,bot,javascript"
+  },
+  {
+    "title": "Bijou.js",
+    "link": "https://bijou.js.org",
+    "code_link": "https://github.com/bijoujs/bijou.js",
+    "image": "https://camo.githubusercontent.com/eaf58fc8851079abf86b1daba9bf62a95f6e8c3a72621bd451c90cfbbe7c5b77/68747470733a2f2f62696a6f752e6a732e6f72672f62696a6f752e706e67",
+    "description": "Bijou.js – A comprehensive library of JavaScript snippets, super easy to use and super helpful! 😃",
+    "tags": "library,javascript"
+  },
+  {
+    "title": "Prompt/alert engine",
+    "link": "https://trqhj.csb.app",
+    "code_link": "https://codesandbox.io/s/popup-modal-with-prompt-trqhj",
+    "image": "https://user-images.githubusercontent.com/61319150/103492249-264c7700-4def-11eb-8146-c349e28a6235.png",
+    "description": "A comprehensive alert and prompt engine that looks amazing! Easy to use, supports callbacks, promises and more!",
+    "tags": "html,css,javascript"
+  },
+  {
+    "title": "Send me an email with client side JS!",
+    "link": "https://v3j0b.csb.app",
+    "code_link": "https://codesandbox.io/s/send-me-an-email-working-v3j0b",
+    "image": "https://user-images.githubusercontent.com/61319150/103492332-bee2f700-4def-11eb-8c3c-768fece1cba4.png",
+    "description": " An easy way to send me an email using EmailJS! It works really well! 👍🏻",
+    "tags": "javascript,emailjs"
+  },
+  {
+    "title": "Screen recorder",
+    "link": "https://wjon6.csb.app/",
+    "code_link": "https://codesandbox.io/s/screen-recorder-wjon6",
+    "image": "https://user-images.githubusercontent.com/61319150/103492295-7fb4a600-4def-11eb-8291-42a05a034ab7.png",
+    "description": "A super simple screen recorder supporting recording a tab, window, or even your whole desktop!",
+    "tags": "javascript"
+  },
+  {
+    "title": "Javascript Mousemove effect",
+    "link": "https://7snyo.csb.app",
+    "code_link": "https://codesandbox.io/s/mouse-effect-particles-7snyo",
+    "image": "https://user-images.githubusercontent.com/61319150/103492381-2305bb00-4df0-11eb-8736-47bc283e151e.png",
+    "description": " A super cool mousemove effect using canvas!",
+    "tags": "canvas,javascript"
+  },
+  {
+    "title": "Code editor",
+    "link": "https://fpek0.csb.app/",
+    "code_link": "https://codesandbox.io/s/fpek0",
+    "image": "https://user-images.githubusercontent.com/61319150/120940382-9e8ecf80-c6e2-11eb-895c-ef5a8b834703.gif",
+    "description": "Super simple, shareable, customizeable and easy to use code editor.",
+    "tags": "javascript,html,css"
+  },
+  {
+    "title": "OCR",
+    "link": "https://uoji2.csb.app",
+    "code_link": "https://codesandbox.io/s/ocr-uoji2",
+    "image": "https://user-images.githubusercontent.com/61319150/103551942-bbdc1b00-4e70-11eb-8950-835bbbe2f8a8.png",
+    "description": "This converts an image into a searchable PDF using Tesseract.js!",
+    "tags": "javascript,css,tesseract"
+  },
+  {
+    "title": "Notes app with GitHub auth",
+    "link": "https://notes.explosionscratc.repl.co",
+    "code_link": "https://notes.explosionscratc.repl.co/__repl",
+    "image": "https://user-images.githubusercontent.com/61319150/113602909-e02ecb80-9608-11eb-9852-ffc227a70ae6.png",
+    "description": "An easy to use notes app supporting markdown, code snippets, public and private notes, user profiles and more!",
+    "tags": "node.js,handlebars,javascript"
+  },
+  {
+    "title": "Google-like search engine",
+    "link": "https://google.explosionscratc.repl.co",
+    "code_link": "https://google.explosionscratc.repl.co/__repl",
+    "image": "https://user-images.githubusercontent.com/61319150/113602099-ce005d80-9607-11eb-8ce6-bb377e209e7e.png",
+    "description": "A google-like search engine that uses a backend nodejs server to get \"Did you mean\" suggestions, search results, definitions of words, and quick answers to questions. Works without reloading the page every time, and unlike google, is completely anonymous and free. No advertisements, tracking, but I did add some beautiful graphics!",
+    "tags": "javascript,css"
+  },
+  {
+    "title": "Discord unblocker",
+    "link": "https://discordunblock.explosionscratc.repl.co/",
+    "code_link": "https://discordunblock.explosionscratc.repl.co/__repl",
+    "image": "https://user-images.githubusercontent.com/61319150/113601766-60543180-9607-11eb-89ae-0e137120965b.png",
+    "description": "I made a website that uses discord.js through a bot to send messages to my discord server. It supports channel selection, markdown, images and much more!",
+    "tags": "discord,bot,javascript"
+  },
+  {
+    "title": "Grammar checker",
+    "link": "https://dwvzq.csb.app",
+    "code_link": "https://codesandbox.io/s/grammar-checker-working-dwvzq",
+    "image": "https://user-images.githubusercontent.com/61319150/103491923-1469d480-4ded-11eb-94fd-ac68f2582a9b.png",
+    "description": "This is a comprehensive grammar checker supporting passive language, hard to read sentences, dictionary lookup of words and more! Try it out!",
+    "tags": "node.js,javascript"
+  },
+  {
+    "title": "Translate API",
+    "link": "https://t6iuc.sse.codesandbox.io?q=Bonjour&to=Spanish",
+    "code_link": "https://codesandbox.io/s/translate-api-t6iuc",
+    "image": "https://user-images.githubusercontent.com/61319150/121197045-96e03f80-c836-11eb-9c5f-1be49ea6e27e.png",
+    "description": "An easy to use API for translating text I also made bookmarklets to use it with Duolingo to get the answer right just by clicking it!",
+    "tags": "api,node.js"
+  },
+  {
+    "title": "Code Beautifier",
+    "link": "https://049x8.csb.app",
+    "code_link": "https://codesandbox.io/s/code-prettier-049x8",
+    "image": "https://user-images.githubusercontent.com/61319150/103492058-0799b080-4dee-11eb-8546-854ca3e6673e.png",
+    "description": "This beautifies many code languages and gives a nice, simple output!",
+    "tags": "api,node.js,javascript"
+  },
+  {
+    "title": "javascript,node.js,socket.io",
+    "link": "https://d7qk7.csb.app",
+    "code_link": "https://codesandbox.io/s/collab-text-editor-working-d7qk7",
+    "image": "https://user-images.githubusercontent.com/61319150/103492202-d968a080-4dee-11eb-8d6c-6559a4b59410.png",
+    "description": "This is a rich text editor supporting collaboration! It uses Socket.io as the framework for this!",
+    "tags": "javascript,node.js"
+  },
+  {
+    "title": "Scratch redirect API",
+    "link": "https://ngzq0.sse.codesandbox.io/",
+    "code_link": "https://codesandbox.io/s/scratch-duplicate-redirect-tool-ngzq0",
+    "image": "https://user-images.githubusercontent.com/61319150/121197045-96e03f80-c836-11eb-9c5f-1be49ea6e27e.png",
+    "description": "Simply redirects you to the oldest, most relevant scratch forum topic! (https://ngzq0.sse.codesandbox.io?q=Cloud%20Variables)",
+    "tags": "api,node.js"
+  },
+  {
+    "title": "YouTube downloader",
+    "link": "https://codesandbox.io/s/youtube-4n8hm",
+    "code_link": "https://4n8hm.csb.app",
+    "image": "https://user-images.githubusercontent.com/61319150/103492480-c9ea5700-4df0-11eb-9360-4f437a9c32dc.png",
+    "description": "Supports downloading any video on YouTube at any resolution or filetype! This is my most popular project as of writing and has ~480 views!",
+    "tags": "api,node.js,javascript"
+  },
+  {
+    "title": "URL Shortener",
+    "link": "https://zru1d.csb.app",
+    "code_link": "https://codesandbox.io/s/gallant-golick-zru1d",
+    "image": "https://user-images.githubusercontent.com/61319150/103492695-46316a00-4df2-11eb-812c-962d86a05a95.png",
+    "description": "SImple URL Shortener.",
+    "tags": "node.js,javascript"
+  },
+  {
+    "title": "Calculator",
+    "link": "https://jqigu.csb.app",
+    "code_link": "https://codesandbox.io/s/calculator-jqigu",
+    "image": "https://user-images.githubusercontent.com/61319150/120908772-97f54f00-c633-11eb-9e41-1ab32a8af6d2.gif",
+    "description": "A beautiful calculator I made with the help of a YouTube tutorial, it works smoothly, and amazingly! ",
+    "tags": "javascript,html,css"
+  },
+  {
+    "title": "Loading Animation",
+    "link": "https://ek1di.csb.app",
+    "code_link": "https://codesandbox.io/s/loading-thing-ek1di",
+    "image": "https://user-images.githubusercontent.com/61319150/120908794-d7bc3680-c633-11eb-8068-c2b594d47575.gif",
+    "description": "A slick loading animation that I made with CSS ::before and ::after elements!",
+    "tags": "html,css"
+  },
+  {
+    "title": "Weather app",
+    "link": "https://js-stuff.cf/weather.html",
+    "code_link": "https://github.com/Explosion-Scratch/projects/blob/master/weather.html",
+    "image": "https://user-images.githubusercontent.com/61319150/121228328-3fe86380-c852-11eb-8e02-d2b9f8911c9d.gif",
+    "description": "An easy to use weather app for getting the weather in any city! (One of my first projects!)",
+    "tags": "javascript,html,css"
+  }
+]

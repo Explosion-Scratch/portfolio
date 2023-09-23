@@ -33,8 +33,9 @@
   .card {
     @include glassmorphism;
     display: flex;
-    height: 280px;
-    width: 200px;
+    min-height: 280px;
+    margin: 0 auto;
+    width: 100%;
     border-radius: 10px;
     transition: 0.4s ease-out;
     position: relative;

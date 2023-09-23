@@ -10,6 +10,8 @@
   import Profile from "./components/Profile.svelte";
   import GridSection from "./components/GridSection.svelte";
   import Meta from "./components/Meta.svelte";
+  import Card from "./components/Card.svelte";
+  import Projects from "./components/Projects.svelte";
   let timeline = [
     "Created this timeline",
     "Published my second chrome extension to the chrome webstore",
@@ -39,7 +41,7 @@
   </div>
 </Section>
 <Section>
-  <h1>About me</h1>
+  <Projects></Projects>
 </Section>
 <CustomCursor />
 

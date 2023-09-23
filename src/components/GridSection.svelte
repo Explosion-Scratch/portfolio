@@ -2,7 +2,7 @@
 </script>
 
 <div class="main">
-  <div class="grid" />
+  <div class="grid"><slot></slot></div>
 </div>
 
 <style lang="scss">
