@@ -1,6 +1,8 @@
 <script>
   import { onMount } from "svelte";
   import Section from "./Section.svelte";
+  import projects from "../projects.json";
+  import Card from "./Card.svelte";
 
   const waves = [
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill-opacity="1" d="M0,288L40,266.7C80,245,160,203,240,181.3C320,160,400,160,480,176C560,192,640,224,720,218.7C800,213,880,171,960,160C1040,149,1120,171,1200,186.7C1280,203,1360,213,1400,218.7L1440,224L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path></svg>`,
@@ -24,6 +26,18 @@
       <div class="wave_container">
         {@html getWave().replaceAll("$COLOR", color)}
       </div>
+    {/each}
+  </div>
+  <div class="projects">
+    {#each projects as project}
+      <Card
+        title="{project.title}"
+        body="{project.description}"
+        image="{project.image}"
+        url="{project.link}"
+        code="{project.code_link}"
+        tags="{project.tags}"
+      />
     {/each}
   </div>
 </Section>

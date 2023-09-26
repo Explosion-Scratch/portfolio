@@ -1,108 +1,96 @@
+<script>
+  export let title = "";
+  export let body = "";
+  export let tags = [];
+  export let code = "";
+  export let url = "";
+  export let image = "";
+
+  let isVideo = false;
+
+  // Check if the image is a video
+  $: {
+    isVideo = /\.(mp4|mpv|avi|mkv)$/i.test(image);
+  }
+</script>
+
 <div class="card">
-  <h3 class="title">
-    {#if $$slots.title}
-      <slot name="title" />
-    {:else if $$props.title}
-      {#if $$props.html}
-        {@html $$props.title}
-      {:else}
-        {$$props.title}
-      {/if}
+  <div class="media">
+    {#if isVideo}
+      <video controls>
+        <source src="{image}" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    {:else}
+      <img src="{image}" alt="Card Image" />
     {/if}
-  </h3>
-  <div class="bar">
-    <div class="emptybar" />
-    <div class="filledbar" />
   </div>
-  <div class="body">
-    {#if $$slots.body}
-      <slot name="body" />
-    {:else if $$props.body}
-      {#if $$props.html}
-        {@html $$props.body}
-      {:else}
-        {$$props.body}
-      {/if}
-    {/if}
+  <div class="content">
+    <h5>{title}</h5>
+    <p>{body}</p>
+  </div>
+  <div class="button">
+    <button data-ripple-light="true">Read More</button>
   </div>
 </div>
 
-<style lang="scss">
-  @import "../main.scss";
-  $background: #17141d;
+<style scoped lang="scss">
+  $primary: #3498db;
+  $lightPrimary: lighten($primary, 10%);
+  $darkPrimary: darken($primary, 10%);
+
   .card {
-    @include glassmorphism;
-    display: flex;
-    min-height: 280px;
-    margin: 0 auto;
-    width: 100%;
-    border-radius: 10px;
-    transition: 0.4s ease-out;
-    position: relative;
-    left: 0px;
-    color: #dcc;
-    &:not(:first-child) {
-      margin-left: -50px;
+    @apply relative flex w-80 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md;
+
+    .header {
+      @apply relative mx-4 -mt-6 h-40 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40 bg-gradient-to-r from-blue-500 to-blue-600;
     }
 
-    &:hover {
-      transform: translateY(-20px);
-      transition: 0.4s ease-out;
+    .content {
+      @apply p-6;
 
-      ~ .card {
-        position: relative;
-        left: 50px;
-        transition: 0.4s ease-out;
+      h5 {
+        @apply mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased;
+      }
+
+      p {
+        @apply block font-sans text-base font-light leading-relaxed text-inherit antialiased;
       }
     }
-  }
-  .card .body {
-    position: absolute;
-    top: 110px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-  .card .title {
-    color: white;
-    font-weight: 300;
-    position: absolute;
-    left: 20px;
-    top: 15px;
-  }
 
-  .card .bar {
-    position: absolute;
-    top: 100px;
-    left: 20px;
-    height: 5px;
-    width: 150px;
-  }
+    .button {
+      @apply p-6 pt-0;
 
-  .card .emptybar {
-    background-color: #fff1;
-    width: 100%;
-    height: 100%;
-  }
+      button {
+        @apply select-none rounded-lg bg-blue-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all;
 
-  .card .filledbar {
-    position: absolute;
-    top: 0px;
-    z-index: 3;
-    width: 0px;
-    height: 100%;
-    background: rgb(0, 154, 217);
-    background: linear-gradient(
-      90deg,
-      rgba(0, 154, 217, 1) 0%,
-      rgba(217, 147, 0, 1) 65%,
-      rgba(255, 186, 0, 1) 100%
-    );
-    transition: 0.6s ease-out;
-  }
+        &:hover {
+          @apply shadow-lg shadow-blue-500/40;
+        }
 
-  .card:hover .filledbar {
-    width: 100%;
-    transition: 0.4s ease-out;
+        &:active {
+          @apply opacity-85 shadow-none;
+        }
+
+        &:focus {
+          @apply opacity-85 shadow-none;
+        }
+
+        &:disabled {
+          @apply pointer-events-none opacity-50 shadow-none;
+        }
+      }
+    }
+
+    .media {
+      @apply w-full rounded-xl overflow-hidden;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+
+      img,
+      video {
+        @apply w-full h-auto;
+      }
+    }
   }
 </style>
