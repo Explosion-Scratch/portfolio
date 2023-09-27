@@ -93,12 +93,14 @@
     border: none;
     outline: none;
     padding: 0;
+
     &:focus {
         outline: none
     }
 }
 
 $gray: #666;
+$background: rgb(20, 20, 20);
 $primary: #088;
 $primaryLight: lighten($primary, 10);
 $primaryDark: darken($primary, 10);
@@ -112,4 +114,4 @@ Ubuntu,
 Cantarell,
 "Helvetica Neue",
 sans-serif;
-$background: #000;
+$text: rgb(250, 240, 250);

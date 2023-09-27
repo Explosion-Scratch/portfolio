@@ -44,7 +44,6 @@
       projects = [...totalProjects];
       return;
     }
-    console.log(fuse.search("spanish"));
     projects = fuse.search(q).map((i) => i.item);
   }
 
@@ -94,7 +93,6 @@
   @import "../main.scss";
 
   $secondary: adjust-hue(lighten($primary, 20), -10);
-  $background: black;
   .icon {
     cursor: pointer;
     color: white;

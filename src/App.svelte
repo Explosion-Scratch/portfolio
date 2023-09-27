@@ -15,6 +15,9 @@
   import { events } from "./store";
   import ProjectModal from "./components/ProjectModal.svelte";
   import { onMount } from "svelte";
+  import GlowCards from "./components/GlowCards.svelte";
+
+  import Lenis from "@studio-freight/lenis";
 
   let timeline = [
     "Created this timeline",
@@ -31,6 +34,17 @@
   events.on("project", (project) => {
     modal.showing = true;
     modal.project = project;
+  });
+
+  onMount(() => {
+    const lenis = new Lenis();
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
   });
 </script>
 
@@ -59,6 +73,9 @@
   </div>
 </Section>
 <Section>
+  <GlowCards />
+</Section>
+<Section>
   <Projects />
 </Section>
 {#if modal.showing}
@@ -75,7 +92,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background: black;
+    background: $background;
     font-family: $font;
   }
   :global(*) {
@@ -85,7 +102,7 @@
     font-family: $font;
   }
   :global(#gradient-bg) {
-    background: linear-gradient(to bottom, black, #1f005c);
+    background: linear-gradient(to bottom, $background, darken($primary, 30));
     @include flex;
     & > .container {
       height: calc(100vh + 100px);

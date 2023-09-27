@@ -8,6 +8,9 @@ devDependencies:
   '@iconify/svelte':
     specifier: ^3.1.4
     version: 3.1.4(svelte@3.59.1)
+  '@studio-freight/lenis':
+    specifier: ^1.0.24
+    version: 1.0.24
   '@sveltejs/vite-plugin-svelte':
     specifier: ^2.0.4
     version: 2.0.4(svelte@3.59.1)(vite@4.3.9)
@@ -303,6 +306,10 @@ packages:
     dependencies:
       mkdirp: 1.0.4
       rimraf: 3.0.2
+    dev: true
+
+  /@studio-freight/lenis@1.0.24:
+    resolution: {integrity: sha512-lOd+vy62k/ekOEU0PLXjHIpobVKBYeBEiy0T3x6MrvgG5ohbP3+iVRZAUAdw94Sv2jk6AgowwJqifB9pC/qc9Q==}
     dev: true
 
   /@sveltejs/vite-plugin-svelte@2.0.4(svelte@3.59.1)(vite@4.3.9):
