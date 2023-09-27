@@ -11,6 +11,9 @@ devDependencies:
   '@sveltejs/vite-plugin-svelte':
     specifier: ^2.0.4
     version: 2.0.4(svelte@3.59.1)(vite@4.3.9)
+  fuse.js:
+    specifier: ^6.6.2
+    version: 6.6.2
   node-sass:
     specifier: ^9.0.0
     version: 9.0.0
@@ -20,6 +23,9 @@ devDependencies:
   svelte:
     specifier: ^3.59.1
     version: 3.59.1
+  vanilla-tilt:
+    specifier: ^1.8.1
+    version: 1.8.1
   vite:
     specifier: ^4.3.9
     version: 4.3.9(sass@1.68.0)
@@ -751,6 +757,11 @@ packages:
 
   /function-bind@1.1.1:
     resolution: {integrity: sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==}
+    dev: true
+
+  /fuse.js@6.6.2:
+    resolution: {integrity: sha512-cJaJkxCCxC8qIIcPBF9yGxY0W/tVZS3uEISDxhYIdtk8OL93pe+6Zj7LjCqVV4dzbqcriOZ+kQ/NE4RXZHsIGA==}
+    engines: {node: '>=10'}
     dev: true
 
   /gauge@4.0.4:
@@ -1863,6 +1874,10 @@ packages:
     dependencies:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
+    dev: true
+
+  /vanilla-tilt@1.8.1:
+    resolution: {integrity: sha512-hPB1XUsnh+SIeVSW2beb5RnuFxz4ZNgxjGD78o52F49gS4xaoLeEMh9qrQnJrnEn/vjjBI7IlxrrXmz4tGV0Kw==}
     dev: true
 
   /vite@4.3.9(sass@1.68.0):

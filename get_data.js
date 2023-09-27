@@ -1,10 +1,36 @@
-import { writeFileSync } from 'fs';
+import { createHash } from 'crypto';
+import { createWriteStream, writeFileSync } from 'fs';
 import { resolve } from 'path';
+import { Readable } from 'stream';
+import { finished } from 'stream/promises';
 
-getSpreadsheet('2PACX-1vQvFX6gBzJOJEU01O-R_iuMfCr-5k8aQAvEzumMh9nPKjoe3PcOKiZgfG7OWXX1ahV8Alv325H6UqUu').then(data => {
-    writeFileSync(resolve('.', 'src', 'projects.json'), JSON.stringify(data, null, 2));
+getSpreadsheet('2PACX-1vQvFX6gBzJOJEU01O-R_iuMfCr-5k8aQAvEzumMh9nPKjoe3PcOKiZgfG7OWXX1ahV8Alv325H6UqUu').then(async data => {
+    for (let i = 0; i < data.length; i++) {
+        const project = data[i];
+        if (!project.image) { continue; }
+        console.log('Downloading: ', project.image)
+        const assetHash = hash(project.image);
+        const res = await fetch(project.image);
+        const contentType = res.headers.get('content-type');
+        const contentLength = res.headers.get('content-length');
+        const path = `${assetHash}.${contentType.split('/')[1]}`;
+
+        const stream = createWriteStream(resolve('.', 'public', 'project_images', path));
+        await finished(Readable.fromWeb(res.body).pipe(stream));
+        console.log('Finished downloading:', project.image)
+        data[i] = {
+            ...project,
+            assetHash,
+            contentType,
+            path,
+            contentLength,
+        };
+    } writeFileSync(resolve('.', 'src', 'projects.json'), JSON.stringify(data, null, 2));
 })
 
+function hash(str) {
+    return createHash('sha256').update(str).digest('hex');
+}
 async function getSpreadsheet(id, pageNum = 1) {
     if (id.includes("/")) {
         //If the ID is a URL

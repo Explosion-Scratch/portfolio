@@ -1,8 +1,13 @@
 <script>
   import { onMount } from "svelte";
   import Section from "./Section.svelte";
-  import projects from "../projects.json";
+  import _projects from "../projects.json";
+  import SearchBar from "./SearchBar.svelte";
   import Card from "./Card.svelte";
+  import { events } from "../store";
+  import { preloadImage } from "../utils";
+
+  let projects = [..._projects];
 
   const waves = [
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill-opacity="1" d="M0,288L40,266.7C80,245,160,203,240,181.3C320,160,400,160,480,176C560,192,640,224,720,218.7C800,213,880,171,960,160C1040,149,1120,171,1200,186.7C1280,203,1360,213,1400,218.7L1440,224L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path></svg>`,
@@ -14,6 +19,24 @@
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill-opacity="1" d="M0,224L48,202.7C96,181,192,139,288,112C384,85,480,75,576,90.7C672,107,768,149,864,144C960,139,1056,85,1152,58.7C1248,32,1344,32,1392,32L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>`,
   ];
 
+  onMount(() => {
+    window.onclick = () => {
+      Promise.all(
+        _projects
+          // .slice(0, 20)
+          .map((i) => i.image)
+          .filter(Boolean)
+          .map((a) => {
+            return preloadImage(a).then(() => {
+              console.log("Preloaded", a);
+            });
+          })
+      ).then(() => {
+        events.emit("loaded");
+        console.log("Preloaded first 20 images");
+      });
+    };
+  });
   const color = "white";
   function getWave() {
     return waves[Math.floor(Math.random() * waves.length)];
@@ -28,6 +51,7 @@
       </div>
     {/each}
   </div>
+  <SearchBar bind:projects="{projects}" />
   <div class="projects">
     {#each projects as project}
       <Card
@@ -36,7 +60,8 @@
         image="{project.image}"
         url="{project.link}"
         code="{project.code_link}"
-        tags="{project.tags}"
+        tags="{(project.tags || '').split(',')}"
+        on:click="{(e) => events.emit('project', e.detail)}"
       />
     {/each}
   </div>
@@ -44,12 +69,29 @@
 
 <style scoped="" lang="scss">
   $count: 10;
-  $wavecolor: blue;
+  @import "../main.scss";
+  $wavecolor: $primary;
+  .projects {
+    display: grid;
+    width: 80vw;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    $height: 550px;
+    max-width: 1080px;
+    margin: 0 auto;
+    grid-template-rows: $height;
+    gap: 6em 3em;
+    :global(.card) {
+      height: $height;
+    }
+  }
   .waves {
     width: 100%;
     height: 150px;
     display: block;
     position: relative;
+    $MASK: linear-gradient(to bottom, black, transparent);
+    -webkit-mask-image: $MASK;
+    mask-image: $MASK;
     .wave_container :global(svg) {
       position: absolute;
       width: 100%;
@@ -75,14 +117,15 @@
         }
       }
       @keyframes wave-#{$i} {
+        $max: 0.6;
         0% {
-          transform: scaleY(0.8);
+          transform: scaleY($max);
         }
         50% {
-          transform: scaleY(calc(random(5) / 10) + 0.2);
+          transform: scaleY(min(calc(random(5) / 10) + 0.2, $max));
         }
         100% {
-          transform: scaleY(0.8);
+          transform: scaleY($max);
         }
       }
     }

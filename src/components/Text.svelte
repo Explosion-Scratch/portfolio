@@ -3,11 +3,15 @@
   let el = null;
   export let text = "";
   onMount(() => {
-    setInterval(() => (text = el.innerText), 100);
+    setInterval(() => {
+      if (el) {
+        text = el.innerText;
+      }
+    }, 100);
   });
 </script>
 
-<h1 {...$$props} class="glitch" data-text={text} bind:this={el}>
+<h1 {...$$props} class="glitch" data-text="{text}" bind:this="{el}">
   <slot />
 </h1>
 

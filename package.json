@@ -12,9 +12,11 @@
   "devDependencies": {
     "@iconify/svelte": "^3.1.4",
     "@sveltejs/vite-plugin-svelte": "^2.0.4",
+    "fuse.js": "^6.6.2",
     "node-sass": "^9.0.0",
     "sass": "^1.68.0",
     "svelte": "^3.59.1",
+    "vanilla-tilt": "^1.8.1",
     "vite": "^4.3.9"
   }
 }
