@@ -1,11 +1,9 @@
 <script>
-  import { onMount } from "svelte";
   import Section from "./Section.svelte";
   import _projects from "../projects.json";
   import SearchBar from "./SearchBar.svelte";
   import Card from "./Card.svelte";
   import { events } from "../store";
-  import { preloadImage } from "../utils";
 
   let projects = [..._projects];
 
@@ -19,24 +17,6 @@
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill-opacity="1" d="M0,224L48,202.7C96,181,192,139,288,112C384,85,480,75,576,90.7C672,107,768,149,864,144C960,139,1056,85,1152,58.7C1248,32,1344,32,1392,32L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>`,
   ];
 
-  onMount(() => {
-    window.onclick = () => {
-      Promise.all(
-        _projects
-          // .slice(0, 20)
-          .map((i) => i.image)
-          .filter(Boolean)
-          .map((a) => {
-            return preloadImage(a).then(() => {
-              console.log("Preloaded", a);
-            });
-          })
-      ).then(() => {
-        events.emit("loaded");
-        console.log("Preloaded first 20 images");
-      });
-    };
-  });
   const color = "white";
   function getWave() {
     return waves[Math.floor(Math.random() * waves.length)];

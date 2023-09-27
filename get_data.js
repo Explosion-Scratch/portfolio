@@ -25,7 +25,8 @@ getSpreadsheet('2PACX-1vQvFX6gBzJOJEU01O-R_iuMfCr-5k8aQAvEzumMh9nPKjoe3PcOKiZgfG
             path,
             contentLength,
         };
-    } writeFileSync(resolve('.', 'src', 'projects.json'), JSON.stringify(data, null, 2));
+    }
+    writeFileSync(resolve('.', 'src', 'projects.json'), JSON.stringify(data, null, 2));
 })
 
 function hash(str) {

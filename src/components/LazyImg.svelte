@@ -1,8 +1,12 @@
 <script>
   import { onDestroy, onMount } from "svelte";
   import Loader from "./Loader.svelte";
+  import projects from "../projects.json";
 
   export let src;
+
+  // Wait for hash before setting actual SRC
+  let _src = null;
   let isVideo = false;
   let is_vid_override = false;
   let loadImg = false;
@@ -69,17 +73,42 @@
     video.pause();
   }
 
-  onMount(() => {
+  onMount(async () => {
     HANDLESCROLL();
     window.addEventListener("scroll", HANDLESCROLL);
     el.addEventListener("mouseenter", MOUSEENTER);
     el.addEventListener("mouseleave", MOUSELEAVE);
+    const f = (
+      await Promise.all(
+        projects.map(async (i) => {
+          return { ...i, valid: i.assetHash === (await sha256(src)) };
+        })
+      )
+    ).filter((i) => i.valid)?.[0];
+    if (f) {
+      _src = `/project_images/${f.path}`;
+      if (f.contentType.endsWith("mp4")) {
+        is_vid_override = true;
+      }
+    } else {
+      _src = src;
+    }
   });
   onDestroy(() => {
     window.removeEventListener("scroll", HANDLESCROLL);
     el.removeEventListener("mouseenter", MOUSEENTER);
     el.removeEventListener("mouseleave", MOUSELEAVE);
   });
+  // FROM: https://stackoverflow.com/a/48161723/14197829
+  async function sha256(message) {
+    const msgBuffer = new TextEncoder().encode(message);
+    const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray
+      .map((b) => b.toString(16).padStart(2, "0"))
+      .join("");
+    return hashHex;
+  }
 
   let errored = false;
   function error() {
@@ -97,10 +126,10 @@
 </script>
 
 <div class="img" bind:this="{el}">
-  {#if loadImg}
+  {#if loadImg && _src}
     {#if isVideo}
       <video
-        src="{src}"
+        src="{_src}"
         alt="Video for {title}"
         autoplay
         muted
@@ -116,7 +145,7 @@
     {:else}
       <img
         on:error="{() => (is_vid_override = true)}"
-        src="{src}"
+        src="{_src}"
         alt="Image for {title}"
         class="img_el"
         class:loading="{loading}"
