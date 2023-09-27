@@ -89,6 +89,15 @@
     }
 }
 
+:global(button) {
+    border: none;
+    outline: none;
+    padding: 0;
+    &:focus {
+        outline: none
+    }
+}
+
 $gray: #666;
 $primary: #088;
 $primaryLight: lighten($primary, 10);
