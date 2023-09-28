@@ -39,27 +39,15 @@
   import gsap from "gsap";
   import ScrollTrigger from "gsap/ScrollTrigger";
   onMount(() => {
-    // gsap.registerPlugin(ScrollTrigger);
-    // globals.timeline = gsap.timeline({
-    //   scrollTrigger: {
-    //     trigger: "body",
-    //     start: "top center",
-    //     end: "bottom center",
-    //     scrub: true,
-    //     markers: true,
-    //   },
-    // });
-    // globals.readyRes();
-    // window.globals = globals;
-    // console.log("Ready");
-    // const lenis = new Lenis();
+    gsap.registerPlugin(ScrollTrigger);
+    const lenis = new Lenis();
 
-    // function raf(time) {
-    //   lenis.raf(time);
-    //   requestAnimationFrame(raf);
-    // }
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
 
-    // requestAnimationFrame(raf);
+    requestAnimationFrame(raf);
   });
 </script>
 

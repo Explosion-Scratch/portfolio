@@ -26,25 +26,6 @@
   let elements = {
     projects_container: null,
   };
-
-  onMount(async () => {
-    const cards = elements.projects_container.querySelectorAll(".card");
-    await globals.ready;
-    // const tl = gsap.timeline({
-    //   scrollTrigger: {
-    //     trigger: elements.projects_container,
-    //     start: "top center",
-    //     end: "bottom center",
-    //     scrub: true,
-    //     markers: true,
-    //   },
-    // });
-    // for (let card of cards) {
-    //   tl.to(card, {
-    //     opacity: 1,
-    //   });
-    // }
-  });
 </script>
 
 <Section>

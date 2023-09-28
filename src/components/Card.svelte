@@ -1,6 +1,7 @@
 <script>
   import LazyImg from "./LazyImg.svelte";
   import { icons } from "../icons";
+  import gsap from '../helpers/gsap';
   import { createEventDispatcher, onMount } from "svelte";
   import Tag from "./Tag.svelte";
   import { events } from "../store";
@@ -20,6 +21,10 @@
 
 <div
   class="card"
+  use:gsap="{{
+    from: { opacity: 0 },
+    to: { opacity: 1 },
+  }}"
   on:click="{() => dispatch('click', getInfo())}"
   on:keyup="{(e) =>
     (e.key === 'Enter' || e.key === 'Space') && dispatch('click', getInfo())}"

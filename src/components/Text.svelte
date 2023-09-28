@@ -10,21 +10,21 @@
       }
     }, 100);
     await globals.ready;
-    globals.timeline.fromTo(
-      el,
-      {
-        y: 40,
-        opacity: 0,
-        scaleY: 0.8,
-        "clip-path": "polygon(30% 100%, 70% 100%, 100% 100%, 0% 100%)",
-      },
-      {
-        scaleY: 1,
-        "clip-path": `polygon(1% 1%, 99% 1%, 100% 100%, 0% 100%)`,
-        y: 0,
-        opacity: 1,
-      }
-    );
+    // globals.timeline.fromTo(
+    //   el,
+    //   {
+    //     y: 40,
+    //     opacity: 0,
+    //     scaleY: 0.8,
+    //     "clip-path": "polygon(30% 100%, 70% 100%, 100% 100%, 0% 100%)",
+    //   },
+    //   {
+    //     scaleY: 1,
+    //     "clip-path": `polygon(1% 1%, 99% 1%, 100% 100%, 0% 100%)`,
+    //     y: 0,
+    //     opacity: 1,
+    //   }
+    // );
     // const tl = gsap.timeline({
     //   scrollTrigger: {
     //     trigger: el,

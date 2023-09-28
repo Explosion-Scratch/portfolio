@@ -14,6 +14,9 @@ devDependencies:
   '@sveltejs/vite-plugin-svelte':
     specifier: ^2.0.4
     version: 2.0.4(svelte@3.59.1)(vite@4.3.9)
+  '@types/gsap':
+    specifier: ^3.0.0
+    version: 3.0.0
   fuse.js:
     specifier: ^6.6.2
     version: 6.6.2
@@ -342,6 +345,13 @@ packages:
   /@tootallnate/once@2.0.0:
     resolution: {integrity: sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==}
     engines: {node: '>= 10'}
+    dev: true
+
+  /@types/gsap@3.0.0:
+    resolution: {integrity: sha512-BbWLi4WRHGze4C8NV7U7yRevuBFiPkPZZyGa0rryanvh/9HPUFXTNBXsGQxJZJq7Ix7j4RXMYodP3s+OsqCErg==}
+    deprecated: This is a stub types definition. gsap provides its own type definitions, so you do not need this installed.
+    dependencies:
+      gsap: 3.12.2
     dev: true
 
   /@types/minimist@1.2.2:
