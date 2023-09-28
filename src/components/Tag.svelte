@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import { icons } from "../icons";
   import { strip } from "../utils";
+  import AnimatedIcon from "./AnimatedIcon.svelte";
 
   export let tag;
 
@@ -21,7 +22,9 @@
 {#if exists}
   <span class="tag pointer" class:light="{light}">
     <span class="icon">
-      {@html getIcon(tag)?.html}
+      <AnimatedIcon>
+        {@html getIcon(tag)?.html}
+      </AnimatedIcon>
     </span>
     <span class="icon_text">{tag[0].toUpperCase() + tag.slice(1)}</span>
   </span>

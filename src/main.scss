@@ -40,7 +40,16 @@
 }
 
 @mixin button {
+    all: unset;
+    text-decoration: none;
     user-select: none;
+    -webkit-user-select: none;
+    // Flex
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .2em;
+
     cursor: pointer;
     background: linear-gradient(60deg,
             $primaryLight,
@@ -54,10 +63,18 @@
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
         0 2px 4px -2px rgb(0 0 0 / 0.1);
     $py: 0.8em;
-    padding: $py 2em;
+    $px: 1em;
+    padding: $py $px;
+
+    // SVG
+    :global(svg) {
+        $size: 20px;
+        width: $size;
+        height: $size;
+    }
 
     &.primary {
-        padding: $py 3em;
+        padding: $py calc($px * 1.5);
     }
 
     border: 2px solid $primaryLight;
@@ -115,3 +132,33 @@ Cantarell,
 "Helvetica Neue",
 sans-serif;
 $text: rgb(250, 240, 250);
+
+$breakpoints: ('sm': '640px',
+    'md': '768px',
+    'lg': '1024px',
+    'xl': '1280px',
+    '2xl': '1536px'
+);
+
+
+// SCSS is beautiful/// Mixin to manage responsive breakpoints
+// FROM: https://css-tricks.com/snippets/sass/mixin-manage-breakpoints/
+/// @author Kitty Giraudel
+/// @param {String} $breakpoint - Breakpoint name
+/// @require $breakpoints
+@mixin bp($breakpoint) {
+
+    // If the key exists in the map
+    @if map-has-key($breakpoints, $breakpoint) {
+
+        // Prints a media query based on the value
+        @media (min-width: map-get($breakpoints, $breakpoint)) {
+            @content;
+        }
+    }
+
+    // If the key doesn't exist in the map
+    @else {
+        @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. ";
+    }
+}

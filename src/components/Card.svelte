@@ -1,10 +1,10 @@
 <script>
   import LazyImg from "./LazyImg.svelte";
-  import { icons } from "../icons";
-  import gsap from '../helpers/gsap';
+  import useGSAP from "../helpers/gsap";
   import { createEventDispatcher, onMount } from "svelte";
   import Tag from "./Tag.svelte";
   import { events } from "../store";
+  import { getIcon, inView } from "../utils";
   export let title = "";
   export let body = "";
   export let tags = [];
@@ -17,14 +17,22 @@
   function getInfo() {
     return { title, body, tags, code, url, image };
   }
+
+  let card;
+  let visible = true;
+  onMount(() => {
+    events.on("scroll", () => {
+      if (inView(card, 1)) {
+        visible = true;
+      }
+    });
+  });
 </script>
 
 <div
   class="card"
-  use:gsap="{{
-    from: { opacity: 0 },
-    to: { opacity: 1 },
-  }}"
+  bind:this="{card}"
+  class:visible="{visible}"
   on:click="{() => dispatch('click', getInfo())}"
   on:keyup="{(e) =>
     (e.key === 'Enter' || e.key === 'Space') && dispatch('click', getInfo())}"
@@ -44,19 +52,43 @@
     </p>
   </div>
   <div class="buttons">
-    <button class="primary" on:click="{() => events.emit('open_url', { url })}"
-      >View</button
+    <a
+      class="primary"
+      href="{url}"
+      target="code_win"
+      on:click="{() => events.emit('open_url', { url })}"
     >
-    <button
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="32"
+        height="32"
+        viewBox="0 0 256 256"
+        ><path
+          fill="currentColor"
+          d="M227.32 28.68a16 16 0 0 0-15.66-4.08h-.15L19.57 82.84a16 16 0 0 0-2.42 29.84l85.62 40.55l40.55 85.62a15.86 15.86 0 0 0 14.42 9.15q.69 0 1.38-.06a15.88 15.88 0 0 0 14-11.51l58.2-191.94v-.15a16 16 0 0 0-4-15.66Zm-69.49 203.17l-.05.14l-39.36-83.09l47.24-47.25a8 8 0 0 0-11.31-11.31l-47.25 47.24L24 98.22h.14L216 40Z"
+        ></path></svg
+      >
+      <span class="text">View</span>
+    </a>
+    <a
+      href="{code}"
+      target="code_win"
       class="secondary"
-      on:click="{() => events.emit('open_url', { url: code })}">Code</button
+      on:click="{() => events.emit('open_url', { url: code })}"
     >
+      {@html getIcon(code)}
+      <span class="text">Code</span>
+    </a>
   </div>
 </div>
 
 <style lang="scss" scoped>
   @import "../main.scss";
   .card {
+    opacity: 0;
+    &.visible {
+      opacity: 1;
+    }
     &::before {
       content: "";
       position: absolute;
@@ -174,8 +206,16 @@
       margin-top: 1em;
       padding: 2em;
       padding-top: 0;
-      button {
+      display: flex;
+      width: 100%;
+      gap: 0.3em;
+      flex-direction: column;
+      @include bp('lg') {
+        flex-direction: row;
+      }
+      a {
         @include button;
+        flex: 1;
       }
     }
   }

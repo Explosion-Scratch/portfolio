@@ -1,6 +1,8 @@
 import gsap from 'gsap';
+import { globals } from '../store';
 
 export default async function useGSAP(node, options) {
+    await globals.ready;
     options = {
         scrollMargin: { x: 0, y: 50 },
         from: {},
