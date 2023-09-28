@@ -3,8 +3,11 @@ import { globals } from '../store';
 
 export default async function useGSAP(node, options) {
     await globals.ready;
+    options.scrollMargin = {
+        x: 0, y: 50, top: 0, bottom: 0,
+        ...options.scrollMargin,
+    }
     options = {
-        scrollMargin: { x: 0, y: 50 },
         from: {},
         to: {},
         windowPercent: 20,
@@ -16,12 +19,13 @@ export default async function useGSAP(node, options) {
     console.log(node, rect, options)
     let tl = gsap.timeline({
         scrollTrigger: {
-            start: `${rect.top + window.scrollY - options.scrollMargin.y} ${100 - options.windowPercent}%`,
-            end: `${rect.top + rect.height + window.scrollY + options.scrollMargin.y} ${options.windowPercent}%`,
+            start: `${rect.top + window.scrollY - options.scrollMargin.y - 50 - options.scrollMargin.top}px ${100 - options.windowPercent}%`,
+            end: `${rect.top + rect.height + window.scrollY + options.scrollMargin.y + options.scrollMargin.bottom}px ${options.windowPercent}%`,
             scrub: true,
             markers: true,
             ...options.scrollTrigger,
-        }
+        },
+        ease: 'linear',
     })
     const tl_res = await options.timeline(tl);
     if (!tl_res) {

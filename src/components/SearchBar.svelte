@@ -7,6 +7,7 @@
   let totalProjects = [];
   import gsap from "gsap";
   import ScrollTrigger from "gsap/ScrollTrigger";
+  import useGSAP from "../helpers/gsap";
   // Mock before load
   let fuse = {
     search: () => totalProjects.map((i) => ({ item: i })),
@@ -36,6 +37,7 @@
         .map((project) => project.tags)
         .join(",")
         .split(",")
+        .map((i) => strip(i))
     ),
   ]
     .map((i) => i.toLowerCase())
@@ -74,10 +76,28 @@
       class="tags"
       bind:this="{elements.tags}"
       class:expanded="{tagsExpanded}"
+      class:notransform="{tagsExpanded || query?.length}"
     >
-      {#each tags as tag}
-        <Tag tag="{tag}" />
-      {/each}
+      <div
+        class="tag_scroller"
+        use:useGSAP="{{
+          from: {},
+          to: {
+            opacity: 1,
+            xPercent: -200,
+          },
+          scrollMargin: { y: 100, top: 1000, bottom: 700 },
+          windowPercent: 50,
+        }}"
+      >
+        {#each tags as tag}
+          <Tag
+            tag="{tag}"
+            count="{projects.filter((i) => i.tags?.split(',')?.includes(tag))
+              .length}"
+          />
+        {/each}
+      </div>
     </div>
     <button
       class="icon pointer chevron"
@@ -120,10 +140,15 @@
     }
     background: transparent;
   }
+  .notransform,
+  .notransform .tag_scroller {
+    transform: none !important;
+  }
   .tags_container {
     display: flex;
     &.expanded {
       flex-direction: column;
+      &,
       .icon {
         display: flex;
         justify-content: center;
@@ -145,7 +170,13 @@
   .tags:not(.expanded) {
     overflow-x: scroll;
     white-space: nowrap;
-    $mask: linear-gradient(to right, black 80%, transparent);
+    $mask: linear-gradient(
+      to right,
+      transparent,
+      black 10%,
+      black 80%,
+      transparent
+    );
     -webkit-mask-image: $mask;
     mask-image: $mask;
   }

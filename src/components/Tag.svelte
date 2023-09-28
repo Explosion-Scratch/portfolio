@@ -3,7 +3,7 @@
   import { icons } from "../icons";
   import { strip } from "../utils";
   import AnimatedIcon from "./AnimatedIcon.svelte";
-  
+  export let count = 0;
   export let tag;
 
   function getIcon(tag) {
@@ -26,7 +26,7 @@
         {@html getIcon(tag)?.html}
       </AnimatedIcon>
     </span>
-    <span class="icon_text">{tag[0].toUpperCase() + tag.slice(1)}</span>
+    <span class="icon_text">{tag[0].toUpperCase() + tag.slice(1)}{count > 0 ? ` (${count})` : ''}</span>
   </span>
 {/if}
 
