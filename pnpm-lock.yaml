@@ -17,6 +17,9 @@ devDependencies:
   '@types/gsap':
     specifier: ^3.0.0
     version: 3.0.0
+  curtainsjs:
+    specifier: ^8.1.5
+    version: 8.1.5
   fuse.js:
     specifier: ^6.6.2
     version: 6.6.2
@@ -636,6 +639,10 @@ packages:
       path-key: 3.1.1
       shebang-command: 2.0.0
       which: 2.0.2
+    dev: true
+
+  /curtainsjs@8.1.5:
+    resolution: {integrity: sha512-b94eQIIxTaHJVmwo8LUm5dY9E477H9bXVO/lY/nVz1hTvoCHDCpyPMoSCfE8IsIwT8OtBD/LameMfSR02d5UNQ==}
     dev: true
 
   /debug@4.3.4:

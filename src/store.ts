@@ -18,7 +18,13 @@ let hub = () => ({
     },
 });
 
-export const globals = ({
+type Globals = {
+    timeline: GSAPTimeline,
+    modal: {
+        showing?: boolean;
+    }
+}
+export const globals: Globals = ({
     timeline: {},
     modal: {},
     ready: null,
