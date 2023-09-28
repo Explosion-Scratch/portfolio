@@ -3,7 +3,7 @@
   import { icons } from "../icons";
   import { strip } from "../utils";
   import AnimatedIcon from "./AnimatedIcon.svelte";
-
+  
   export let tag;
 
   function getIcon(tag) {

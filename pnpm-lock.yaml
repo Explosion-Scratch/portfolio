@@ -32,6 +32,9 @@ devDependencies:
   svelte:
     specifier: ^3.59.1
     version: 3.59.1
+  svelte-hover-draw-svg:
+    specifier: ^3.0.1
+    version: 3.0.1(svelte@3.59.1)
   vanilla-tilt:
     specifier: ^1.8.1
     version: 1.8.1
@@ -1811,6 +1814,14 @@ packages:
     engines: {node: ^12.20 || ^14.13.1 || >= 16}
     peerDependencies:
       svelte: ^3.19.0 || ^4.0.0-next.0
+    dependencies:
+      svelte: 3.59.1
+    dev: true
+
+  /svelte-hover-draw-svg@3.0.1(svelte@3.59.1):
+    resolution: {integrity: sha512-2QLDhZIIp8uU83L0ygZ7BvTpUnPLb+y1CJWnHQSXamofS2I11IxQg72jHI5H+rMDDKqz2OqDbKOOBmqFSKagGg==}
+    peerDependencies:
+      svelte: ^3.57.0
     dependencies:
       svelte: 3.59.1
     dev: true

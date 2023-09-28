@@ -19,6 +19,7 @@
     "node-sass": "^9.0.0",
     "sass": "^1.68.0",
     "svelte": "^3.59.1",
+    "svelte-hover-draw-svg": "^3.0.1",
     "vanilla-tilt": "^1.8.1",
     "vite": "^4.3.9"
   }

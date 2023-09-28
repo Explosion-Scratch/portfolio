@@ -1,13 +1,17 @@
 <script>
   import { onMount } from "svelte";
-
   let container;
   onMount(() => {
-    for (const svg of container.querySelectorAll("svg")) {
-      svg.style.setProperty(
-        "--offset",
-        svg.querySelector("path").getTotalLength()
-      );
+    for (const path of container.querySelectorAll("path")) {
+      path.setAttribute("pathLength", 1);
+      // continue;
+      //    let len = path.getTotalLength();
+      //    const style = getComputedStyle(path);
+      //    if (style.strokeLinecap !== "butt") {
+      //      len += parseInt(style.strokeWidth);
+      //    }
+      //    path.closest('svg').style.setProperty("--length", len + 'px');
+      //    console.log(path, len);
     }
   });
 </script>
@@ -16,17 +20,23 @@
   <slot />
 </span>
 
-<style scoped="" lang="scss">
-  .animated_icon {
-    transition: stroke-dashoffset 1s ease;
+<style>
+  .animated_icon :global(path) {
+    --offset: 1;
+    transition: stroke-dashoffset 2s ease;
+    fill: currentColor;
+    stroke: currentColor;
     stroke-dasharray: var(--offset);
     stroke-dashoffset: 0;
     stroke-width: 0;
   }
   .animated_icon:hover :global(path) {
-    animation: icon_animation 1s ease-in forwards;
+    animation: animate 1s ease-in forwards;
   }
-  @keyframes icon_animation {
+  :global(.hover) .animated_icon :global(path) {
+    animation: animate 1s ease-in forwards;
+  }
+  @keyframes animate {
     0% {
       stroke-dashoffset: var(--offset);
     }
