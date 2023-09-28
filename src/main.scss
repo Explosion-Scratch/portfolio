@@ -119,6 +119,7 @@
 $gray: #666;
 $background: rgb(20, 20, 20);
 $primary: #088;
+$secondary: adjust-hue($primary, 30);
 $primaryLight: lighten($primary, 10);
 $primaryDark: darken($primary, 10);
 $monospace_font: monospace;
