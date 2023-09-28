@@ -1,13 +1,41 @@
 <script>
   import { onMount } from "svelte";
+  import { globals } from "../store";
   let el = null;
   export let text = "";
-  onMount(() => {
+  onMount(async () => {
     setInterval(() => {
       if (el) {
         text = el.innerText;
       }
     }, 100);
+    await globals.ready;
+    globals.timeline.fromTo(
+      el,
+      {
+        y: 40,
+        opacity: 0,
+        scaleY: 0.8,
+        "clip-path": "polygon(30% 100%, 70% 100%, 100% 100%, 0% 100%)",
+      },
+      {
+        scaleY: 1,
+        "clip-path": `polygon(1% 1%, 99% 1%, 100% 100%, 0% 100%)`,
+        y: 0,
+        opacity: 1,
+      }
+    );
+    // const tl = gsap.timeline({
+    //   scrollTrigger: {
+    //     trigger: el,
+    //     start: "top center",
+    //     end: "bottom center",
+    //     scrub: true,
+    //   }
+    // });
+    // tl.to(el, {
+    //   x: 800,
+    // });
   });
 </script>
 
@@ -16,6 +44,7 @@
 </h1>
 
 <style scoped lang="scss">
+  @import "../main.scss";
   // Important that this background color remains consistent with the background of the page
 
   $primaryColor: #fff;
@@ -23,7 +52,9 @@
   $steps: 20;
   $accent1: blue;
   $accent2: red;
-
+  :global(.glitch, .glitch *) {
+    font-family: $monospace_font !important;
+  }
   .glitch {
     position: relative;
     margin: 0 auto;

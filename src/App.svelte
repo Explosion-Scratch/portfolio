@@ -16,7 +16,7 @@
   import ProjectModal from "./components/ProjectModal.svelte";
   import { onMount } from "svelte";
   import GlowCards from "./components/GlowCards.svelte";
-
+  import { globals } from "./store";
   import Lenis from "@studio-freight/lenis";
 
   let timeline = [
@@ -36,15 +36,30 @@
     modal.project = project;
   });
 
+  import gsap from "gsap";
+  import ScrollTrigger from "gsap/ScrollTrigger";
   onMount(() => {
-    const lenis = new Lenis();
+    // gsap.registerPlugin(ScrollTrigger);
+    // globals.timeline = gsap.timeline({
+    //   scrollTrigger: {
+    //     trigger: "body",
+    //     start: "top center",
+    //     end: "bottom center",
+    //     scrub: true,
+    //     markers: true,
+    //   },
+    // });
+    // globals.readyRes();
+    // window.globals = globals;
+    // console.log("Ready");
+    // const lenis = new Lenis();
 
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
+    // function raf(time) {
+    //   lenis.raf(time);
+    //   requestAnimationFrame(raf);
+    // }
 
-    requestAnimationFrame(raf);
+    // requestAnimationFrame(raf);
   });
 </script>
 
@@ -58,7 +73,6 @@
         use:typing="{{
           items: [
             '--Explosion--',
-            'depressed lol',
             'a developer',
             'a designer',
             'a creator',
@@ -71,9 +85,6 @@
       <Icon icon="bytesize:arrow-right" />
     </Glassmorphism>
   </div>
-</Section>
-<Section>
-  <GlowCards />
 </Section>
 <Section>
   <Projects />

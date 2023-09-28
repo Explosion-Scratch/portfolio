@@ -5,9 +5,14 @@
   import Fuse from "fuse.js";
   export let projects = [];
   let totalProjects = [];
+  import gsap from "gsap";
+  import ScrollTrigger from "gsap/ScrollTrigger";
   // Mock before load
   let fuse = {
     search: () => totalProjects.map((i) => ({ item: i })),
+  };
+  let elements = {
+    tags: null,
   };
   let placeholderInt;
   let placeholder = "Search";
@@ -65,7 +70,11 @@
     />
   </div>
   <div class="tags_container" class:expanded="{tagsExpanded}">
-    <div class="tags" class:expanded="{tagsExpanded}">
+    <div
+      class="tags"
+      bind:this="{elements.tags}"
+      class:expanded="{tagsExpanded}"
+    >
       {#each tags as tag}
         <Tag tag="{tag}" />
       {/each}

@@ -14,6 +14,7 @@
     "@studio-freight/lenis": "^1.0.24",
     "@sveltejs/vite-plugin-svelte": "^2.0.4",
     "fuse.js": "^6.6.2",
+    "gsap": "^3.12.2",
     "node-sass": "^9.0.0",
     "sass": "^1.68.0",
     "svelte": "^3.59.1",

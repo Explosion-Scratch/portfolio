@@ -4,7 +4,7 @@ import { writable } from "svelte/store";
 let hub = () => ({
     hub: Object.create(null),
     emit(event, data) {
-        (this.hub['*'] || []).forEach((handler) => handler(event, data));        
+        (this.hub['*'] || []).forEach((handler) => handler(event, data));
         (this.hub[event] || []).forEach((handler) => handler(data));
     },
     on(event, handler) {
@@ -17,5 +17,12 @@ let hub = () => ({
         if (this.hub[event].length === 0) delete this.hub[event];
     },
 });
+
+export const globals = ({
+    timeline: {},
+    modal: {},
+    ready: null,
+    readyRes: () => { },
+})
 
 export const events = hub();

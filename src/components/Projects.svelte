@@ -3,7 +3,8 @@
   import _projects from "../projects.json";
   import SearchBar from "./SearchBar.svelte";
   import Card from "./Card.svelte";
-  import { events } from "../store";
+  import { events, globals } from "../store";
+  import { onMount } from "svelte";
 
   let projects = [..._projects];
 
@@ -21,6 +22,29 @@
   function getWave() {
     return waves[Math.floor(Math.random() * waves.length)];
   }
+
+  let elements = {
+    projects_container: null,
+  };
+
+  onMount(async () => {
+    const cards = elements.projects_container.querySelectorAll(".card");
+    await globals.ready;
+    // const tl = gsap.timeline({
+    //   scrollTrigger: {
+    //     trigger: elements.projects_container,
+    //     start: "top center",
+    //     end: "bottom center",
+    //     scrub: true,
+    //     markers: true,
+    //   },
+    // });
+    // for (let card of cards) {
+    //   tl.to(card, {
+    //     opacity: 1,
+    //   });
+    // }
+  });
 </script>
 
 <Section>
@@ -32,7 +56,7 @@
     {/each}
   </div>
   <SearchBar bind:projects="{projects}" />
-  <div class="projects">
+  <div class="projects" bind:this="{elements.projects_container}">
     {#each projects as project}
       <Card
         title="{project.title}"

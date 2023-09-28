@@ -1,7 +1,7 @@
 <script>
   import LazyImg from "./LazyImg.svelte";
   import { icons } from "../icons";
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher, onMount } from "svelte";
   import Tag from "./Tag.svelte";
   import { events } from "../store";
   export let title = "";
