@@ -1,38 +1,57 @@
 <script>
-  import { Curtains, Plane, Vec2 } from "curtainsjs";
-  import { onMount } from "svelte";
-  const funcs = {
+  let elements = {
+    img: null,
+    canvas: null,
+    plane: null,
+  };
+  let funcs = {
     start: () => {},
   };
-  onMount(() => {
-    window.funcs = funcs;
-    const mousePosition = new Vec2();
-    const mouseLastPosition = new Vec2();
+  export let src;
+  export let isVideo = false;
+  import { Curtains, Plane } from "curtainsjs";
+  import { onMount } from "svelte";
 
-    const deltas = {
-      max: 0,
-      applied: 0,
-    };
+  onMount(() => {
     const curtains = new Curtains({
-      container: "canvas",
-      watchScroll: false, // no need to listen for the scroll in this example
-      pixelRatio: Math.min(1.5, window.devicePixelRatio), // limit pixel ratio for performance
+      container: elements.canvas,
     });
-    curtains
-      .onError(() => {
-        // we will add a class to the document body to display original video
-        document.body.classList.add("no-curtains", "curtains-ready");
+    const params = {
+      vertexShaderID: "plane-vs",
+      fragmentShaderID: "plane-fs",
+      uniforms: {
+        time: {
+          name: "uTime",
+          type: "1f",
+          value: 0,
+        },
+      },
+    };
+    const plane = new Plane(curtains, elements.plane, params);
+    plane
+      .onReady(() => {
         funcs.start = () => {
-          document.body.classList.add("video-started");
-          planeElements[0].getElementsByTagName("video")[0].play();
+          if (isVideo) {
+            plane.playVideos();
+          }
         };
       })
-      .onContextLost(() => {
-        curtains.restoreContext();
+      .onRender(() => {
+        plane.uniforms.time.value++;
       });
+  });
+</script>
 
-    const planeElements = document.getElementsByClassName("curtain");
-    const vs = `
+<div id="canvas" bind:this="{elements.canvas}"></div>
+<div class="plane" bind:this="{elements.plane}">
+  <img
+    bind:this="{elements.img}"
+    src="/project_images/0f975869b3fb62f329c67861ba56681aea8f0b2011273c023ee0bbefc9a5bff7.png"
+    crossorigin=""
+  />
+</div>
+<svelte:head>
+  <script id="plane-vs" type="x-shader/x-vertex">
         precision mediump float;
 
         // default mandatory variables
@@ -59,33 +78,25 @@
 
             vec3 vertexPosition = aVertexPosition;
 
-            // get the distance between our vertex and the mouse position
             float distanceFromMouse = distance(uMousePosition, vec2(vertexPosition.x, vertexPosition.y));
 
-            // calculate our wave effect
             float waveSinusoid = cos(5.0 * (distanceFromMouse - (uTime / 75.0)));
 
-            // attenuate the effect based on mouse distance
             float distanceStrength = (0.4 / (distanceFromMouse + 0.4));
 
-            // calculate our distortion effect
             float distortionEffect = distanceStrength * waveSinusoid * uMouseMoveStrength;
 
-            // apply it to our vertex position
             vertexPosition.z +=  distortionEffect / 30.0;
             vertexPosition.x +=  (distortionEffect / 30.0 * (uResolution.x / uResolution.y) * (uMousePosition.x - vertexPosition.x));
             vertexPosition.y +=  distortionEffect / 30.0 * (uMousePosition.y - vertexPosition.y);
 
             gl_Position = uPMatrix * uMVMatrix * vec4(vertexPosition, 1.0);
-
-            // varyings
             vTextureCoord = (simplePlaneVideoTextureMatrix * vec4(aTextureCoord, 0.0, 1.0)).xy;
             vVertexPosition = vertexPosition;
         }
-    `;
-
-    const fs = `
-        precision mediump float;
+  </script>
+  <script id="plane-fs" type="x-shader/x-fragment">
+     precision mediump float;
 
         varying vec3 vVertexPosition;
         varying vec2 vTextureCoord;
@@ -106,169 +117,30 @@
 
             gl_FragColor = finalColor;
         }
-    `;
+  </script>
+</svelte:head>
 
-    // some basic parameters
-    const params = {
-      vertexShader: vs,
-      fragmentShader: fs,
-      widthSegments: 20,
-      heightSegments: 20,
-      uniforms: {
-        resolution: {
-          // resolution of our plane
-          name: "uResolution",
-          type: "2f", // notice this is an length 2 array of floats
-          value: [planeElements[0].clientWidth, planeElements[0].clientHeight],
-        },
-        time: {
-          // time uniform that will be updated at each draw call
-          name: "uTime",
-          type: "1f",
-          value: 0,
-        },
-        mousePosition: {
-          // our mouse position
-          name: "uMousePosition",
-          type: "2f", // again an array of floats
-          value: mousePosition,
-        },
-        mouseMoveStrength: {
-          // the mouse move strength
-          name: "uMouseMoveStrength",
-          type: "1f",
-          value: 0,
-        },
-      },
-    };
-
-    // create our plane
-    const simplePlane = new Plane(curtains, planeElements[0], params);
-
-    simplePlane
-      .onReady(() => {
-        // display the button
-        document.body.classList.add("curtains-ready");
-
-        // set a fov of 35 to reduce perspective (we could have used the fov init parameter)
-        simplePlane.setPerspective(35);
-
-        // now that our plane is ready we can listen to mouse move event
-        const wrapper = document.getElementById("page-wrap");
-
-        wrapper.addEventListener("mousemove", (e) => {
-          handleMovement(e, simplePlane);
-        });
-
-        wrapper.addEventListener(
-          "touchmove",
-          (e) => {
-            handleMovement(e, simplePlane);
-          },
-          {
-            passive: true,
-          }
-        );
-
-        // click to play the videos
-        funcs.start = () => {
-          // display canvas and hide the button
-          document.body.classList.add("video-started");
-
-          // apply a little effect once everything is ready
-          deltas.max = 2;
-
-          simplePlane.playVideos();
-        };
-      })
-      .onRender(() => {
-        // increment our time uniform
-        simplePlane.uniforms.time.value++;
-
-        // decrease both deltas by damping : if the user doesn't move the mouse, effect will fade away
-        deltas.applied += (deltas.max - deltas.applied) * 0.02;
-        deltas.max += (0 - deltas.max) * 0.01;
-
-        // send the new mouse move strength value
-        simplePlane.uniforms.mouseMoveStrength.value = deltas.applied;
-      })
-      .onAfterResize(() => {
-        const planeBoundingRect = simplePlane.getBoundingRect();
-        simplePlane.uniforms.resolution.value = [
-          planeBoundingRect.width,
-          planeBoundingRect.height,
-        ];
-      })
-      .onError(() => {
-        // we will add a class to the document body to display original video
-        document.body.classList.add("no-curtains", "curtains-ready");
-
-        // handle video
-        funcs.start = () => {
-          // display canvas and hide the button
-          document.body.classList.add("video-started");
-
-          planeElements[0].getElementsByTagName("video")[0].play();
-        };
-      });
-
-    // handle the mouse move event
-    function handleMovement(e, plane) {
-      // update mouse last pos
-      mouseLastPosition.copy(mousePosition);
-
-      const mouse = new Vec2();
-
-      // touch event
-      if (e.targetTouches) {
-        mouse.set(e.targetTouches[0].clientX, e.targetTouches[0].clientY);
-      }
-      // mouse event
-      else {
-        mouse.set(e.clientX, e.clientY);
-      }
-
-      // lerp the mouse position a bit to smoothen the overall effect
-      mousePosition.set(
-        curtains.lerp(mousePosition.x, mouse.x, 0.3),
-        curtains.lerp(mousePosition.y, mouse.y, 0.3)
-      );
-
-      // convert our mouse/touch position to coordinates relative to the vertices of the plane and update our uniform
-      plane.uniforms.mousePosition.value =
-        plane.mouseToPlaneCoords(mousePosition);
-
-      // calculate the mouse move strength
-      if (mouseLastPosition.x && mouseLastPosition.y) {
-        let delta =
-          Math.sqrt(
-            Math.pow(mousePosition.x - mouseLastPosition.x, 2) +
-              Math.pow(mousePosition.y - mouseLastPosition.y, 2)
-          ) / 30;
-        delta = Math.min(4, delta);
-        // update max delta only if it increased
-        if (delta >= deltas.max) {
-          deltas.max = delta;
-        }
-      }
-    }
-  });
-</script>
-
-<div id="page-wrap">
-  <div id="canvas"></div>
-  <div class="curtain-wrapper">
-    <div class="curtain">
-      <video
-        src="https://www.curtainsjs.com/examples/medias/plane-video-texture-1.mp4"
-        data-sampler="simplePlaneVideoTexture"></video>
-    </div>
-  </div>
-  <!-- 
-			<div id="enter-site-wrapper" class="flex-wrapper">
-				<span id="enter-site">
-					Click to enter site<br />
-					<small>(on mobile devices we can't start playing videos without a user action)</small>
-				</span>
-			</div> -->
-</div>
+<style>
+  :global(body) {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+  }
+  #canvas {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  .plane {
+    width: 80%;
+    height: 80vh;
+    margin: 10vh auto;
+  }
+  .plane img {
+    display: none;
+  }
+</style>
