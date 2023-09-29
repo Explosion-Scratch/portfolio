@@ -5,6 +5,7 @@
   import Card from "./Card.svelte";
   import { events, globals } from "../store";
   import { onMount } from "svelte";
+  import { hash } from "../utils";
 
   let projects = [..._projects];
 
@@ -38,7 +39,7 @@
   </div>
   <SearchBar bind:projects="{projects}" />
   <div class="projects" bind:this="{elements.projects_container}">
-    {#each projects as project}
+    {#each projects as project (hash(JSON.stringify(project)))}
       <Card
         title="{project.title}"
         body="{project.description}"

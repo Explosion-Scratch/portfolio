@@ -22,6 +22,7 @@
     isVideo = /\.(mp4|mpv|avi|mkv)$/i.test(src) || is_vid_override;
   }
 
+
   function HANDLESCROLL() {
     if (inView(el, 1)) {
       loadImg = true;
@@ -60,60 +61,33 @@
     video.currentTime = 0;
     video.pause();
   }
-  let setSrc = (src) => {};
 
-  const mounted = async () => {
+  onMount(async () => {
     HANDLESCROLL();
     window.addEventListener("scroll", HANDLESCROLL);
     el.addEventListener("mouseenter", MOUSEENTER);
     el.addEventListener("mouseleave", MOUSELEAVE);
-    const hashes = await Promise.all(
-      projects.map(async (i) => {
-        return { ...i, hash: await sha256(src) };
-      })
-    );
-    setSrc = async (url) => {
-      const hash = await sha256(url);
-      const f = hashes.filter((i) => i.hash === hash)?.[0];
-      if (f) {
-        _src = `/project_images/${f.path}`;
-        if (f.contentType.endsWith("mp4")) {
-          is_vid_override = true;
-        }
-      } else {
-        _src = url;
+    const f = (
+      await Promise.all(
+        projects.map(async (i) => {
+          return { ...i, valid: i.assetHash === (await sha256(src)) };
+        })
+      )
+    ).filter((i) => i.valid)?.[0];
+    if (f) {
+      _src = `/project_images/${f.path}`;
+      if (f.contentType.endsWith("mp4")) {
+        is_vid_override = true;
       }
-    };
-    setSrc(src);
-  };
-
-  const destroy = () => {
-    window?.removeEventListener("scroll", HANDLESCROLL);
-    el.removeEventListener("mouseenter", MOUSEENTER);
-    el.removeEventListener("mouseleave", MOUSELEAVE);
-  };
-
-  onMount(mounted);
-  onMount(async () => {
-    while (true) {
-      await change(() => src);
-      console.log("SRC changed", src);
-      setSrc(src);
-    }
-    function change(fn, args = []) {
-      return new Promise((resolve) => {
-        let res = fn(...args);
-        setInterval(() => {
-          let newRes = fn(...args);
-          if (newRes !== res) {
-            resolve(newRes, res);
-          }
-        }, 100);
-      });
+    } else {
+      _src = src;
     }
   });
-  onDestroy(destroy);
-
+  onDestroy(() => {
+    window.removeEventListener("scroll", HANDLESCROLL);
+    el.removeEventListener("mouseenter", MOUSEENTER);
+    el.removeEventListener("mouseleave", MOUSELEAVE);
+  });
   // FROM: https://stackoverflow.com/a/48161723/14197829
   async function sha256(message) {
     const msgBuffer = new TextEncoder().encode(message);
@@ -190,8 +164,9 @@
       <a href="{src}" alt="Go to {src}" class="link"
         >Go to {src?.split("://")[1]?.split("/")?.[0]}</a
       >
-      <a alt="Retry loading" on:click="{() => ((errored = false), error())}"
-        >Retry</a
+      <a
+        alt="Retry loading"
+        on:click="{() => ((errored = false), error())}">Retry</a
       >
     </div>
   {/if}

@@ -5,17 +5,12 @@
   import Matrix from "./components/Matrix.svelte";
   import CustomCursor from "./components/CustomCursor.svelte";
   import Icon from "@iconify/svelte";
-  import Timeline from "./components/Timeline.svelte";
   import Section from "./components/Section.svelte";
-  import Profile from "./components/Profile.svelte";
-  import GridSection from "./components/GridSection.svelte";
   import Meta from "./components/Meta.svelte";
-  import Card from "./components/Card.svelte";
   import Projects from "./components/Projects.svelte";
   import { events } from "./store";
   import ProjectModal from "./components/ProjectModal.svelte";
-  import { onMount, tick } from "svelte";
-  import GlowCards from "./components/GlowCards.svelte";
+  import { onMount } from "svelte";
   import { globals } from "./store";
   import Lenis from "@studio-freight/lenis";
 
@@ -45,6 +40,7 @@
   });
   import gsap from "gsap";
   import ScrollTrigger from "gsap/ScrollTrigger";
+  import { hash } from "./utils";
   onMount(() => {
     globals.timeline = gsap.timeline({});
     gsap.registerPlugin(ScrollTrigger);
@@ -81,7 +77,9 @@
   <Projects />
 </Section>
 {#if modal.showing}
-  <ProjectModal project="{modal.project}" />
+  {#key hash(JSON.stringify(modal.project))}
+    <ProjectModal project="{modal.project}" />
+  {/key}
 {/if}
 <CustomCursor />
 

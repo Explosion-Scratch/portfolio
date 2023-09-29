@@ -1,7 +1,7 @@
 <script>
   import { onDestroy, onMount } from "svelte";
   import Tag from "./Tag.svelte";
-  import { strip } from "../utils";
+  import { debounce, strip } from "../utils";
   import Fuse from "fuse.js";
   export let projects = [];
   let totalProjects = [];
@@ -64,6 +64,7 @@
     projects = fuse.search(q).map((i) => i.item);
   }
 
+  const debounced_handle = debounce(handle);
   let tagsExpanded = false;
   let inputFocused = false;
   let container;
@@ -77,9 +78,9 @@
       on:blur="{() => (inputFocused = false)}"
       placeholder="{inputFocused ? placeholder : 'Search...'}"
       bind:value="{query}"
-      on:change="{handle}"
-      on:keyup="{handle}"
-      on:input="{handle}"
+      on:change="{debounced_handle}"
+      on:keyup="{debounced_handle}"
+      on:input="{debounced_handle}"
     />
   </div>
   <div class="tags_container" class:expanded="{tagsExpanded}">
