@@ -36,7 +36,7 @@ export function getIcon(link) {
     }
     const DEFAULT_ICON = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M6 6a2 2 0 0 1 2-2a1 1 0 0 0 0-2a4 4 0 0 0-4 4v3a2 2 0 0 1-2 2a1 1 0 0 0 0 2a2 2 0 0 1 2 2v3a4 4 0 0 0 4 4a1 1 0 0 0 0-2a2 2 0 0 1-2-2v-3a4 4 0 0 0-1.38-3A4 4 0 0 0 6 9Zm16 5a2 2 0 0 1-2-2V6a4 4 0 0 0-4-4a1 1 0 0 0 0 2a2 2 0 0 1 2 2v3a4 4 0 0 0 1.38 3A4 4 0 0 0 18 15v3a2 2 0 0 1-2 2a1 1 0 0 0 0 2a4 4 0 0 0 4-4v-3a2 2 0 0 1 2-2a1 1 0 0 0 0-2Z"/></svg>`;
 
-    let icon = Object.entries(ICONS).find(i => link.toLowerCase().includes(i[0]))?.[1]
+    let icon = Object.entries(ICONS).find(i => link?.toLowerCase()?.includes(i[0]))?.[1]
     if (!icon) {
         icon = DEFAULT_ICON
         console.log("Icon not found", link)
@@ -92,10 +92,14 @@ export function safeInterval(fn, ms) {
         }
     };
 }
-export async function safeTimeout(fn, ms) {
-    let timeout = setTimeout(fn, ms);
+export function safeRequestAnimationFrame(fn) {
+    let going = true;
+    function run() {
+        fn();
+        if (going) { requestAnimationFrame(run); }
+    }
     onDestroy(() => {
-        clearTimeout(timeout);
+        going = false
     })
-    return timeout;
+    requestAnimationFrame(run)
 }

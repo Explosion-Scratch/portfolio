@@ -5,7 +5,7 @@
   import AnimatedIcon from "./AnimatedIcon.svelte";
   export let count = 0;
   export let tag;
-
+  export let iconOnly = false;
   function getIcon(tag) {
     return icons.find((i) => strip(i.id) === strip(tag));
   }
@@ -20,14 +20,24 @@
 </script>
 
 {#if exists}
-  <span class="tag pointer" class:light="{light}">
-    <span class="icon">
-      <AnimatedIcon>
-        {@html getIcon(tag)?.html}
-      </AnimatedIcon>
+  {#if iconOnly}
+    <AnimatedIcon>
+      {@html getIcon(tag)?.html}
+    </AnimatedIcon>
+  {:else}
+    <span class="tag pointer" class:light="{light}">
+      <span class="icon">
+        <AnimatedIcon>
+          {@html getIcon(tag)?.html}
+        </AnimatedIcon>
+      </span>
+      <span class="icon_text"
+        >{tag[0].toUpperCase() + tag.slice(1)}{count > 0
+          ? ` (${count})`
+          : ""}</span
+      >
     </span>
-    <span class="icon_text">{tag[0].toUpperCase() + tag.slice(1)}{count > 0 ? ` (${count})` : ''}</span>
-  </span>
+  {/if}
 {/if}
 
 <style lang="scss" scoped>

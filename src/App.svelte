@@ -14,7 +14,7 @@
   import Projects from "./components/Projects.svelte";
   import { events } from "./store";
   import ProjectModal from "./components/ProjectModal.svelte";
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import GlowCards from "./components/GlowCards.svelte";
   import { globals } from "./store";
   import Lenis from "@studio-freight/lenis";
@@ -31,11 +31,18 @@
     console.log("Event", event, e);
   });
   let modal = { showing: false, project: null };
-  events.on("project", (project) => {
+  events.on("project", async (project) => {
+    if (modal.showing) {
+      modal.showing = false;
+      await new Promise((r) => setTimeout(r, 10));
+    }
+    console.log("Showing project", project);
     modal.showing = true;
-    modal.project = project;
+    modal.project = { ...project };
   });
-
+  events.on("modal_close", () => {
+    modal.showing = false;
+  });
   import gsap from "gsap";
   import ScrollTrigger from "gsap/ScrollTrigger";
   onMount(() => {

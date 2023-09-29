@@ -120,6 +120,8 @@ $gray: #666;
 $background: rgb(20, 20, 20);
 $primary: #088;
 $secondary: adjust-hue($primary, 30);
+$secondaryLight: lighten($secondary, 10);
+$secondaryDark: darken($secondary, 10);
 $primaryLight: lighten($primary, 10);
 $primaryDark: darken($primary, 10);
 $monospace_font: monospace;
@@ -161,5 +163,45 @@ $breakpoints: ('sm': '640px',
     // If the key doesn't exist in the map
     @else {
         @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. ";
+    }
+}
+
+@mixin close-button {
+    $size: 50px;
+    height: $size;
+    width: $size;
+    box-sizing: border-box;
+    line-height: $size;
+    display: inline-block;
+
+    &:before,
+    &:after {
+        $width: 15px;
+        $height: 2px;
+        transform: rotate(-45deg);
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: calc(-1 * $height/2);
+        margin-left: calc(-1 * $width/2);
+        display: block;
+        height: $height;
+        width: $width;
+        border-radius: 1000px;
+        background-color: currentColor;
+        transition: all 0.25s ease-out;
+    }
+
+    &:after {
+        transform: rotate(-135deg);
+    }
+
+    &:hover {
+
+        &:before,
+        &:after {
+            transform: rotate(0deg);
+        }
     }
 }

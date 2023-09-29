@@ -2,12 +2,21 @@
   import { vs, fs } from "../helpers/shader";
   import { safeInterval } from "../utils";
 
-  let elements = {
+  export const elements = {
     img: null,
     canvas: null,
     plane: null,
     wrapper: null,
   };
+  let time;
+
+  safeInterval(() => {
+    if (!isVideo) {
+      return;
+    }
+    time = elements.img.currentTime;
+  }, 500);
+
   export const funcs = {
     start: () => {},
     mouse: () => {},
@@ -23,19 +32,26 @@
   export let src;
   export let isVideo = false;
   import { Curtains, Plane, Vec2 } from "curtainsjs";
-  import { onDestroy, onMount } from "svelte";
+  import { onMount } from "svelte";
 
-  onDestroy(() => {
-    for (const interval of intervals) {
-      clearInterval(interval);
-    }
-  });
-  onMount(() => {
+  let loadPRes;
+  let loaded = new Promise((r) => (loadPRes = r));
+  onMount(async () => {
+    await loaded;
+    console.log(
+      "Img loaded",
+      elements.img.naturalWidth,
+      elements.img.naturalHeight
+    );
     res.width = elements.img.clientWidth || elements.img.naturalWidth;
     res.height = elements.img.clientHeight || elements.img.naturalHeight;
+    let aspectRatio = res.height / res.width;
+    let originalRes = {
+      width: res.width,
+      height: res.height,
+    };
     elements.img.style.display = "none";
     window.funcs = funcs;
-    console.log({ res, src, isVideo, funcs });
     const mousePosition = new Vec2();
     // we will keep track of the last position in order to calculate the movement strength/delta
     const mouseLastPosition = new Vec2();
@@ -49,6 +65,7 @@
       container: elements.canvas,
     });
     const params = {
+      watchScroll: false,
       vertexShader: vs,
       fragmentShader: fs,
       widthSegments: 20,
@@ -107,10 +124,18 @@
 
     funcs.interval.set(() => {
       curtains.resize();
-      let parent = elements.wrapper;
+      let parent = elements.wrapper.parentElement;
       let rect = parent.getBoundingClientRect();
-      width = rect.width;
-      height = rect.height;
+
+      // scale = min(dst.width/src.width, dst.height/src.height)
+
+      let scale = Math.min(
+        rect.width / originalRes.width,
+        rect.height / originalRes.height
+      );
+      width = originalRes.width * scale;
+      height = originalRes.height * scale;
+
       const planeBoundingRect = plane.getBoundingRect();
       plane.uniforms.resolution.value = [
         planeBoundingRect.width,
@@ -145,13 +170,23 @@
         }
       }
     };
+    funcs.click = (e) => {
+      funcs.mouse(e);
+      deltas.applied = Math.min(8, Math.max(5, deltas.applied * 2));
+    };
   });
+
+  function scrub(e) {
+    const percent = e.offsetX / e.target.clientWidth;
+    elements.img.currentTime = percent * elements.img.duration;
+  }
 </script>
 
 <div
-  class="wrapper"
+  class="wrapper pointer"
   bind:this="{elements.wrapper}"
   on:mousemove="{funcs.mouse}"
+  on:click="{funcs.click}"
   style="--width: {width}px; --height: {height}px;"
 >
   <div id="canvas" bind:this="{elements.canvas}"></div>
@@ -161,16 +196,27 @@
         bind:this="{elements.img}"
         src="{src}"
         crossorigin=""
+        on:canplay="{loadPRes}"
+        on:load="{loadPRes}"
         data-sampler="simplePlaneVideoTexture"></video>
     {:else}
       <img
         bind:this="{elements.img}"
         src="{src}"
         crossorigin=""
+        on:load="{loadPRes}"
         data-sampler="simplePlaneVideoTexture"
       />
     {/if}
   </div>
+  {#if isVideo}
+    <div class="progress_bar pointer" on:click="{scrub}">
+      <div
+        class="progress"
+        style:width="{(time / elements.img?.duration) * 100 + "%"}"
+      ></div>
+    </div>
+  {/if}
 </div>
 <svelte:head />
 
@@ -209,6 +255,28 @@
     position: relative;
     box-shadow: rgba($text, 0.3) 0px 6px 24px 0px;
     border: 1px dashed $primary;
+    .progress_bar {
+      $inset: 5px;
+      border-radius: 10000px;
+      right: $inset;
+      left: $inset;
+      bottom: 3px;
+      position: absolute;
+      display: block;
+      height: 5px;
+      background: rgba($primary, 0.3);
+      transition: height 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      &:hover {
+        height: 13px;
+      }
+      .progress {
+        display: block;
+        height: 100%;
+        transition: width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border-radius: 10000px;
+        background: linear-gradient(to right, $primaryLight, $secondaryLight);
+      }
+    }
   }
   #canvas {
     position: absolute;
