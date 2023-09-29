@@ -1,3 +1,5 @@
+import { onDestroy } from "svelte";
+
 export function strip(a) {
     return a.toLowerCase().replace(/[^a-z0-9]/gi, "");
 }
@@ -40,4 +42,60 @@ export function getIcon(link) {
         console.log("Icon not found", link)
     }
     return icon;
+}
+
+export async function getInfo(image, projects) {
+    let out = {
+        isVideo: false,
+        url: image,
+    }
+    const f = (
+        await Promise.all(
+            projects.map(async (i) => {
+                return { ...i, valid: i.assetHash === (await sha256(image)) };
+            })
+        )
+    ).filter((i) => i.valid)?.[0];
+    if (f) {
+        image = `/project_images/${f.path}`;
+        if (f.contentType.endsWith("mp4")) {
+            out.isVideo = true;
+        }
+    }
+    out.url = image;
+    return out;
+}
+export async function sha256(message) {
+    const msgBuffer = new TextEncoder().encode(message);
+    const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray
+        .map((b) => b.toString(16).padStart(2, "0"))
+        .join("");
+    return hashHex;
+}
+
+export function safeInterval(fn, ms) {
+    const info = {
+        fn,
+    }
+    let interval = setInterval((...a) => {
+        info.fn(...a)
+    }, ms);
+    onDestroy(() => {
+        clearInterval(interval);
+    })
+    return {
+        set: (f) => {
+            console.log('setting function', f);
+            info.fn = f
+        }
+    };
+}
+export async function safeTimeout(fn, ms) {
+    let timeout = setTimeout(fn, ms);
+    onDestroy(() => {
+        clearTimeout(timeout);
+    })
+    return timeout;
 }

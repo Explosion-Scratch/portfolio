@@ -1,14 +1,15 @@
 <script>
   import { onMount } from "svelte";
   import { globals } from "../store";
+  import { safeInterval } from "../utils";
   let el = null;
   export let text = "";
+  safeInterval(() => {
+    if (el) {
+      text = el.innerText;
+    }
+  }, 100);
   onMount(async () => {
-    setInterval(() => {
-      if (el) {
-        text = el.innerText;
-      }
-    }, 100);
     await globals.ready;
     globals.timeline.fromTo(
       el,

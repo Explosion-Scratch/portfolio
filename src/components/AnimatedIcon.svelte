@@ -38,7 +38,7 @@
     }
   }
   .animated_icon:hover,
-  :global(.tag:hover .animated_icon) {
+  :global(.tag:hover .animated_icon), :global(.hover_target:hover .animated_icon) {
     &.rotate {
       transform: rotate(1turn);
     }

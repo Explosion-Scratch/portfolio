@@ -1,5 +1,7 @@
 <script>
-  import { vs, fs } from "./helpers/shader";
+  import { vs, fs } from "../helpers/shader";
+  import { safeInterval } from "../utils";
+
   let elements = {
     img: null,
     canvas: null,
@@ -10,6 +12,7 @@
     start: () => {},
     mouse: () => {},
     setResolution: () => {},
+    interval: safeInterval(() => {}, 100),
   };
   export let width = 500;
   export let height = 500;
@@ -20,8 +23,13 @@
   export let src;
   export let isVideo = false;
   import { Curtains, Plane, Vec2 } from "curtainsjs";
-  import { onMount } from "svelte";
+  import { onDestroy, onMount } from "svelte";
 
+  onDestroy(() => {
+    for (const interval of intervals) {
+      clearInterval(interval);
+    }
+  });
   onMount(() => {
     res.width = elements.img.clientWidth || elements.img.naturalWidth;
     res.height = elements.img.clientHeight || elements.img.naturalHeight;
@@ -81,6 +89,7 @@
             plane.playVideos();
           }
         };
+        funcs.start();
       })
       .onRender(() => {
         plane.uniforms.time.value++;
@@ -96,7 +105,7 @@
         ];
       });
 
-    setInterval(() => {
+    funcs.interval.set(() => {
       curtains.resize();
       let parent = elements.wrapper;
       let rect = parent.getBoundingClientRect();
@@ -109,7 +118,7 @@
       ];
       res.width = planeBoundingRect.width;
       res.height = planeBoundingRect.height;
-    }, 100);
+    });
     funcs.mouse = (e) => {
       mouseLastPosition.copy(mousePosition);
       const mouse = new Vec2();
@@ -191,14 +200,15 @@
 </style> -->
 
 <style lang="scss">
+  @import "../main.scss";
   .wrapper {
     $size: 500px;
     width: var(--width, $size);
     overflow: hidden;
     height: var(--height, $size);
     position: relative;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
-      rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    box-shadow: rgba($text, 0.3) 0px 6px 24px 0px;
+    border: 1px dashed $primary;
   }
   #canvas {
     position: absolute;
@@ -209,7 +219,7 @@
     left: $inset;
   }
   .plane {
-    $inset: 20px;
+    $inset: -20px;
     width: calc(100% + $inset);
     height: calc(100% + $inset);
     margin-left: calc(0px - calc($inset / 2));

@@ -1,103 +1,147 @@
 <script>
-  import { onMount } from "svelte";
-  import CurtainImage from "./CurtainImage.svelte";
-  import Tag from "./components/Tag.svelte";
+  import Glitch from "./components/Text.svelte";
+  import { typing } from "./components/typing.js";
+  import Glassmorphism from "./components/Glassmorphism.svelte";
+  import Matrix from "./components/Matrix.svelte";
+  import CustomCursor from "./components/CustomCursor.svelte";
+  import Icon from "@iconify/svelte";
+  import Timeline from "./components/Timeline.svelte";
+  import Section from "./components/Section.svelte";
+  import Profile from "./components/Profile.svelte";
+  import GridSection from "./components/GridSection.svelte";
+  import Meta from "./components/Meta.svelte";
+  import Card from "./components/Card.svelte";
+  import Projects from "./components/Projects.svelte";
   import { events } from "./store";
-  let w, h;
+  import ProjectModal from "./components/ProjectModal.svelte";
+  import { onMount } from "svelte";
+  import GlowCards from "./components/GlowCards.svelte";
+  import { globals } from "./store";
+  import Lenis from "@studio-freight/lenis";
+
+  let timeline = [
+    "Created this timeline",
+    "Published my second chrome extension to the chrome webstore",
+    "Published my first extension to the chrome webstore",
+    "Created a fast and end to end encrypted file sharing service called OnDrop",
+    "Created a library of useful JavaScript functions called Bijou.js and designed a website for it",
+  ];
+
+  events.on("*", (event, e) => {
+    console.log("Event", event, e);
+  });
+  let modal = { showing: false, project: null };
+  events.on("project", (project) => {
+    modal.showing = true;
+    modal.project = project;
+  });
+
+  import gsap from "gsap";
+  import ScrollTrigger from "gsap/ScrollTrigger";
   onMount(() => {
-    w = window.innerWidth / 2;
-    h = window.innerHeight * 0.8;
+    globals.timeline = gsap.timeline({});
+    gsap.registerPlugin(ScrollTrigger);
+    const lenis = new Lenis();
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
   });
 </script>
 
-<div class="project_modal_wrapper">
-  <div class="right">
-    <div class="img_container">
-      <CurtainImage
-        width="{w}"
-        height="{h}"
-        src="/project_images/0f975869b3fb62f329c67861ba56681aea8f0b2011273c023ee0bbefc9a5bff7.png"
-      />
-    </div>
+<svelte:head><Meta /></svelte:head>
+<!-- <GridSection /> -->
+<Section>
+  <Matrix />
+  <div class="center">
+    <Glitch>
+      I am <span
+        use:typing="{{
+          items: ['--Explosion--', 'a developer', 'a designer', 'a creator'],
+          loop: false,
+        }}"></span>
+    </Glitch>
+    <Glassmorphism class="button"
+      >Hello
+      <Icon icon="bytesize:arrow-right" />
+    </Glassmorphism>
   </div>
-  <div class="left">
-    <h1>{project.title}</h1>
-    <div class="tags">
-      {#each tags as tag}
-        <Tag tag="{tag}" light="{true}" />
-      {/each}
-    </div>    <div class="desc">
-      {project.description}
-    </div>
-    <div class="buttons">
-      <a
-        class="primary"
-        href="{project.url}"
-        target="code_win"
-        on:click="{() => events.emit('open_url', { url: project.url })}"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="32"
-          height="32"
-          viewBox="0 0 256 256"
-          ><path
-            fill="currentColor"
-            d="M227.32 28.68a16 16 0 0 0-15.66-4.08h-.15L19.57 82.84a16 16 0 0 0-2.42 29.84l85.62 40.55l40.55 85.62a15.86 15.86 0 0 0 14.42 9.15q.69 0 1.38-.06a15.88 15.88 0 0 0 14-11.51l58.2-191.94v-.15a16 16 0 0 0-4-15.66Zm-69.49 203.17l-.05.14l-39.36-83.09l47.24-47.25a8 8 0 0 0-11.31-11.31l-47.25 47.24L24 98.22h.14L216 40Z"
-          ></path></svg
-        >
-        <span class="text">View</span>
-      </a>
-      <a
-        href="{project.code}"
-        target="code_win"
-        class="secondary"
-        on:click="{() => events.emit('open_url', { url: project.code })}"
-      >
-        {@html getIcon(project.code)}
-        <span class="text">Code</span>
-      </a>
-    </div>
-  </div>
-</div>
+</Section>
+<Section>
+  <Projects />
+</Section>
+{#if modal.showing}
+  <ProjectModal project="{modal.project}" />
+{/if}
+<CustomCursor />
 
-<style lang="scss" scoped="">
-  @import "./main.scss";
-  .project_modal_wrapper :global(*) {
-    box-sizing: border-box;
+<style lang="scss">
+  @import "main.scss";
+  .center {
+    font-family: $monospace_font;
   }
-  .project_modal_wrapper {
+  :global(body) {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: $background;
     font-family: $font;
-    color: $text;
-    width: 100vw;
-    position: fixed;
-    inset: 0;
-    height: 100vh;
-    background: linear-gradient(
-      45deg,
-      darken($primary, 20),
-      darken($secondary, 10)
-    );
+  }
+  :global(*) {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: $font;
+  }
+  :global(#gradient-bg) {
+    background: linear-gradient(to bottom, $background, darken($primary, 30));
+    @include flex;
+    & > .container {
+      height: calc(100vh + 100px);
+      width: 100vw;
+      display: flex;
+      & > :global(*) {
+        flex: 1;
+      }
+
+      & > :global(.timeline) {
+        padding: 20px;
+        margin: 20px;
+      }
+      & > :global(.profile .wrapper) {
+        max-width: 500px;
+      }
+    }
+  }
+  :global(.button) {
+    @include flex;
+    padding: 15px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+    :global(svg) {
+      transition: margin 0.3s ease;
+      margin-left: 3px;
+    }
+    &:hover {
+      background-color: rgba(29, 39, 58, 0.63);
+      :global(svg) {
+        margin-left: 5px;
+      }
+    }
+  }
+  .center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 5vmin;
-    .right,
-    .left {
-      overflow: hidden;
-      flex: 1;
-    }
-    .left {
-      padding: 3em;
-      h1 {
-        font-weight: 200;
-        font-size: 2em;
-      }
-      .desc {
-        margin-top: 1em;
-        font-weight: 300;
-        line-height: 1.7em;
-      }
-    }
+    flex-direction: column;
   }
 </style>
