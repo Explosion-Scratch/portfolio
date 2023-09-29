@@ -10,6 +10,7 @@
   let w, h;
   let loading = true;
   onMount(() => {
+    document.addEventListener("keyup", handle);
     w = window.innerWidth / 2;
     h = window.innerHeight * 0.8;
     document.body.style.overflow = "hidden";
@@ -19,9 +20,20 @@
       project.image = a.url;
       project.isVideo = a.isVideo;
       loading = false;
-      console.log('Modal project: ', {...project})
+      console.log("Modal project: ", { ...project });
     });
   });
+  onDestroy(() => {
+    document.removeEventListener("keyup", handle);
+  });
+  function handle(e) {
+    if (e.key === "Escape") {
+      close();
+    }
+  }
+  function close() {
+    events.emit("modal_close");
+  }
   onDestroy(() => {
     document.body.style.overflow = "auto";
   });
@@ -31,6 +43,19 @@
   $: previousProject = projectIndex < 1 ? null : projects[projectIndex - 1];
   $: nextProject =
     projectIndex >= projects.length - 1 ? null : projects[projectIndex + 1];
+
+  function getTags(project) {
+    if (!project.tags) {
+      return [];
+    }
+    if (Array.isArray(project.tags)) {
+      return project.tags;
+    }
+    if (typeof project.tags === "string") {
+      return project.tags.split(",");
+    }
+    return [];
+  }
 </script>
 
 <div class="project_modal_wrapper" class:closeHovered="{closeHovered}">
@@ -39,7 +64,7 @@
     on:mouseenter="{() => (closeHovered = true)}"
     on:mouseleave="{() => (closeHovered = false)}"
   >
-    <a href="#" on:click="{() => events.emit('modal_close')}" class="close"></a>
+    <a on:click="{() => events.emit('modal_close')}" class="close"></a>
   </div>
   <div class="right">
     <div class="img_container">
@@ -54,9 +79,9 @@
     </div>
   </div>
   <div class="left">
-    <h1>{project.title}s</h1>
+    <h1>{project.title}</h1>
     <div class="tags">
-      {#each project.tags.split(',') as tag}
+      {#each getTags(project) as tag}
         <Tag tag="{tag}" />
       {/each}
     </div>
@@ -100,10 +125,10 @@
     </div>
   </div>
   <div class="next_previous">
-    {#if nextProject}
+    {#if previousProject}
       <div
-        class="next move_btn"
-        on:click="{() => events.emit('project', nextProject)}"
+        class="next move_btn pointer"
+        on:click="{() => events.emit('project', previousProject)}"
       >
         <div class="arrow">
           <svg
@@ -118,9 +143,9 @@
           >
         </div>
         <div class="meta">
-          <span class="title">{nextProject.title}</span>
+          <span class="title">{previousProject.title}</span>
           <div class="icons">
-            {#each nextProject.tags.split(",") as tag}<Tag
+            {#each getTags(previousProject) as tag}<Tag
                 tag="{tag}"
                 iconOnly="{true}"
               />{/each}
@@ -128,10 +153,10 @@
         </div>
       </div>
     {/if}
-    {#if previousProject}
+    {#if nextProject}
       <div
-        class="previous move_btn"
-        on:click="{() => events.emit('project', previousProject)}"
+        class="previous move_btn pointer"
+        on:click="{() => events.emit('project', nextProject)}"
       >
         <div class="arrow">
           <svg
@@ -146,9 +171,9 @@
           >
         </div>
         <div class="meta">
-          <span class="title">{previousProject.title}</span>
+          <span class="title">{nextProject.title}</span>
           <div class="icons">
-            {#each previousProject.tags.split(",") as tag}<Tag
+            {#each getTags(nextProject) as tag}<Tag
                 tag="{tag}"
                 iconOnly="{true}"
               />{/each}
@@ -225,7 +250,7 @@
           flex-direction: column;
           gap: 0.3em;
           .title {
-            transition: font-weight .2s ease-out;
+            transition: font-weight 0.2s ease-out;
             border-bottom: 1px solid $primary;
             font-size: 1em;
             font-weight: 200;
@@ -286,6 +311,7 @@
       }
     }
     .left {
+      width: 100%;
       padding: 3em;
       max-width: 800px;
       margin: 0 auto;
@@ -304,6 +330,7 @@
       padding-top: 0;
       display: flex;
       width: 100%;
+      max-width: 400px;
       gap: 0.3em;
       justify-content: flex-start;
       align-items: flex-start;

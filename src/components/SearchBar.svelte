@@ -8,6 +8,7 @@
   import gsap from "gsap";
   import ScrollTrigger from "gsap/ScrollTrigger";
   import useGSAP from "../helpers/gsap";
+  import { events } from "../store";
   // Mock before load
   let fuse = {
     search: () => totalProjects.map((i) => ({ item: i })),
@@ -28,8 +29,17 @@
         placeholders[Math.floor(Math.random() * placeholders.length)];
     }, 1000);
   });
+  const searchTag = (tag) => {
+    events.emit("modal_close");
+    query = `tags:${tag}`;
+    container?.scrollIntoView();
+    handle();
+  };
+  events.on("tag", searchTag);
+
   onDestroy(() => {
     clearInterval(placeholderInt);
+    events.off("tag", searchTag);
   });
   $: tags = [
     ...new Set(
@@ -56,9 +66,10 @@
 
   let tagsExpanded = false;
   let inputFocused = false;
+  let container;
 </script>
 
-<div class="input_container">
+<div class="input_container" bind:this="{container}">
   <div class="input">
     <div class="bg"></div>
     <input
@@ -146,16 +157,25 @@
   }
   .tags_container {
     display: flex;
+    width: 100%;
+    .tags, .tag_scroller {
+      width: 100%;
+    }
     &.expanded {
       flex-direction: column;
+      padding: 1em;
+      border-radius: .3em;
       &,
       .icon {
         display: flex;
         justify-content: center;
         align-items: center;
         font-size: 1em;
-        margin-top: 0.5em;
-        border: 2px dashed rgba($primary, 0.5);
+        padding: .3em 1em;
+        margin-top: 1em;
+        margin-bottom: .5em;
+        width: 100%;
+        border: 1px dashed rgba($primary, 0.5);
         color: rgba(lighten($primary, 45), 0.8);
         svg {
           transform: rotate(180deg);

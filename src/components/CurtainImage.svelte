@@ -41,7 +41,8 @@
     console.log(
       "Img loaded",
       elements.img.naturalWidth,
-      elements.img.naturalHeight
+      elements.img.naturalHeight,
+      elements.img,
     );
     res.width = elements.img.clientWidth || elements.img.naturalWidth;
     res.height = elements.img.clientHeight || elements.img.naturalHeight;
@@ -102,7 +103,7 @@
     plane
       .onReady(() => {
         funcs.start = () => {
-          if (isVideo) {
+          if (isVideo || src.endsWith('.gif')) {
             plane.playVideos();
           }
         };
@@ -198,6 +199,7 @@
         crossorigin=""
         on:canplay="{loadPRes}"
         on:load="{loadPRes}"
+        autoplay
         data-sampler="simplePlaneVideoTexture"></video>
     {:else}
       <img

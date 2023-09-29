@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import { icons } from "../icons";
+  import { events } from "../store";
   import { strip } from "../utils";
   import AnimatedIcon from "./AnimatedIcon.svelte";
   export let count = 0;
@@ -21,11 +22,17 @@
 
 {#if exists}
   {#if iconOnly}
-    <AnimatedIcon>
-      {@html getIcon(tag)?.html}
-    </AnimatedIcon>
+    <div class="_tag">
+      <AnimatedIcon>
+        {@html getIcon(tag)?.html}
+      </AnimatedIcon>
+    </div>
   {:else}
-    <span class="tag pointer" class:light="{light}">
+    <span
+      class="tag pointer"
+      class:light="{light}"
+      on:click|stopPropagation="{() => events.emit('tag', tag)}"
+    >
       <span class="icon">
         <AnimatedIcon>
           {@html getIcon(tag)?.html}

@@ -22,7 +22,6 @@ export default async function useGSAP(node, options) {
             start: `${rect.top + window.scrollY - options.scrollMargin.y - 50 - options.scrollMargin.top}px ${100 - options.windowPercent}%`,
             end: `${rect.top + rect.height + window.scrollY + options.scrollMargin.y + options.scrollMargin.bottom}px ${options.windowPercent}%`,
             scrub: true,
-            markers: true,
             ...options.scrollTrigger,
         },
         ease: 'linear',

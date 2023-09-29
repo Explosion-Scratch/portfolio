@@ -1,6 +1,6 @@
 <script>
   import LazyImg from "./LazyImg.svelte";
-  import useGSAP from "../helpers/gsap";
+  import { fly } from "svelte/transition";
   import { createEventDispatcher, onMount } from "svelte";
   import Tag from "./Tag.svelte";
   import { events } from "../store";
@@ -19,20 +19,11 @@
   }
 
   let card;
-  let visible = true;
-  onMount(() => {
-    events.on("scroll", () => {
-      if (inView(card, 1)) {
-        visible = true;
-      }
-    });
-  });
 </script>
 
 <div
   class="card"
   bind:this="{card}"
-  class:visible="{visible}"
   on:click="{() => dispatch('click', getInfo())}"
   on:keyup="{(e) =>
     (e.key === 'Enter' || e.key === 'Space') && dispatch('click', getInfo())}"
@@ -85,10 +76,6 @@
 <style lang="scss" scoped>
   @import "../main.scss";
   .card {
-    opacity: 0;
-    &.visible {
-      opacity: 1;
-    }
     &::before {
       content: "";
       position: absolute;
@@ -210,7 +197,7 @@
       width: 100%;
       gap: 0.3em;
       flex-direction: column;
-      @include bp('lg') {
+      @include bp("lg") {
         flex-direction: row;
       }
       a {

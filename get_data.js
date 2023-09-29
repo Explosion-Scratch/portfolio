@@ -3,6 +3,10 @@ import { createWriteStream, writeFileSync } from 'fs';
 import { resolve } from 'path';
 import { Readable } from 'stream';
 import { finished } from 'stream/promises';
+import { readdirSync } from 'fs';
+
+let existing = readdirSync(resolve('.', 'public', 'project_images'));
+console.log(existing);
 
 getSpreadsheet('2PACX-1vQvFX6gBzJOJEU01O-R_iuMfCr-5k8aQAvEzumMh9nPKjoe3PcOKiZgfG7OWXX1ahV8Alv325H6UqUu').then(async data => {
     for (let i = 0; i < data.length; i++) {
