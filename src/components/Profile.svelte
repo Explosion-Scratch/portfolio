@@ -1,21 +1,51 @@
 <script>
+  import { onMount } from "svelte";
   import backgroundImage from "../helpers/backgroundImage";
-  import tooltip from '../helpers/tooltip';
+  import useGSAP from "../helpers/gsap";
+  import tooltip from "../helpers/tooltip";
+  import Waves from "./Waves.svelte";
+  import { globals } from "../store";
 
   const pfp = `https://avatars.githubusercontent.com/u/61319150?v=4`;
   const username = "Explosion-Scratch";
+
+  let wrapper;
+  onMount(() => {
+    wrapper.style.marginTop = `-${globals.matrixOverlap * 100}vh`;
+  });
 </script>
 
-<div class="wrapper">
-  <div class="card">
+<div
+  class="wrapper"
+  use:useGSAP="{{
+    timeline: (tl, { node }) => {
+      tl.from(node, { '--top': '30%' });
+      tl.to(node, { '--top': '70%' });
+      tl.from(node, {
+        height: '100vh',
+      });
+      tl.to(node, { height: '90vh', ease: 'ease.out' }, '80%');
+    },
+    ease: 'ease.out',
+    start: () => window.innerHeight * 0.8,
+    end: () => window.innerHeight * 2,
+  }}"
+  bind:this="{wrapper}"
+>
+  <div class="card" use:useGSAP="{{ from: { opacity: 0 } }}">
     <div class="avatar">
       <img src="{pfp}" alt="My profile picture (@{username})" />
     </div>
     <div class="info">
-      <div class="name" use:backgroundImage={{
-        url: pfp,
-        opacity: .1,
-      }}>{username}</div>
+      <div
+        class="name"
+        use:backgroundImage="{{
+          url: pfp,
+          opacity: 0.1,
+        }}"
+      >
+        {username}
+      </div>
       <div class="description">Fullstack JavaScript developer</div>
     </div>
     <div class="social">
@@ -66,23 +96,37 @@
       </a>
     </div>
     <div class="buttons">
-      <button class="primary" use:tooltip={'Scroll down below!'}> View Projects </button>
-      <button class="secondary" use:tooltip={'@Explosion-Scratch'}> Visit GitHub </button>
+      <button class="primary" use:tooltip="{'Scroll down below!'}">
+        View Projects
+      </button>
+      <button class="secondary" use:tooltip="{'@Explosion-Scratch'}">
+        Visit GitHub
+      </button>
     </div>
   </div>
+  <Waves
+    style="position absolute; bottom: 0; right: 0; top: calc(100% - 350px); left: 0;"
+  />
 </div>
 
 <style lang="scss" scoped="">
   @import "../main.scss";
   $maxWidth: 500px;
+  // Fade out
+  :global(.waves) {
+    $MASK: linear-gradient(to bottom, black, transparent);
+    -webkit-mask-image: $MASK;
+    mask-image: $MASK;
+  }
+
   .wrapper {
-    display: grid;
-    place-items: center;
-    height: 70vh;
     position: relative;
+    min-height: 90vh;
+
     $w: calc($maxWidth / 2);
     $left: calc(50vw - $w);
     $right: calc(100vw - $left);
+    $shift: 0%;
     &::before,
     &::after {
       content: "";
@@ -90,21 +134,21 @@
       width: $size;
       height: $size;
       position: absolute;
-      top: 70%;
+      top: calc(clamp(30%, var(--top, 70%), 70%) - $shift);
       left: $left;
       border-radius: 50%;
       @include glow;
       z-index: -100;
       transform: translate(-50%, -50%);
       opacity: 0.5;
-      transition: top 1s cubic-bezier(0.23, -0.01, 0.36, 1.48);
+      // transition: top 1s cubic-bezier(0.23, -0.01, 0.36, 1.48);
       background: linear-gradient(to right, $primaryLight, $primaryDark);
-      animation: before 15s ease-in-out infinite alternate-reverse;
+      // animation: before 15s ease-in-out infinite alternate-reverse;
     }
     &::after {
       left: $right;
-      top: 20%;
-      animation-name: after;
+      top: calc(100% - clamp(30%, var(--top, 30%), 100%) - $shift);
+      // animation-name: after;
     }
     // &:hover::after {
     //   top: 70%;
@@ -130,11 +174,14 @@
     }
   }
   .card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: relative;
     padding: 0.5em 1em;
     max-width: $maxWidth;
     width: 80vw;
@@ -241,7 +288,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
+
       button {
+        z-index: 10;
         $themeColor: rgba(lighten($primary, 30), 0.5);
         font-size: 16px;
         font-weight: 200;

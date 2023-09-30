@@ -22,10 +22,6 @@
   import { hash } from "./utils";
   import { events, globals } from "./store";
 
-  events.on("*", (event, e) => {
-    console.log("Event", event, e);
-  });
-
   let modal = { showing: false, project: null };
   events.on("project", async (project) => {
     if (modal.showing) {
@@ -44,6 +40,8 @@
   onMount(() => {
     globals.timeline = gsap.timeline({});
     gsap.registerPlugin(ScrollTrigger);
+
+    globals.readyRes();
     const lenis = new Lenis();
 
     function raf(time) {
@@ -63,13 +61,15 @@
   <TippyStyles />
 </svelte:head>
 <Section>
-  <Matrix />
+  <Matrix settings={{
+    height: () => window.innerHeight * (1 + globals.matrixOverlap),
+  }}/>
   <div class="center">
     <Glitch>
       I am <span
         use:typing="{{
           items: ['--Explosion--', 'a developer', 'a designer', 'a creator'],
-          loop: false,
+          loop: true,
         }}"></span>
     </Glitch>
     <Glassmorphism class="button"

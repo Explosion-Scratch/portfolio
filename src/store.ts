@@ -29,6 +29,9 @@ export const globals: Globals = ({
     modal: {},
     ready: null,
     readyRes: () => { },
+    matrixOverlap: 0.5,// percent of window height
 })
+
+globals.ready = new Promise(r => (globals.readyRes = r));
 
 export const events = hub();

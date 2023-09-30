@@ -1,7 +1,8 @@
 <script>
   import { onMount } from "svelte";
   let CANVAS_EL = null; //Bind in dom
-  export let settings = {
+  export let settings = {};
+  $: _settings = {
     el: CANVAS_EL,
     color: ({ x, y, width, height }) => {
       // Nice diagonal gradient:
@@ -15,10 +16,13 @@
     size: 8,
     width: () => window.innerWidth,
     height: () => window.innerHeight,
+    ...settings,
   };
+
   const resize = () => {
-    matrix({ ...settings, height: settings.height(), width: settings.width() });
+    matrix({ ..._settings, height: _settings.height(), width: _settings.width() });
   };
+
   onMount(() => {
     // We can just run the resize function =P
     resize();

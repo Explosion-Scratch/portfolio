@@ -9,34 +9,12 @@
 
   let projects = [..._projects];
 
-  const waves = [
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill-opacity="1" d="M0,288L40,266.7C80,245,160,203,240,181.3C320,160,400,160,480,176C560,192,640,224,720,218.7C800,213,880,171,960,160C1040,149,1120,171,1200,186.7C1280,203,1360,213,1400,218.7L1440,224L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path></svg>`,
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill-opacity="1" d="M0,160L40,138.7C80,117,160,75,240,58.7C320,43,400,53,480,64C560,75,640,85,720,85.3C800,85,880,75,960,101.3C1040,128,1120,192,1200,213.3C1280,235,1360,213,1400,202.7L1440,192L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path></svg>`,
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill-opacity="1" d="M0,256L34.3,234.7C68.6,213,137,171,206,160C274.3,149,343,171,411,176C480,181,549,171,617,160C685.7,149,754,139,823,160C891.4,181,960,235,1029,245.3C1097.1,256,1166,224,1234,224C1302.9,224,1371,256,1406,272L1440,288L1440,320L1405.7,320C1371.4,320,1303,320,1234,320C1165.7,320,1097,320,1029,320C960,320,891,320,823,320C754.3,320,686,320,617,320C548.6,320,480,320,411,320C342.9,320,274,320,206,320C137.1,320,69,320,34,320L0,320Z"></path></svg>`,
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill-opacity="1" d="M0,224L30,208C60,192,120,160,180,176C240,192,300,256,360,245.3C420,235,480,149,540,122.7C600,96,660,128,720,138.7C780,149,840,139,900,154.7C960,171,1020,213,1080,218.7C1140,224,1200,192,1260,197.3C1320,203,1380,245,1410,266.7L1440,288L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"></path></svg>`,
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill-opacity="1" d="M0,224L30,202.7C60,181,120,139,180,112C240,85,300,75,360,85.3C420,96,480,128,540,144C600,160,660,160,720,186.7C780,213,840,267,900,277.3C960,288,1020,256,1080,218.7C1140,181,1200,139,1260,154.7C1320,171,1380,245,1410,282.7L1440,320L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"></path></svg>`,
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill-opacity="1" d="M0,32L48,53.3C96,75,192,117,288,160C384,203,480,245,576,234.7C672,224,768,160,864,117.3C960,75,1056,53,1152,80C1248,107,1344,181,1392,218.7L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>`,
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill-opacity="1" d="M0,224L48,202.7C96,181,192,139,288,112C384,85,480,75,576,90.7C672,107,768,149,864,144C960,139,1056,85,1152,58.7C1248,32,1344,32,1392,32L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>`,
-  ];
-
-  const color = "white";
-  function getWave() {
-    return waves[Math.floor(Math.random() * waves.length)];
-  }
-
   let elements = {
     projects_container: null,
   };
 </script>
 
 <Section>
-  <div class="waves">
-    {#each new Array(10).fill(null) as _, i}
-      <div class="wave_container">
-        {@html getWave().replaceAll("$COLOR", color)}
-      </div>
-    {/each}
-  </div>
   <SearchBar bind:projects="{projects}" />
   <div class="projects" bind:this="{elements.projects_container}">
     {#each projects as project (hash(JSON.stringify(project)))}
@@ -54,9 +32,6 @@
 </Section>
 
 <style scoped="" lang="scss">
-  $count: 10;
-  @import "../main.scss";
-  $wavecolor: $primary;
   .projects {
     display: grid;
     width: 80vw;
@@ -68,52 +43,6 @@
     gap: 6em 3em;
     :global(.card) {
       height: $height;
-    }
-  }
-  .waves {
-    width: 100%;
-    height: 150px;
-    display: block;
-    position: relative;
-    $MASK: linear-gradient(to bottom, black, transparent);
-    -webkit-mask-image: $MASK;
-    mask-image: $MASK;
-    .wave_container :global(svg) {
-      position: absolute;
-      width: 100%;
-      bottom: 0;
-      right: 0;
-      left: 0;
-    }
-    .wave_container {
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      width: 100%;
-      inset: 0;
-    }
-    @for $i from 1 through $count {
-      .wave_container:nth-child(#{$i}) {
-        :global(svg) {
-          opacity: calc(random(2) / 10) + 0.1;
-          transform-origin: bottom;
-          animation-delay: calc(random(100)) + ms;
-          animation: wave-#{$i} calc(random(3) + 2) + s ease-in-out infinite;
-          fill: adjust-hue($color: $wavecolor, $degrees: random(100) - 50);
-        }
-      }
-      @keyframes wave-#{$i} {
-        $max: 0.6;
-        0% {
-          transform: scaleY($max);
-        }
-        50% {
-          transform: scaleY(min(calc(random(5) / 10) + 0.2, $max));
-        }
-        100% {
-          transform: scaleY($max);
-        }
-      }
     }
   }
 </style>
