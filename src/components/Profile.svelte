@@ -1,5 +1,6 @@
 <script>
   import backgroundImage from "../helpers/backgroundImage";
+  import tooltip from '../helpers/tooltip';
 
   const pfp = `https://avatars.githubusercontent.com/u/61319150?v=4`;
   const username = "Explosion-Scratch";
@@ -65,8 +66,8 @@
       </a>
     </div>
     <div class="buttons">
-      <button class="primary"> View Projects </button>
-      <button class="secondary"> Visit GitHub </button>
+      <button class="primary" use:tooltip={'Scroll down below!'}> View Projects </button>
+      <button class="secondary" use:tooltip={'@Explosion-Scratch'}> Visit GitHub </button>
     </div>
   </div>
 </div>
@@ -75,6 +76,9 @@
   @import "../main.scss";
   $maxWidth: 500px;
   .wrapper {
+    display: grid;
+    place-items: center;
+    height: 70vh;
     position: relative;
     $w: calc($maxWidth / 2);
     $left: calc(50vw - $w);

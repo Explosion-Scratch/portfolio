@@ -9,6 +9,7 @@
   import ScrollTrigger from "gsap/ScrollTrigger";
   import useGSAP from "../helpers/gsap";
   import { events } from "../store";
+  import tooltip from "../helpers/tooltip";
   // Mock before load
   let fuse = {
     search: () => totalProjects.map((i) => ({ item: i })),
@@ -112,6 +113,7 @@
       </div>
     </div>
     <button
+    use:tooltip={tagsExpanded ? "Collapse tags =)" : "Expand"}
       class="icon pointer chevron"
       on:click="{() => (tagsExpanded = !tagsExpanded)}"
     >

@@ -6,6 +6,7 @@
   import { events } from "../store";
   import { getIcon, inView } from "../utils";
   import textEffect from "../helpers/textEffect";
+  import tooltip from "../helpers/tooltip";
   export let title = "";
   export let body = "";
   export let tags = [];
@@ -33,7 +34,7 @@
     <LazyImg src="{image}" />
   </div>
   <div class="meta">
-    <h5 class="title" use:textEffect={{iterations: 1}}>{title}</h5>
+    <h5 class="title" use:textEffect="{{ iterations: 1 }}">{title}</h5>
     <div class="tags">
       {#each tags as tag}
         <Tag tag="{tag}" light="{true}" />
@@ -47,6 +48,7 @@
     <a
       class="primary"
       href="{url}"
+      use:tooltip="{url}"
       target="code_win"
       on:click="{() => events.emit('open_url', { url })}"
     >
@@ -63,6 +65,7 @@
       <span class="text">View</span>
     </a>
     <a
+      use:tooltip="{code}"
       href="{code}"
       target="code_win"
       class="secondary"

@@ -7,6 +7,7 @@
   import { events } from "../store";
   import { getIcon, getInfo, safeInterval } from "../utils";
   import AnimatedIcon from "./AnimatedIcon.svelte";
+  import tooltip from "../helpers/tooltip";
   let w, h;
   let loading = true;
   onMount(() => {
@@ -94,6 +95,7 @@
       <a
         class="primary hover_target"
         href="{project.url}"
+        use:tooltip={project.url}
         target="code_win"
         on:click="{() => events.emit('open_url', { url: project.url })}"
       >
@@ -113,6 +115,7 @@
       </a>
       <a
         href="{project.code}"
+        use:tooltip={project.code}
         target="code_win"
         class="secondary hover_target"
         on:click="{() => events.emit('open_url', { url: project.code })}"

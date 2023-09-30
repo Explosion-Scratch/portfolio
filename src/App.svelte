@@ -1,4 +1,5 @@
 <script>
+  // Components
   import Glitch from "./components/Text.svelte";
   import { typing } from "./components/typing.js";
   import Glassmorphism from "./components/Glassmorphism.svelte";
@@ -8,25 +9,23 @@
   import Section from "./components/Section.svelte";
   import Meta from "./components/Meta.svelte";
   import Projects from "./components/Projects.svelte";
-  import { events } from "./store";
+  import Profile from "./components/Profile.svelte";
   import ProjectModal from "./components/ProjectModal.svelte";
+  import TippyStyles from "./components/TippyStyles.svelte";
+
   import { onMount } from "svelte";
-  import { globals } from "./store";
   import Lenis from "@studio-freight/lenis";
+  import gsap from "gsap";
+  import ScrollTrigger from "gsap/ScrollTrigger";
 
-  import backgroundImage from "./helpers/backgroundImage";
-
-  let timeline = [
-    "Created this timeline",
-    "Published my second chrome extension to the chrome webstore",
-    "Published my first extension to the chrome webstore",
-    "Created a fast and end to end encrypted file sharing service called OnDrop",
-    "Created a library of useful JavaScript functions called Bijou.js and designed a website for it",
-  ];
+  // Helpers
+  import { hash } from "./utils";
+  import { events, globals } from "./store";
 
   events.on("*", (event, e) => {
     console.log("Event", event, e);
   });
+
   let modal = { showing: false, project: null };
   events.on("project", async (project) => {
     if (modal.showing) {
@@ -37,13 +36,10 @@
     modal.showing = true;
     modal.project = { ...project };
   });
+
   events.on("modal_close", () => {
     modal.showing = false;
   });
-  import gsap from "gsap";
-  import ScrollTrigger from "gsap/ScrollTrigger";
-  import { hash } from "./utils";
-  import Profile from "./components/Profile.svelte";
 
   onMount(() => {
     globals.timeline = gsap.timeline({});
@@ -62,7 +58,10 @@
   });
 </script>
 
-<svelte:head><Meta /></svelte:head>
+<svelte:head>
+  <Meta />
+  <TippyStyles />
+</svelte:head>
 <Section>
   <Matrix />
   <div class="center">
@@ -80,7 +79,7 @@
   </div>
 </Section>
 <Section>
-  <Profile></Profile>
+  <Profile />
 </Section>
 <Section>
   <Projects />

@@ -38,6 +38,9 @@ devDependencies:
   svelte-hover-draw-svg:
     specifier: ^3.0.1
     version: 3.0.1(svelte@3.59.1)
+  tippy.js:
+    specifier: ^6.3.7
+    version: 6.3.7
   vanilla-tilt:
     specifier: ^1.8.1
     version: 1.8.1
@@ -318,6 +321,10 @@ packages:
     dependencies:
       mkdirp: 1.0.4
       rimraf: 3.0.2
+    dev: true
+
+  /@popperjs/core@2.11.8:
+    resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
     dev: true
 
   /@studio-freight/lenis@1.0.24:
@@ -1848,6 +1855,12 @@ packages:
       minizlib: 2.1.2
       mkdirp: 1.0.4
       yallist: 4.0.0
+    dev: true
+
+  /tippy.js@6.3.7:
+    resolution: {integrity: sha512-E1d3oP2emgJ9dRQZdf3Kkn0qJgI6ZLpyS5z6ZkY1DF3kaQaBsGZsndEpHwx+eC+tYM41HaSNvNtLx8tU57FzTQ==}
+    dependencies:
+      '@popperjs/core': 2.11.8
     dev: true
 
   /to-regex-range@5.0.1:
