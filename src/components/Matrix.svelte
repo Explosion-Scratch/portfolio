@@ -24,13 +24,17 @@
     resize();
     console.log(CANVAS_EL);
   });
+  let timeout;
   function handleScroll() {
     let visible = inView(CANVAS_EL);
     if (window.MATRIX_INTERVAL && !visible) {
-      clearInterval(window.MATRIX_INTERVAL);
-      window.MATRIX_INTERVAL = null;
+      timeout = setTimeout(() => {
+        clearInterval(window.MATRIX_INTERVAL);
+        window.MATRIX_INTERVAL = null;
+      }, 5000);
     }
     if (!window.MATRIX_INTERVAL && visible) {
+      clearTimeout(timeout);
       resize();
     }
   }
@@ -106,9 +110,9 @@
   }
 </script>
 
-<svelte:window on:resize={resize} on:scroll={handleScroll} />
+<svelte:window on:resize="{resize}" on:scroll="{handleScroll}" />
 
-<canvas bind:this={CANVAS_EL} />
+<canvas bind:this="{CANVAS_EL}"></canvas>
 
 <style lang="scss">
   @import "../main.scss";

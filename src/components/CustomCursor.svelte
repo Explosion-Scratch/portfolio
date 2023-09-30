@@ -1,4 +1,5 @@
 <script>
+  import { events } from "../store";
   import { safeInterval, safeRequestAnimationFrame } from "../utils";
 
   let innerCursor = null;
@@ -21,6 +22,7 @@
 
     let x = e.clientX;
     let y = e.clientY;
+    events.emit("mousemove", { x, y });
     Object.assign(mouse, { x, y });
 
     if (e.target.closest("a, button, .button, .pointer")) {

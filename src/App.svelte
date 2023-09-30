@@ -14,6 +14,8 @@
   import { globals } from "./store";
   import Lenis from "@studio-freight/lenis";
 
+  import backgroundImage from "./helpers/backgroundImage";
+
   let timeline = [
     "Created this timeline",
     "Published my second chrome extension to the chrome webstore",
@@ -41,6 +43,8 @@
   import gsap from "gsap";
   import ScrollTrigger from "gsap/ScrollTrigger";
   import { hash } from "./utils";
+  import Profile from "./components/Profile.svelte";
+
   onMount(() => {
     globals.timeline = gsap.timeline({});
     gsap.registerPlugin(ScrollTrigger);
@@ -51,12 +55,14 @@
       requestAnimationFrame(raf);
     }
 
+    lenis.on("scroll", () => {
+      events.emit("scroll");
+    });
     requestAnimationFrame(raf);
   });
 </script>
 
 <svelte:head><Meta /></svelte:head>
-<!-- <GridSection /> -->
 <Section>
   <Matrix />
   <div class="center">
@@ -72,6 +78,9 @@
       <Icon icon="bytesize:arrow-right" />
     </Glassmorphism>
   </div>
+</Section>
+<Section>
+  <Profile></Profile>
 </Section>
 <Section>
   <Projects />

@@ -15,8 +15,10 @@
 }
 
 @mixin dark-glassmorphism {
-    backdrop-filter: blur(var(--blur, 2px)) saturate(200%);
-    -webkit-backdrop-filter: blur(14px) saturate(200%);
+    $blur: 14px;
+    @content;
+    backdrop-filter: blur($blur) saturate(200%);
+    -webkit-backdrop-filter: blur($blur) saturate(200%);
     background-color: rgba(17, 25, 40, 0.63);
     border: 1px solid rgba(255, 255, 255, 0.125);
     color: white;
@@ -204,4 +206,148 @@ $breakpoints: ('sm': '640px',
             transform: rotate(0deg);
         }
     }
+}
+
+@mixin glow_card {
+    $border_size: 1px;
+    position: relative;
+
+    $border_color: white;
+    $background: black;
+    background: $background;
+    $shadow: rgba(lighten($primary, 25), 0.1);
+
+    transition: box-shadow 0.8s ease;
+    box-shadow: 0 0 0 1px $shadow;
+
+    &:hover {
+        $opacity: .2;
+        box-shadow: 0 10px 15px -3px rgba($shadow, $opacity), 0 4px 6px -4px rgba($shadow, $opacity);
+        border-color: $shadow;
+    }
+
+    &::before,
+    &::after {
+        border-radius: inherit;
+        transition: opacity 0.3s ease;
+    }
+
+    &::before {
+        opacity: 0;
+        position: absolute;
+        inset: calc(-1 * $border-size);
+        content: "";
+        z-index: -1;
+        background: radial-gradient(circle at var(--mouse-x) var(--mouse-y),
+                $border_color,
+                $background);
+    }
+
+    &:hover::before {
+        opacity: 1;
+    }
+
+    &::after {
+        position: absolute;
+        inset: calc(-1 * $border-size);
+        content: "";
+        z-index: -1;
+        background: radial-gradient(500px circle at var(--mouse-x) var(--mouse-y),
+                $border_color,
+                $background);
+        opacity: 0.7;
+    }
+}
+
+:global(.glow_card) {
+    @include glow_card;
+}
+
+:global(body) {
+    font-family: $font;
+    color: $text;
+}
+
+
+@mixin card {
+    &::before {
+        content: "";
+        position: absolute;
+        inset: -4px;
+        border-radius: 0.5rem;
+        opacity: 0.2;
+        $c: lighten($primary, 20);
+        background: linear-gradient(45deg, $c, adjust-hue($c, 30));
+        transition: inset 0.3s ease, opacity 0.8s ease;
+        display: block;
+        padding: 20px;
+        z-index: -10;
+    }
+
+    &:hover::before {
+        inset: -6px;
+        opacity: 0.7;
+        border-radius: 0.3rem;
+    }
+
+    &,
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    font-family: $font;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.5rem;
+    background: white;
+    background-clip: border;
+    color: $gray;
+    $shadow_color: adjust-hue($primary, -30);
+    $size: 10;
+    box-shadow: 3px 4px calc($size * 2)+px calc(0 - ($size / 4))+px $shadow_color;
+
+    &:hover {
+        $shadow_color: lighten($primary, 20);
+        $size: 30;
+        box-shadow: 3px 4px calc($size * 2) + px calc(0 - ($size / 4)) + px $shadow_color;
+    }
+}
+
+@mixin glow {
+    $color: $primary;
+    @content;
+    box-shadow:
+        2.8px 2.8px 2.2px rgba($color, 0.02),
+        6.7px 6.7px 5.3px rgba($color, 0.028),
+        12.5px 12.5px 10px rgba($color, 0.035),
+        22.3px 22.3px 17.9px rgba($color, 0.042),
+        41.8px 41.8px 33.4px rgba($color, 0.05),
+        100px 100px 80px rgba($color, 0.07);
+}
+
+@mixin glow_intense {
+    $color: $primary;
+    @content;
+    box-shadow:
+        2.2px 1.5px 2.2px rgba($color, 0.096),
+        5.3px 3.7px 5.3px rgba($color, 0.137),
+        9.9px 6.9px 10px rgba($color, 0.17),
+        17.6px 12.3px 17.9px rgba($color, 0.203),
+        33px 23px 33.4px rgba($color, 0.244),
+        79px 55px 80px rgba($color, 0.34);
+}
+
+@mixin glow_sharp {
+    $color: $primary;
+    @content;
+    box-shadow:
+        0.1px 0.1px 2.2px rgba($color, 0.096),
+        0.3px 0.3px 5.3px rgba($color, 0.137),
+        0.6px 0.5px 10px rgba($color, 0.17),
+        1.1px 0.9px 17.9px rgba($color, 0.203),
+        2.1px 1.7px 33.4px rgba($color, 0.244),
+        5px 4px 80px rgba($color, 0.34);
 }

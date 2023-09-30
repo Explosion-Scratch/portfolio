@@ -5,6 +5,7 @@
   import Tag from "./Tag.svelte";
   import { events } from "../store";
   import { getIcon, inView } from "../utils";
+  import textEffect from "../helpers/textEffect";
   export let title = "";
   export let body = "";
   export let tags = [];
@@ -32,7 +33,7 @@
     <LazyImg src="{image}" />
   </div>
   <div class="meta">
-    <h5 class="title">{title}</h5>
+    <h5 class="title" use:textEffect={{iterations: 1}}>{title}</h5>
     <div class="tags">
       {#each tags as tag}
         <Tag tag="{tag}" light="{true}" />
@@ -76,48 +77,7 @@
 <style lang="scss" scoped>
   @import "../main.scss";
   .card {
-    &::before {
-      content: "";
-      position: absolute;
-      inset: -4px;
-      border-radius: 0.5rem;
-      opacity: 0.2;
-      $c: lighten($primary, 20);
-      background: linear-gradient(45deg, $c, adjust-hue($c, 30));
-      transition: inset 0.3s ease, opacity 0.8s ease;
-      display: block;
-      padding: 20px;
-      z-index: -10;
-    }
-    &:hover::before {
-      inset: -6px;
-      opacity: 0.7;
-      border-radius: 0.3rem;
-    }
-    &,
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    font-family: $font;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    border-radius: 0.5rem;
-    background: white;
-    background-clip: border;
-    color: $gray;
-    $shadow_color: adjust-hue($primary, -30);
-    $size: 10;
-    box-shadow: 3px 4px calc($size * 2) + px calc(0 - ($size / 4)) + px
-      $shadow_color;
-    &:hover {
-      $shadow_color: lighten($primary, 20);
-      $size: 30;
-      box-shadow: 3px 4px calc($size * 2) + px calc(0 - ($size / 4)) + px
-        $shadow_color;
-    }
+    @include card;
     $marginBottom: 0.3;
     .top {
       border-radius: 1em;
