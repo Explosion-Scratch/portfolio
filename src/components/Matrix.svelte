@@ -20,7 +20,11 @@
   };
 
   const resize = () => {
-    matrix({ ..._settings, height: _settings.height(), width: _settings.width() });
+    matrix({
+      ..._settings,
+      height: _settings.height(),
+      width: _settings.width(),
+    });
   };
 
   onMount(() => {
@@ -61,7 +65,10 @@
     const w = (canvas.width = width || canvas.parentElement.offsetWidth);
     const h = (canvas.height = height || canvas.parentElement.offsetHeight);
     const cols = Math.floor(w / size) + 1;
-    const ypos = Array(cols).fill(0);
+    const ypos = [
+      ...Array(cols).fill(0),
+      ...Array(Math.floor(cols)).fill(Math.random() * height * size),
+    ];
 
     // Clear it
     ctx.clearRect(0, 0, w, h);
@@ -73,7 +80,7 @@
       ctx.fillRect(0, 0, w, h);
       ctx.font = font;
       ypos.forEach((y, ind) => {
-        const x = ind * size;
+        const x = (ind % cols) * size;
         // This is what gets passed to the functions
         const args = {
           x,
@@ -90,8 +97,12 @@
         }
         ctx.fillStyle = col;
         ctx.fillText(text, x, y);
-        if (y > 100 + Math.random() * 10000) ypos[ind] = 0;
-        else ypos[ind] = y + size;
+        if (y > 100 + Math.random() * 10000) {
+          ypos[ind] =
+            ind > cols ? Math.floor((1 - Math.pow(Math.random(), 3)) * height * size) : 0;
+        } else {
+          ypos[ind] = y + size;
+        }
       });
     }
 

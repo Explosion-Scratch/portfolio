@@ -38,10 +38,14 @@
   });
 
   onMount(() => {
+    globals.wrapper = document.body;
+    globals.wrapper.style.height = '100vh';
+    globals.wrapper.style.overflowY = 'visible';
     globals.timeline = gsap.timeline({});
     gsap.registerPlugin(ScrollTrigger);
 
     globals.readyRes();
+    return;
     const lenis = new Lenis();
 
     function raf(time) {
@@ -60,30 +64,32 @@
   <Meta />
   <TippyStyles />
 </svelte:head>
-<Section>
-  <Matrix settings={{
-    height: () => window.innerHeight * (1 + globals.matrixOverlap),
-  }}/>
-  <div class="center">
-    <Glitch>
-      I am <span
-        use:typing="{{
-          items: ['--Explosion--', 'a developer', 'a designer', 'a creator'],
-          loop: true,
-        }}"></span>
-    </Glitch>
-    <Glassmorphism class="button"
-      >Hello
-      <Icon icon="bytesize:arrow-right" />
-    </Glassmorphism>
-  </div>
-</Section>
-<Section>
-  <Profile />
-</Section>
-<Section>
-  <Projects />
-</Section>
+<div class="body_wrapper">
+  <Section>
+    <Matrix settings={{
+      height: () => window.innerHeight * (1 + globals.matrixOverlap),
+    }}/>
+    <div class="center">
+      <Glitch>
+        I am <span
+          use:typing="{{
+            items: ['--Explosion--', 'a developer', 'a designer', 'a creator'],
+            loop: true,
+          }}"></span>
+      </Glitch>
+      <Glassmorphism class="button"
+        >Hello
+        <Icon icon="bytesize:arrow-right" />
+      </Glassmorphism>
+    </div>
+  </Section>
+  <Section>
+    <Profile />
+  </Section>
+  <Section>
+    <Projects />
+  </Section>
+</div>
 {#if modal.showing}
   {#key hash(JSON.stringify(modal.project))}
     <ProjectModal project="{modal.project}" />
@@ -93,6 +99,12 @@
 
 <style lang="scss">
   @import "main.scss";
+  .body_wrapper {
+    scroll-snap-type: y mandatory;
+    :global(section){
+      scroll-snap-align: start;
+    }
+  }
   .center {
     font-family: $monospace_font;
   }

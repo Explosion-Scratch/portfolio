@@ -26,6 +26,7 @@ export default function useGSAP(node, options) {
                 end: options.end || `${rect.top + rect.height + window.scrollY + options.scrollMargin.y + options.scrollMargin.bottom}px ${options.windowPercent}%`,
                 scrub: true,
                 // markers: true,
+                pin: options.pin || false,
                 ...options.scrollTrigger,
             },
             ease: options.ease || 'linear',
