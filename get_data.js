@@ -3,17 +3,26 @@ import { createWriteStream, writeFileSync } from 'fs';
 import { resolve } from 'path';
 import { Readable } from 'stream';
 import { finished } from 'stream/promises';
-import { readdirSync } from 'fs';
+import { readdirSync, readFileSync } from 'fs';
 
 let existing = readdirSync(resolve('.', 'public', 'project_images'));
-console.log(existing);
+let projects = JSON.parse(readFileSync(resolve('.', 'src', 'projects.json')));
 
 getSpreadsheet('2PACX-1vQvFX6gBzJOJEU01O-R_iuMfCr-5k8aQAvEzumMh9nPKjoe3PcOKiZgfG7OWXX1ahV8Alv325H6UqUu').then(async data => {
     for (let i = 0; i < data.length; i++) {
         const project = data[i];
         if (!project.image) { continue; }
-        console.log('Downloading: ', project.image)
         const assetHash = hash(project.image);
+        // if (existing.find(i => i.includes(assetHash))){
+        //     const p = projects.find(i => i.title === project.title)
+        //     console.log('Already exists: ', assetHash);
+        //     data[i] = {
+        //         ...p,
+        //         ...project,
+        //     }
+        //     continue;
+        // }
+        console.log('Downloading: ', project.image)
         const res = await fetch(project.image);
         const contentType = res.headers.get('content-type');
         const contentLength = res.headers.get('content-length');

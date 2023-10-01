@@ -236,8 +236,8 @@
   },
   {
     "title": "Translate webpages",
-    "link": "",
-    "code_link": "",
+    "link": "https://github.com/explosion-scratch/userscripts",
+    "code_link": "https://github.com/explosion-scratch/userscripts",
     "image": "https://github.com/Explosion-Scratch/projects/assets/61319150/b8571c44-ca35-4a04-9735-256001fa7d71",
     "description": "Learn any language by translating some of the words on the current webpage to your target language",
     "tags": "javascript,chrome",
@@ -716,7 +716,7 @@
     "contentLength": "7973287"
   },
   {
-    "title": "URL Shortener:",
+    "title": "URL Shortener",
     "link": "https://slight.gq",
     "code_link": "https://slight.gq/__repl",
     "image": "https://user-images.githubusercontent.com/61319150/121193980-ebce8680-c833-11eb-9728-0af139545184.png",
@@ -728,7 +728,7 @@
     "contentLength": "27472"
   },
   {
-    "title": "Bookmarklet maker:",
+    "title": "Bookmarklet maker",
     "link": "https://qzlxp.csb.app",
     "code_link": "https://codesandbox.io/s/competent-snowflake-qzlxp?file=/script.js",
     "image": "https://user-images.githubusercontent.com/61319150/120908701-7fd10000-c632-11eb-9784-759991921ef3.gif",
@@ -932,12 +932,12 @@
     "contentLength": "40722"
   },
   {
-    "title": "javascript,node.js,socket.io",
+    "title": "Collaborative Rich Text Editor",
     "link": "https://d7qk7.csb.app",
     "code_link": "https://codesandbox.io/s/collab-text-editor-working-d7qk7",
     "image": "https://user-images.githubusercontent.com/61319150/103492202-d968a080-4dee-11eb-8d6c-6559a4b59410.png",
     "description": "This is a rich text editor supporting collaboration! It uses Socket.io as the framework for this!",
-    "tags": "javascript,node.js",
+    "tags": "javascript,node.js,socket.io",
     "assetHash": "08623356abf69634082a466d31574a4a35be0e2fe2b499fc1f3ec0b2afcd0575",
     "contentType": "image/png",
     "path": "08623356abf69634082a466d31574a4a35be0e2fe2b499fc1f3ec0b2afcd0575.png",

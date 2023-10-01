@@ -79,7 +79,6 @@
     scrollTrigger: {
       trigger: wrapper,
       pin: wrapper,
-      markers: true,
     }
   }}"
   bind:this="{wrapper}"
