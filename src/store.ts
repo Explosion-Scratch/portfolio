@@ -37,7 +37,8 @@ export const globals: Globals = ({
     images: {
         repo_count: `https://github.com/Explosion-Scratch/projects/assets/61319150/4e429acc-cf9b-4594-a1c5-791ea35f7d08`,
         github_contribs: `https://github.com/Explosion-Scratch/projects/assets/61319150/7c3a74b9-aa06-427f-a22b-14c2f3736a02`,
-    }
+    },
+    base: '/portfolio',
 })
 
 globals.ready = new Promise(r => (globals.readyRes = r));

@@ -1,4 +1,5 @@
 import { onDestroy } from "svelte";
+import {globals} from './store';
 
 export function strip(a) {
     return a.toLowerCase().replace(/[^a-z0-9]/gi, "");
@@ -57,7 +58,7 @@ export async function getInfo(image, projects) {
         )
     ).filter((i) => i.valid)?.[0];
     if (f) {
-        image = `/project_images/${f.path}`;
+        image = `${globals.base}/project_images/${f.path}`;
         if (f.contentType.endsWith("mp4")) {
             out.isVideo = true;
         }

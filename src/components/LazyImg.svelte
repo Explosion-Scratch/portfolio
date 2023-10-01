@@ -3,7 +3,8 @@
   import Loader from "./Loader.svelte";
   import projects from "../projects.json";
   import { inView } from "../utils";
-
+  import {globals} from '../store';
+  
   export let src;
 
   // Wait for hash before setting actual SRC
@@ -75,7 +76,7 @@
       )
     ).filter((i) => i.valid)?.[0];
     if (f) {
-      _src = `/project_images/${f.path}`;
+      _src = `${globals.base}/project_images/${f.path}`;
       if (f.contentType.endsWith("mp4")) {
         is_vid_override = true;
       }
