@@ -3,7 +3,12 @@ import { createWriteStream, writeFileSync } from 'fs';
 import { resolve } from 'path';
 import { Readable } from 'stream';
 import { finished } from 'stream/promises';
-import { readdirSync, readFileSync } from 'fs';
+import { readdirSync, readFileSync, existsSync } from 'fs';
+import { exec } from 'child_process';
+import { mkdir, readdir, rmdir } from 'fs/promises';
+import { basename } from 'path';
+import { promisify } from 'util';
+
 
 let existing = readdirSync(resolve('.', 'public', 'project_images'));
 let projects = JSON.parse(readFileSync(resolve('.', 'src', 'projects.json')));
@@ -79,14 +84,6 @@ async function getSpreadsheet(id, pageNum = 1) {
     return out2.slice(1);
 }
 
-
-import { exec } from 'child_process';
-import { existsSync, readdirSync } from 'fs';
-import { mkdir, readdir, rmdir } from 'fs/promises';
-import { basename } from 'path';
-import { promisify } from 'util';
-import { resolve } from 'path';
-
 async function upscaleGifs() {
     let orig = process.cwd();
     process.chdir(resolve('public', 'project_images'))
@@ -130,8 +127,13 @@ async function upscaleGif(gif_path) {
     await rmdir(folder, { recursive: true, force: true });
 
     async function runShell(command) {
-        let out = await promisify(exec)(command, { stdio: 'inherit' });
-        return out;
+        try {
+            let out = await promisify(exec)(command, { stdio: 'inherit' });
+            return out;
+        } catch (e) {
+            console.log('ERROR: ', e);
+            return;
+        }
     }
 
     async function upscale(img) {
