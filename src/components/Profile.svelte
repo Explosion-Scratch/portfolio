@@ -1,7 +1,8 @@
 <script>
   import { onMount } from "svelte";
   import backgroundImage from "../helpers/backgroundImage";
-  import useGSAP from "../helpers/gsap";
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
   import tooltip from "../helpers/tooltip";
   import Waves from "./Waves.svelte";
   import { globals } from "../store";
@@ -51,82 +52,117 @@
   ];
 
   let hovering = null;
+
+  onMount(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    let anim = gsap.to(gsap.utils.toArray(".wrapper .scrollanim"), {
+      xPercent: -100,
+      ease: "none",
+      stagger: 0.5,
+      scrollTrigger: {
+        trigger: ".wrapper",
+        start: "top top",
+        end: "+300% bottom",
+        scrub: true,
+        pin: true,
+        markers: true,
+      },
+    });
+    gsap.fromTo(
+      ".hallo",
+      { scale: 1, y: 150, opacity: 0 },
+      {
+        scale: 2,
+        y: 0,
+        opacity: 1,
+        ease: "ease.out",
+        duration: 3,
+        scrollTrigger: {
+          containerAnimation: anim,
+          trigger: ".hallo",
+          scrub: true,
+        },
+      }
+    );
+    gsap.
+    gsap.set(".segment", {
+      zIndex: (i, target, targets) => targets.length - i,
+    });
+  });
 </script>
 
-<div
-  class="wrapper"
-  use:useGSAP="{{
-    timeline: (tl, { node }) => {
-      tl.from(node, { '--top': '30%' });
-      tl.to(node, { '--top': '70%' });
-      tl.from(node, {
-        height: '100vh',
-      });
-      tl.to(
-        node.querySelector('.card'),
-        {
-          x: '-100%',
-          opacity: 0,
-          rotate: '30deg'
-        },
-        '>'
-      );
-      tl.to(node, { height: '80vh', ease: 'ease.out' }, '80%');
-    },
-    ease: 'ease.out',
-    start: () => window.innerHeight * 0.8,
-    end: () => window.innerHeight * 2,
-    scrollTrigger: {
-      trigger: wrapper,
-      pin: wrapper,
-    }
-  }}"
-  bind:this="{wrapper}"
->
-  <div class="card" use:useGSAP="{{ from: { opacity: 0 } }}">
-    <div class="avatar">
-      <img src="{pfp}" alt="My profile picture (@{username})" />
-    </div>
-    <div class="info">
-      <div
-        class="name"
-        use:backgroundImage="{{
-          url: pfp,
-          opacity: 0.3,
-        }}"
-      >
-        {username}
-      </div>
-      <div class="description">Fullstack JavaScript developer</div>
-    </div>
-    <div class="social">
-      {#each socials as s}
-        <a
-          href="{s.url}"
-          class="icon"
-          use:tooltip="{`${s.title} - ${s.alt || s.url}`}"
-        >
+<div class="wrapper" bind:this="{wrapper}">
+  <div class="scrollanim">
+    <div class="segment">
+      <div class="card">
+        <div class="avatar">
+          <img src="{pfp}" alt="My profile picture (@{username})" />
+        </div>
+        <div class="info">
           <div
-            class="icon"
-            on:mouseenter="{() => (hovering = s)}"
-            on:mouseleave="{() => (hovering = null)}"
+            class="name"
+            use:backgroundImage="{{
+              url: pfp,
+              opacity: 0.3,
+            }}"
           >
-            {@html Array.isArray(s.icon)
-              ? hovering === s
-                ? s.icon[1]
-                : s.icon[0]
-              : s.icon}
+            {username}
           </div>
-        </a>
-      {/each}
+          <div class="description">Fullstack JavaScript developer</div>
+        </div>
+        <div class="social">
+          {#each socials as s}
+            <a
+              href="{s.url}"
+              class="icon"
+              use:tooltip="{`${s.title} - ${s.alt || s.url}`}"
+            >
+              <div
+                class="icon"
+                on:mouseenter="{() => (hovering = s)}"
+                on:mouseleave="{() => (hovering = null)}"
+              >
+                {@html Array.isArray(s.icon)
+                  ? hovering === s
+                    ? s.icon[1]
+                    : s.icon[0]
+                  : s.icon}
+              </div>
+            </a>
+          {/each}
+        </div>
+        <div class="buttons">
+          <button
+            class="primary"
+            use:backgroundImage="{{
+              height: 200,
+              url: globals.images.repo_count,
+              opacity: 0.3,
+            }}"
+            use:tooltip="{'Scroll down below!'}"
+          >
+            View Projects
+          </button>
+          <button
+            class="secondary"
+            use:backgroundImage="{{
+              height: 300,
+              opacity: 0.3,
+              url: globals.images.github_contribs,
+            }}"
+            use:tooltip="{'@Explosion-Scratch'}"
+          >
+            Visit GitHub
+          </button>
+        </div>
+      </div>
     </div>
-    <div class="buttons">
-      <button class="primary" use:backgroundImage={{height: 200, url: globals.images.repo_count, opacity: .3}} use:tooltip="{'Scroll down below!'}">
-        View Projects
-      </button>
-      <button class="secondary" use:backgroundImage={{height: 300, opacity: .3, url: globals.images.github_contribs }} use:tooltip="{'@Explosion-Scratch'}">
-        Visit GitHub
-      </button>
+    <div class="segment">
+      <h1 class="hallo">Hello world o</h1>
+    </div>
+    <div class="segment">
+      <h1>Hello world 2</h1>
     </div>
   </div>
   <Waves
@@ -142,12 +178,33 @@
     $MASK: linear-gradient(to bottom, black, transparent);
     -webkit-mask-image: $MASK;
     mask-image: $MASK;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    border: 2px solid red;
   }
 
   .wrapper {
+    border: 1px solid red;
     position: relative;
     min-height: 80vh;
-
+    width: 100vw;
+    overflow: hidden;
+    .scrollanim {
+      width: fit-content;
+      display: flex;
+      height: 100%;
+      .segment {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100vw;
+        height: 100%;
+        border: 1px solid blue;
+      }
+    }
     $w: calc($maxWidth / 2);
     $left: calc(50vw - $w);
     $right: calc(100vw - $left);
@@ -199,10 +256,10 @@
     }
   }
   .card {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    // position: absolute;
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
     align-items: center;
