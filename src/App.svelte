@@ -45,7 +45,6 @@
     gsap.registerPlugin(ScrollTrigger);
 
     globals.readyRes();
-    return;
     const lenis = new Lenis();
 
     function raf(time) {

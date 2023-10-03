@@ -1,47 +1,28 @@
-# Svelte + Vite
+<div align=center><h1>Portfolio</h1></div>
 
-This template should help get you started developing with Svelte in Vite.
 
-## Recommended IDE Setup
+https://github.com/Explosion-Scratch/portfolio/assets/61319150/3ab490cb-1e48-498a-8b45-b8b5d74fd6c8
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
 
-## Need an official Svelte framework?
+<div align=center><i></i>A portfolio website made with Svelte + TS + Vite, showcasing my projects</i></div>
 
-Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
+## Interface
+- Interactivity via Svelte
+- Modular components with two way data bindings frequently used. Examples include for projects, cards, buttons, etc
 
-## Technical considerations
+## Scripting
+- There is a `get_data.js` backend script which fetches from google sheets as well as several frontend scripts which contribute to various effects.
 
-**Why use this over SvelteKit?**
+## Styling
+- Done with SCSS mainly. See `src/main.scss` for some fun variables to change
+- This is then compiled by Vite to a bundle
 
-- It brings its own routing solution which might not be preferable for some users.
-- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
+## Animation
+- **GSAP**: Used for interactive and scroll based animations
+- **Svelte Transitions**: Used here and there for some nice effects
 
-This template contains as little as possible to get started with Vite + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
-
-Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
-
-**Why `global.d.ts` instead of `compilerOptions.types` inside `jsconfig.json` or `tsconfig.json`?**
-
-Setting `compilerOptions.types` shuts out all other types not explicitly listed in the configuration. Using triple-slash references keeps the default TypeScript setting of accepting type information from the entire workspace, while also adding `svelte` and `vite/client` type information.
-
-**Why include `.vscode/extensions.json`?**
-
-Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
-
-**Why enable `checkJs` in the JS template?**
-
-It is likely that most cases of changing variable types in runtime are likely to be accidental, rather than deliberate. This provides advanced typechecking out of the box. Should you like to take advantage of the dynamically-typed nature of JavaScript, it is trivial to change the configuration.
-
-**Why is HMR not preserving my local component state?**
-
-HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/sveltejs/svelte-hmr/tree/master/packages/svelte-hmr#preservation-of-local-state).
-
-If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
-
-```js
-// store.js
-// An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
-```
+## Data source
+- Data is fetched from Google Sheets - See the code in get_data.js
+- This is then written to projects.json
+- All images from the Google Sheets are downloaded locally if they don't already exist
+- GIFs are upscaled using `waifu2x` by splitting to frames, and combining back again to a high quality MP4.
