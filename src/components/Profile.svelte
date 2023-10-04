@@ -1,10 +1,12 @@
 <script>
   import { onMount } from "svelte";
   import backgroundImage from "../helpers/backgroundImage";
-  import useGSAP from "../helpers/gsap";
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
   import tooltip from "../helpers/tooltip";
   import Waves from "./Waves.svelte";
   import { globals } from "../store";
+  import glow from "../helpers/glow";
 
   const pfp = `https://avatars.githubusercontent.com/u/61319150?v=4`;
   const username = "Explosion-Scratch";
@@ -51,82 +53,179 @@
   ];
 
   let hovering = null;
+  const cards = [
+    {
+      title: "Guitar",
+      icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256"><g fill="currentColor"><path d="M155.2 100.8c-23-23-55.57-27.63-72.8-10.4a34.21 34.21 0 0 0-7.61 11.66a16.23 16.23 0 0 1-14.72 10C48 112.44 37 116.61 28.8 124.8C7.6 146 13.33 186.12 41.6 214.4s68.39 34 89.6 12.8c8.19-8.2 12.36-19.2 12.8-31.27a16.23 16.23 0 0 1 10-14.72a34.21 34.21 0 0 0 11.66-7.61c17.17-17.23 12.51-49.82-10.46-72.8ZM112 168a24 24 0 1 1 24-24a24 24 0 0 1-24 24Z" opacity=".2"/><path d="m245.66 42.34l-32-32a8 8 0 0 0-12.72 9.41l-60.42 60.41c-22.79-11.86-48.31-10.87-63.77 4.58a42.27 42.27 0 0 0-9.39 14.37a8.24 8.24 0 0 1-7.55 4.89c-14.59.49-27.26 5.72-36.65 15.11C11.08 131.22 6 148.6 8.74 168.07C11.4 186.7 21.07 205.15 36 220s33.34 24.56 52 27.22a71.13 71.13 0 0 0 10.1.78c15.32 0 28.83-5.23 38.76-15.16c9.39-9.39 14.62-22.06 15.11-36.65a8.24 8.24 0 0 1 4.92-7.55a42.22 42.22 0 0 0 14.37-9.39c15.45-15.46 16.44-41 4.58-63.77l60.41-60.42a8 8 0 0 0 9.41-12.72ZM200 68.68L187.32 56L212 31.31L224.69 44Zm-40 99.25a26.12 26.12 0 0 1-8.95 5.83a24.24 24.24 0 0 0-15 21.89c-.36 10.46-4 19.41-10.43 25.88c-8.44 8.43-21 11.95-35.36 9.89c-15.26-2.17-30.53-10.23-42.99-22.69S26.75 181 24.58 165.81c-2-14.37 1.46-26.92 9.89-35.36C40.94 124 49.89 120.38 60.35 120a24.22 24.22 0 0 0 21.89-15a26.12 26.12 0 0 1 5.83-9c5.49-5.49 13-8.13 21.38-8.13a49.38 49.38 0 0 1 19.13 4.19l-20.08 20.13a32 32 0 1 0 35.31 35.31l20.08-20.08c6.52 15.29 5.58 30.99-3.89 40.51Zm-10.4-61.48a72.9 72.9 0 0 1 5.93 6.75l-15.42 15.42a32.22 32.22 0 0 0-12.68-12.68l15.42-15.43a73 73 0 0 1 6.7 5.94ZM112 128a16 16 0 0 1 16 16a16 16 0 1 1-16-16Zm48.85-32.85a86.94 86.94 0 0 0-6.68-6L176 67.31L188.69 80l-21.83 21.82a86.94 86.94 0 0 0-6-6.68Zm-67.2 99.19a8 8 0 0 1-11.31 11.32l-32-32a8 8 0 0 1 11.32-11.31Z"/></g></svg>`,
+      description:
+        "I've played classical guitar for over 10 years now! My favorite piece is Suite del Recuerdo by Jose Luis Merlin.",
+    },
+    {
+      title: "Reading",
+      icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256"><g fill="currentColor"><path d="M208 32v160H72a24 24 0 0 0-24 24V56a24 24 0 0 1 24-24h40v96l32-24l32 24V32Z" opacity=".2"/><path d="M208 24H72a32 32 0 0 0-32 32v168a8 8 0 0 0 8 8h144a8 8 0 0 0 0-16H56a16 16 0 0 1 16-16h136a8 8 0 0 0 8-8V32a8 8 0 0 0-8-8Zm-88 16h48v72l-19.21-14.4a8 8 0 0 0-9.6 0L120 112Zm80 144H72a31.82 31.82 0 0 0-16 4.29V56a16 16 0 0 1 16-16h32v88a8 8 0 0 0 12.8 6.4L144 114l27.21 20.4A8 8 0 0 0 176 136a8.1 8.1 0 0 0 3.58-.84A8 8 0 0 0 184 128V40h16Z"/></g></svg>`,
+      description:
+        "I also love reading and have since I was a small child. Reading has also fueled many of my other hobbies and empowered me to learn.",
+    },
+    {
+      title: "3d Modeling",
+      icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none"><path fill="currentColor" d="m12 3l7.794 4.5v7.845a2 2 0 0 1-1 1.732L13 20.423a2 2 0 0 1-2 0l-5.794-3.346a2 2 0 0 1-1-1.732V7.5L12 3Z" opacity=".16"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12 3l7.794 4.5v7.845a2 2 0 0 1-1 1.732L13 20.423a2 2 0 0 1-2 0l-5.794-3.346a2 2 0 0 1-1-1.732V7.5L12 3Z"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 7v5l-4.33 2.5M12 12l4.33 2.5"/></g></svg>`,
+      description: "",
+    },
+    {
+      title: "Running",
+      icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256"><g fill="currentColor"><path d="M136 224v-48h-32V80h32V32l96 96Z" opacity=".2"/><path d="m237.66 122.34l-96-96A8 8 0 0 0 128 32v40h-24a8 8 0 0 0-8 8v96a8 8 0 0 0 8 8h24v40a8 8 0 0 0 13.66 5.66l96-96a8 8 0 0 0 0-11.32ZM144 204.69V176a8 8 0 0 0-8-8h-24V88h24a8 8 0 0 0 8-8V51.31L220.69 128ZM48 80v96a8 8 0 0 1-16 0V80a8 8 0 0 1 16 0Zm32 0v96a8 8 0 0 1-16 0V80a8 8 0 0 1 16 0Z"/></g></svg>`,
+      description: "",
+    },
+  ];
+  onMount(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    let anim = gsap.to(gsap.utils.toArray(".wrapper .scrollanim"), {
+      xPercent: -100,
+      ease: "none",
+      stagger: 0.5,
+      scrollTrigger: {
+        trigger: ".wrapper",
+        start: "top top",
+        end: "+200% bottom",
+        scrub: true,
+        pin: true,
+      },
+    });
+    console.log("Wrapper:");
+    console.log(wrapper);
+    console.log([...wrapper.querySelectorAll(".anim")]);
+    for (let a of wrapper.querySelectorAll(".anim")) {
+      console.log(a);
+      gsap.fromTo(
+        a,
+        { scale: 0.5, y: 150, opacity: 0 },
+        {
+          scale: 1,
+          y: 0,
+          opacity: 1,
+          ease: "ease.out",
+          duration: 3,
+          scrollTrigger: {
+            containerAnimation: anim,
+            trigger: a,
+            scrub: true,
+            start: "center 80%",
+            end: "center 70%",
+          },
+        }
+      );
+      for (const card of wrapper.querySelectorAll(".glow_card")) {
+        gsap.fromTo(
+          card,
+          {
+            opacity: 0,
+            y: -50,
+            scale: 0.8,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: .1,
+            stagger: 0.5,
+            scrollTrigger: {
+              containerAnimation: anim,
+              trigger: card,
+              scrub: true,
+              start: "center right",
+              markers: true,
+            },
+          }
+        );
+      }
+    }
+    gsap.set(".segment", {
+      zIndex: (i, target, targets) => targets.length - i,
+    });
+  });
 </script>
 
-<div
-  class="wrapper"
-  use:useGSAP="{{
-    timeline: (tl, { node }) => {
-      tl.from(node, { '--top': '30%' });
-      tl.to(node, { '--top': '70%' });
-      tl.from(node, {
-        height: '100vh',
-      });
-      tl.to(
-        node.querySelector('.card'),
-        {
-          x: '-100%',
-          opacity: 0,
-          rotate: '30deg'
-        },
-        '>'
-      );
-      tl.to(node, { height: '80vh', ease: 'ease.out' }, '80%');
-    },
-    ease: 'ease.out',
-    start: () => window.innerHeight * 0.8,
-    end: () => window.innerHeight * 2,
-    scrollTrigger: {
-      trigger: wrapper,
-      pin: wrapper,
-    }
-  }}"
-  bind:this="{wrapper}"
->
-  <div class="card" use:useGSAP="{{ from: { opacity: 0 } }}">
-    <div class="avatar">
-      <img src="{pfp}" alt="My profile picture (@{username})" />
-    </div>
-    <div class="info">
-      <div
-        class="name"
-        use:backgroundImage="{{
-          url: pfp,
-          opacity: 0.3,
-        }}"
-      >
-        {username}
-      </div>
-      <div class="description">Fullstack JavaScript developer</div>
-    </div>
-    <div class="social">
-      {#each socials as s}
-        <a
-          href="{s.url}"
-          class="icon"
-          use:tooltip="{`${s.title} - ${s.alt || s.url}`}"
-        >
+<div class="wrapper" bind:this="{wrapper}">
+  <div class="scrollanim">
+    <div class="segment">
+      <div class="card">
+        <div class="avatar">
+          <img src="{pfp}" alt="My profile picture (@{username})" />
+        </div>
+        <div class="info">
           <div
-            class="icon"
-            on:mouseenter="{() => (hovering = s)}"
-            on:mouseleave="{() => (hovering = null)}"
+            class="name"
+            use:backgroundImage="{{
+              url: pfp,
+              opacity: 0.3,
+            }}"
           >
-            {@html Array.isArray(s.icon)
-              ? hovering === s
-                ? s.icon[1]
-                : s.icon[0]
-              : s.icon}
+            {username}
           </div>
-        </a>
-      {/each}
+          <div class="description">Fullstack JavaScript developer</div>
+        </div>
+        <div class="social">
+          {#each socials as s}
+            <a
+              href="{s.url}"
+              class="icon"
+              use:tooltip="{`${s.title} - ${s.alt || s.url}`}"
+            >
+              <div
+                class="icon"
+                on:mouseenter="{() => (hovering = s)}"
+                on:mouseleave="{() => (hovering = null)}"
+              >
+                {@html Array.isArray(s.icon)
+                  ? hovering === s
+                    ? s.icon[1]
+                    : s.icon[0]
+                  : s.icon}
+              </div>
+            </a>
+          {/each}
+        </div>
+        <div class="buttons">
+          <button
+            class="primary"
+            use:backgroundImage="{{
+              height: 200,
+              url: globals.images.repo_count,
+              opacity: 0.3,
+            }}"
+            use:tooltip="{'Scroll down below!'}"
+          >
+            View Projects
+          </button>
+          <button
+            class="secondary"
+            use:backgroundImage="{{
+              height: 300,
+              opacity: 0.3,
+              url: globals.images.github_contribs,
+            }}"
+            use:tooltip="{'@Explosion-Scratch'}"
+          >
+            Visit GitHub
+          </button>
+        </div>
+      </div>
     </div>
-    <div class="buttons">
-      <button class="primary" use:backgroundImage={{height: 200, url: globals.images.repo_count, opacity: .3}} use:tooltip="{'Scroll down below!'}">
-        View Projects
-      </button>
-      <button class="secondary" use:backgroundImage={{height: 300, opacity: .3, url: globals.images.github_contribs }} use:tooltip="{'@Explosion-Scratch'}">
-        Visit GitHub
-      </button>
+    <div class="segment">
+      <h1 class="anim">I love to program</h1>
+    </div>
+    <div class="segment other">
+      <h1 class="anim">Also lots of other things</h1>
+      <div class="glowcards" use:glow>
+        {#each cards as c}
+          <div class="glow_card">
+            <div class="icon">{@html c.icon}</div>
+            <div class="title">{c.title}</div>
+            <div class="desc">{c.description}</div>
+          </div>
+        {/each}
+      </div>
     </div>
   </div>
   <Waves
@@ -137,17 +236,72 @@
 <style lang="scss" scoped="">
   @import "../main.scss";
   $maxWidth: 500px;
+  .other {
+    display: flex;
+  }
+  .glowcards {
+    width: 80vw;
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 5em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    justify-content: center;
+    .glow_card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 200px;
+      justify-content: center;
+      border-radius: 0.5em;
+      padding: 0.5em;
+      width: clamp(200px, 20vw, 350px);
+      .desc {
+        font-size: 0.8em;
+        opacity: 0.6;
+        font-weight: 200;
+        margin-top: 0.3em;
+        font-style: italic;
+      }
+      .title {
+        font-weight: 900;
+        color: lighten($primary, 50);
+      }
+      @include glow_card;
+    }
+  }
   // Fade out
   :global(.waves) {
     $MASK: linear-gradient(to bottom, black, transparent);
     -webkit-mask-image: $MASK;
     mask-image: $MASK;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    border: 2px solid red;
   }
 
   .wrapper {
+    border: 1px solid red;
     position: relative;
-    min-height: 80vh;
-
+    width: 100vw;
+    overflow: hidden;
+    .scrollanim {
+      width: fit-content;
+      display: flex;
+      height: 100%;
+      .segment {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100vw;
+        height: 100%;
+        border: 1px solid blue;
+      }
+    }
     $w: calc($maxWidth / 2);
     $left: calc(50vw - $w);
     $right: calc(100vw - $left);
@@ -199,10 +353,10 @@
     }
   }
   .card {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    // position: absolute;
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
     align-items: center;

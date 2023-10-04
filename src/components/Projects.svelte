@@ -33,16 +33,20 @@
 
 <style scoped="" lang="scss">
   .projects {
-    display: grid;
-    width: 80vw;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    display: flex;
+    width: calc(100vw - 40px);
+    flex-wrap: wrap;
     $height: 550px;
     max-width: 1080px;
     margin: 0 auto;
-    grid-template-rows: $height;
-    gap: 6em 3em;
+    justify-content: center;
+    border: 1px solid red;
+    gap: 5em 2em;
     :global(.card) {
       height: $height;
+      min-width: 300px;
+      width: 25vw;
+      max-width: 350px;
     }
   }
 </style>
