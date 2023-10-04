@@ -115,6 +115,7 @@
           },
         }
       );
+      return;
       for (const card of wrapper.querySelectorAll(".glow_card")) {
         gsap.fromTo(
           card,
@@ -128,7 +129,7 @@
             y: 0,
             scale: 1,
             duration: .1,
-            stagger: 0.5,
+            stagger: 0.2,
             scrollTrigger: {
               containerAnimation: anim,
               trigger: card,
@@ -220,9 +221,11 @@
       <div class="glowcards" use:glow>
         {#each cards as c}
           <div class="glow_card">
-            <div class="icon">{@html c.icon}</div>
-            <div class="title">{c.title}</div>
-            <div class="desc">{c.description}</div>
+            <div class="card_content">
+              <div class="icon">{@html c.icon}</div>
+              <div class="title">{c.title}</div>
+              <div class="desc">{c.description}</div>
+            </div>
           </div>
         {/each}
       </div>
@@ -247,6 +250,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 1em;
+    width: 100%;
     justify-content: center;
     .glow_card {
       display: flex;
@@ -256,7 +260,7 @@
       justify-content: center;
       border-radius: 0.5em;
       padding: 0.5em;
-      width: clamp(200px, 20vw, 350px);
+      width: 250px;
       .desc {
         font-size: 0.8em;
         opacity: 0.6;
@@ -269,6 +273,9 @@
         color: lighten($primary, 50);
       }
       @include glow_card;
+      .card_content {
+        background: black;
+      }
     }
   }
   // Fade out
@@ -436,7 +443,7 @@
               background: linear-gradient(
                 20deg,
                 $themeColor,
-                adjust-hue($themeColor, 30)
+                $secondaryLight
               );
             }
           }
