@@ -39,8 +39,8 @@
 
   onMount(() => {
     globals.wrapper = document.body;
-    globals.wrapper.style.height = '100vh';
-    globals.wrapper.style.overflowY = 'visible';
+    globals.wrapper.style.height = "100vh";
+    globals.wrapper.style.overflowY = "visible";
     globals.timeline = gsap.timeline({});
     gsap.registerPlugin(ScrollTrigger);
 
@@ -61,13 +61,21 @@
 
 <svelte:head>
   <Meta />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@300..900&display=swap"
+    rel="stylesheet"
+  />
   <TippyStyles />
 </svelte:head>
 <div class="body_wrapper">
   <Section>
-    <Matrix settings={{
-      height: () => window.innerHeight * (1 + globals.matrixOverlap),
-    }}/>
+    <Matrix
+      settings="{{
+        height: () => window.innerHeight * (1 + globals.matrixOverlap),
+      }}"
+    />
     <div class="center">
       <Glitch>
         I am <span
@@ -100,7 +108,7 @@
   @import "main.scss";
   .body_wrapper {
     scroll-snap-type: y mandatory;
-    :global(section){
+    :global(section) {
       scroll-snap-align: start;
     }
   }

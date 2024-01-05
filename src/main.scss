@@ -55,7 +55,7 @@
     cursor: pointer;
     background: linear-gradient(60deg,
             $primaryLight,
-            adjust-hue($primaryLight, -20));
+            $secondaryLight);
     outline: none;
     border: none;
     border-radius: 0.5em;
@@ -118,16 +118,17 @@
     }
 }
 
-$gray: #666;
-$background: rgb(20, 20, 20);
-$primary: #088;
-$secondary: adjust-hue($primary, 30);
+$primary: rgb(35, 45, 193);
+$secondary: rgb(230, 35, 129);
+$gray: desaturate($secondary, 90%);
+$background: darken($gray, 40);
 $secondaryLight: lighten($secondary, 10);
 $secondaryDark: darken($secondary, 10);
 $primaryLight: lighten($primary, 10);
 $primaryDark: darken($primary, 10);
 $monospace_font: monospace;
-$font: -apple-system,
+$font: 'Open Sans',
+-apple-system,
 BlinkMacSystemFont,
 "Segoe UI",
 Roboto,
@@ -144,7 +145,6 @@ $breakpoints: ('sm': '640px',
     'xl': '1280px',
     '2xl': '1536px'
 );
-
 
 // SCSS is beautiful/// Mixin to manage responsive breakpoints
 // FROM: https://css-tricks.com/snippets/sass/mixin-manage-breakpoints/
@@ -213,7 +213,7 @@ $breakpoints: ('sm': '640px',
     position: relative;
 
     $border_color: white;
-    $background: black;
+    $background: rgba(darken($primary, 40), .9);
     background: $background;
     $shadow: rgba(lighten($primary, 25), 0.1);
 
@@ -277,7 +277,7 @@ $breakpoints: ('sm': '640px',
         border-radius: 0.5rem;
         opacity: 0.2;
         $c: lighten($primary, 20);
-        background: linear-gradient(45deg, $c, adjust-hue($c, 30));
+        background: linear-gradient(45deg, $c, $secondaryLight);
         transition: inset 0.3s ease, opacity 0.8s ease;
         display: block;
         padding: 20px;
@@ -350,4 +350,20 @@ $breakpoints: ('sm': '640px',
         1.1px 0.9px 17.9px rgba($color, 0.203),
         2.1px 1.7px 33.4px rgba($color, 0.244),
         5px 4px 80px rgba($color, 0.34);
+}
+
+
+:export {
+    // breakpoints: $breakpoints;
+    primary: $primary;
+    secondary: $secondary;
+    gray: $gray;
+    background: $background;
+    secondaryLight: $secondaryLight;
+    secondaryDark: $secondaryDark;
+    primaryLight: $primaryLight;
+    primaryDark: $primaryDark;
+    monospace_font: $monospace_font;
+    font: $font;
+    text: $text;
 }

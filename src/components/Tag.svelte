@@ -55,12 +55,12 @@
     margin: 3px;
     justify-content: center;
     align-items: center;
-    background: rgba(lighten($primary, 30), 0.3);
+    background: rgba(lighten($secondary, 30), 0.3);
     border-radius: 0.3em;
     padding: 0.3em 0.5em;
     gap: 0.3em;
     width: fit-content;
-    color: lighten(adjust-hue($primary, -20), 30);
+    color: lighten(adjust-hue($secondary, -20), 30);
     font-size: 0.8em;
     .icon {
       display: grid;
@@ -73,14 +73,14 @@
       }
     }
     &:hover {
-      background: rgba(lighten($primary, 30), 0.4);
+      background: rgba(lighten($secondary, 30), 0.4);
     }
   }
   :global(.tag.light) {
-    color: darken(adjust-hue($primary, -20), 10) !important;
-    background: rgba($primary, 0.2);
+    color: darken($secondary, 30) !important;
+    background: rgba($secondary, 0.2);
     &:hover {
-      background: rgba($primary, 0.3);
+      background: rgba($secondary, 0.3);
     }
   }
 </style>
