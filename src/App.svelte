@@ -76,10 +76,10 @@
             loop: true,
           }}"></span>
       </Glitch>
-      <Glassmorphism class="button"
+      <!--<Glassmorphism class="button"
         >Hello
         <Icon icon="bytesize:arrow-right" />
-      </Glassmorphism>
+      </Glassmorphism>-->
     </div>
   </Section>
   <Section>
