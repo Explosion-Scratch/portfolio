@@ -127,7 +127,8 @@ $secondaryDark: darken($secondary, 10);
 $primaryLight: lighten($primary, 10);
 $primaryDark: darken($primary, 10);
 $monospace_font: monospace;
-$font: -apple-system,
+$font: 'Open Sans',
+-apple-system,
 BlinkMacSystemFont,
 "Segoe UI",
 Roboto,
@@ -212,7 +213,7 @@ $breakpoints: ('sm': '640px',
     position: relative;
 
     $border_color: white;
-    $background: black;
+    $background: rgba(darken($primary, 40), .9);
     background: $background;
     $shadow: rgba(lighten($primary, 25), 0.1);
 
@@ -353,7 +354,7 @@ $breakpoints: ('sm': '640px',
 
 
 :export {
-    breakpoints: $breakpoints;
+    // breakpoints: $breakpoints;
     primary: $primary;
     secondary: $secondary;
     gray: $gray;

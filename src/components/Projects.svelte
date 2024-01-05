@@ -40,7 +40,6 @@
     max-width: 1080px;
     margin: 0 auto;
     justify-content: center;
-    border: 1px solid red;
     gap: 5em 2em;
     :global(.card) {
       height: $height;

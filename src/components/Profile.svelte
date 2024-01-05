@@ -128,7 +128,7 @@
             opacity: 1,
             y: 0,
             scale: 1,
-            duration: .1,
+            duration: 0.1,
             stagger: 0.2,
             scrollTrigger: {
               containerAnimation: anim,
@@ -214,10 +214,10 @@
       </div>
     </div>
     <div class="segment">
-      <h1 class="anim">I love to program</h1>
+      <h1 class="anim gradient_text">I love to program</h1>
     </div>
     <div class="segment other">
-      <h1 class="anim">Also lots of other things</h1>
+      <h1 class="anim other_things">Also lots of other things...</h1>
       <div class="glowcards" use:glow>
         {#each cards as c}
           <div class="glow_card">
@@ -239,6 +239,39 @@
 <style lang="scss" scoped="">
   @import "../main.scss";
   $maxWidth: 500px;
+  $lg_font: clamp(2rem, 7vmin, 4rem);
+  :root {
+    --background-size: 200%;
+  }
+  h1.gradient_text {
+    font-weight: 900;
+    color: transparent;
+    background-size: var(--background-size);
+    animation: gradient 1s ease-in-out 2 forwards;
+    $one: lighten($primary, 20);
+    $two: lighten($secondary, 20);
+    background: linear-gradient(to right, $one, $two, $one) 0 0 /
+      var(--background-size) 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    font-size: $lg_font;
+  }
+  .other_things {
+    font-size: $lg_font;
+    font-weight: 100;
+    --slant: 40deg;
+    font-style: oblique var(--slant);
+  }
+  @keyframes slant {
+    to {
+      font-style: oblique 60deg;
+    }
+  }
+  @keyframes gradient {
+    to {
+      background-position: var(--background-size) 0;
+    }
+  }
   .other {
     display: flex;
   }
@@ -274,7 +307,10 @@
       }
       @include glow_card;
       .card_content {
-        background: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
       }
     }
   }
@@ -291,7 +327,6 @@
   }
 
   .wrapper {
-    border: 1px solid red;
     position: relative;
     width: 100vw;
     overflow: hidden;
@@ -440,11 +475,7 @@
               @include glow_sharp {
                 $color: $themeColor;
               }
-              background: linear-gradient(
-                20deg,
-                $themeColor,
-                $secondaryLight
-              );
+              background: linear-gradient(20deg, $themeColor, $secondaryLight);
             }
           }
         }
