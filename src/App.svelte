@@ -14,7 +14,7 @@
   import TippyStyles from "./components/TippyStyles.svelte";
 
   import { onMount } from "svelte";
-  import Lenis from "@studio-freight/lenis";
+  // import Lenis from "@studio-freight/lenis";
   import gsap from "gsap";
   import ScrollTrigger from "gsap/ScrollTrigger";
 
@@ -45,17 +45,17 @@
     gsap.registerPlugin(ScrollTrigger);
 
     globals.readyRes();
-    const lenis = new Lenis();
+    // const lenis = new Lenis();
 
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
+    // function raf(time) {
+    //   lenis.raf(time);
+    //   requestAnimationFrame(raf);
+    // }
 
-    lenis.on("scroll", () => {
-      events.emit("scroll");
-    });
-    requestAnimationFrame(raf);
+    // lenis.on("scroll", () => {
+    //   events.emit("scroll");
+    // });
+    // requestAnimationFrame(raf);
   });
 </script>
 
@@ -76,10 +76,10 @@
             loop: true,
           }}"></span>
       </Glitch>
-      <!--<Glassmorphism class="button"
-        >Hello
+      <Glassmorphism class="button" on:click={() => events.emit("about")}>
+        About Me
         <Icon icon="bytesize:arrow-right" />
-      </Glassmorphism>-->
+      </Glassmorphism>
     </div>
   </Section>
   <Section>

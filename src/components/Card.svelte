@@ -37,44 +37,67 @@
     <h5 class="title" use:textEffect="{{ iterations: 1 }}">{title}</h5>
     <div class="tags">
       {#each tags as tag}
-        <Tag tag="{tag}" light="{true}" />
+        <Tag {tag} light="{true}" />
       {/each}
     </div>
     <p class="description">
       {body}
     </p>
   </div>
-  <div class="buttons">
-    <a
-      class="primary"
-      href="{url}"
-      use:tooltip="{url}"
-      target="code_win"
-      on:click="{() => events.emit('open_url', { url })}"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="32"
-        height="32"
-        viewBox="0 0 256 256"
-        ><path
-          fill="currentColor"
-          d="M227.32 28.68a16 16 0 0 0-15.66-4.08h-.15L19.57 82.84a16 16 0 0 0-2.42 29.84l85.62 40.55l40.55 85.62a15.86 15.86 0 0 0 14.42 9.15q.69 0 1.38-.06a15.88 15.88 0 0 0 14-11.51l58.2-191.94v-.15a16 16 0 0 0-4-15.66Zm-69.49 203.17l-.05.14l-39.36-83.09l47.24-47.25a8 8 0 0 0-11.31-11.31l-47.25 47.24L24 98.22h.14L216 40Z"
-        ></path></svg
+  {#if !url.includes("coding_backup")}
+    <div class="buttons">
+      <a
+        class="primary"
+        href="{url}"
+        use:tooltip="{url}"
+        target="code_win"
+        on:click="{() => events.emit('open_url', { url })}"
       >
-      <span class="text">View</span>
-    </a>
-    <a
-      use:tooltip="{code}"
-      href="{code}"
-      target="code_win"
-      class="secondary"
-      on:click="{() => events.emit('open_url', { url: code })}"
-    >
-      {@html getIcon(code)}
-      <span class="text">Code</span>
-    </a>
-  </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 256 256"
+          ><path
+            fill="currentColor"
+            d="M227.32 28.68a16 16 0 0 0-15.66-4.08h-.15L19.57 82.84a16 16 0 0 0-2.42 29.84l85.62 40.55l40.55 85.62a15.86 15.86 0 0 0 14.42 9.15q.69 0 1.38-.06a15.88 15.88 0 0 0 14-11.51l58.2-191.94v-.15a16 16 0 0 0-4-15.66Zm-69.49 203.17l-.05.14l-39.36-83.09l47.24-47.25a8 8 0 0 0-11.31-11.31l-47.25 47.24L24 98.22h.14L216 40Z"
+          ></path></svg
+        >
+        <span class="text">View</span>
+      </a>
+      <a
+        use:tooltip="{code}"
+        href="{code}"
+        target="code_win"
+        class="secondary"
+        on:click="{() => events.emit('open_url', { url: code })}"
+      >
+        {@html getIcon(code)}
+        <span class="text">Code</span>
+      </a>
+    </div>
+  {:else}
+    <div class="buttons">
+      <a class="primary" use:tooltip={"Code private, email me for access"}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          ><path
+            fill="currentColor"
+            d="M12 17.75a.75.75 0 0 0 .75-.75v-6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75M12 7a1 1 0 1 1 0 2a1 1 0 0 1 0-2"
+          ></path><path
+            fill="currentColor"
+            fill-rule="evenodd"
+            d="M1.25 12C1.25 6.063 6.063 1.25 12 1.25S22.75 6.063 22.75 12S17.937 22.75 12 22.75S1.25 17.937 1.25 12M12 2.75a9.25 9.25 0 1 0 0 18.5a9.25 9.25 0 0 0 0-18.5"
+            clip-rule="evenodd"
+          ></path></svg
+        >
+        <div class="text">More info</div>
+      </a>
+    </div>
+  {/if}
 </div>
 
 <style lang="scss" scoped>
@@ -91,9 +114,12 @@
       margin-bottom: $marginBottom + em;
       background: linear-gradient(to right, $primaryLight, $primaryDark);
       background-clip: border;
-      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+      box-shadow:
+        0 10px 15px -3px rgb(0 0 0 / 0.1),
         0 4px 6px -4px rgb(0 0 0 / 0.1);
-      transition: margin 0.3s ease, margin-bottom 0.5s ease;
+      transition:
+        margin 0.3s ease,
+        margin-bottom 0.5s ease;
       display: grid;
       place-items: center;
       :global(.img) {
@@ -106,7 +132,10 @@
         margin-top: $offset;
         margin-right: $offset;
         border-radius: inherit;
-        transition: margin 0.3s ease, opacity 0.5s ease, border-color 0.8s ease;
+        transition:
+          margin 0.3s ease,
+          opacity 0.5s ease,
+          border-color 0.8s ease;
         border: 2px solid rgba($primaryLight, 0.2);
       }
       :global(.img .img_el) {

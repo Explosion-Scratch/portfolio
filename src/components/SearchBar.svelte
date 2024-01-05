@@ -25,6 +25,11 @@
     fuse = new Fuse(totalProjects, {
       keys: ["title", "description", "tags"],
     });
+    events.on('projects', () => {
+      container?.scrollIntoView({
+        behavior: 'smooth',
+      });
+    })
     placeholderInt = setInterval(() => {
       placeholder =
         placeholders[Math.floor(Math.random() * placeholders.length)];
@@ -33,7 +38,9 @@
   const searchTag = (tag) => {
     events.emit("modal_close");
     query = `tags:${tag}`;
-    container?.scrollIntoView();
+    container?.scrollIntoView({
+      behavior: 'smooth',
+    });
     handle();
   };
   events.on("tag", searchTag);
@@ -208,6 +215,7 @@
     max-width: 1080px;
     margin: 0 auto;
     margin-bottom: 7em;
+    scroll-margin: 40px;
   }
   .input {
     display: flex;

@@ -4,7 +4,7 @@
   import useGSAP from "../helpers/gsap";
   import tooltip from "../helpers/tooltip";
   import Waves from "./Waves.svelte";
-  import { globals } from "../store";
+  import { events, globals } from "../store";
 
   const pfp = `https://avatars.githubusercontent.com/u/61319150?v=4`;
   const username = "Explosion-Scratch";
@@ -12,6 +12,12 @@
   let wrapper;
   onMount(() => {
     wrapper.style.marginTop = `-${globals.matrixOverlap * 100}vh`;
+    events.on('about', () => {
+      wrapper.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      })
+    })
   });
 
   const socials = [
@@ -121,7 +127,7 @@
       {/each}
     </div>
     <div class="buttons">
-      <button class="primary" use:backgroundImage={{height: 200, url: globals.images.repo_count, opacity: .3}} use:tooltip="{'Scroll down below!'}">
+      <button class="primary" on:click={() => events.emit('projects')} use:backgroundImage={{height: 200, url: globals.images.repo_count, opacity: .3}} use:tooltip="{'Scroll down below!'}">
         View Projects
       </button>
       <button class="secondary" use:backgroundImage={{height: 300, opacity: .3, url: globals.images.github_contribs }} use:tooltip="{'@Explosion-Scratch'}">
